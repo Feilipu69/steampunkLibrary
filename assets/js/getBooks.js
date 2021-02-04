@@ -1,5 +1,3 @@
-let isbn = ["2354083181", "235408322X", "2354083254", "2371021369", "2371021350"];
-
 async function livres(){
 	for (book of isbn) {
 		let div = document.createElement("div");
