@@ -1,21 +1,28 @@
 <?php
-require_once 'controller/Frontcontroller.php';
+namespace Bihin\steampunkLibrary\classes;
+
+require_once 'utils/View.php';
+require_once 'controller/FrontController.php';
+
+use Bihin\steampunkLibrary\utils\View;
+use Bihin\steampunkLibrary\controller\FrontController;
 
 class Router
 {
-	private $frontcontroller;
+	private $frontController;
 
 	public function __construct(){
-		$this->frontcontroller = new Frontcontroller();
+		$this->frontController = new FrontController();
 	}
 
 	public function renderController(){
 		if (isset($_GET['route'])) {
 			if ($_GET['route'] === 'books') {
-				$this->frontcontroller->getBooks();
+				$this->frontController->getBooks();
 			}
 		} else {
-			require_once 'view/home.php';
+			$display = new View('home');
+			$display->render();
 		}
 	}
 }
