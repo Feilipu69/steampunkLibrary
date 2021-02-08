@@ -7,11 +7,11 @@
 	</head>
 	<body>
 		<header>
-			<h1><a href="index.php">La Bibliothèque à Vapeur</a></h1>
+			<h1><a href="<?= HOST; ?>">La Bibliothèque à Vapeur</a></h1>
 			<nav>
 				<ul>
-					<li><a href="index.php">Acceuil</a></li>
-					<li><a href="index.php?route=books">Bibliothèque</a></li>
+					<li><a href="<?= HOST; ?>">Acceuil</a></li>
+					<li><a href="<?= HOST; ?>/books">Bibliothèque</a></li>
 					<!-- Si inscription/connexion 
 					<li><a href="">Forum></a></li>
 					<li><a href="">Newsletter</a></li>
