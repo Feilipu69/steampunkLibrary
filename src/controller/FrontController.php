@@ -1,7 +1,6 @@
 <?php
-namespace Bihin\steampunkLibrary\controller;
+namespace Bihin\steampunkLibrary\src\controller;
 
-require_once 'utils/View.php';
 use Bihin\steampunkLibrary\utils\View;
 
 class FrontController

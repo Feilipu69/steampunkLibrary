@@ -1,0 +1,18 @@
+{
+    "name": "bihin/steampunk-library",
+    "description": "un blog de littérature steampunk",
+    "authors": [
+        {
+            "name": "Bihin Philippe",
+            "email": "feilipu@protonmail.com"
+        }
+    ],
+	"autoload": {
+		"psr-4": {
+			"Bihin\\steampunkLibrary\\classes\\": "classes/",
+			"Bihin\\steampunkLibrary\\src\\": "src/",
+			"Bihin\\steampunkLibrary\\utils\\": "utils/"
+		}
+	},
+    "require": {}
+}

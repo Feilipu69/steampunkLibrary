@@ -7,7 +7,7 @@
 	</head>
 	<body>
 		<header>
-			<h1><a href="">La Bibliothèque à Vapeur</a></h1>
+			<h1><a href="index.php">La Bibliothèque à Vapeur</a></h1>
 			<nav>
 				<ul>
 					<li><a href="index.php">Acceuil</a></li>
