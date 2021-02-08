@@ -1,6 +1,6 @@
 <?php
-//require_once 'classes/Router.php';
 require_once 'vendor/autoload.php';
+require_once 'config.php';
 
 use Bihin\steampunkLibrary\classes\Router;
 
