@@ -9,4 +9,9 @@ class FrontController
 		$displayBooks = new View('books');
 		$displayBooks->render();
 	}
+
+	public function getABook(){
+		$displayABook = new View('book');
+		$displayABook->render();
+	}
 }
