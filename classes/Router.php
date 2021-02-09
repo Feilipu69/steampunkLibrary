@@ -17,6 +17,9 @@ class Router
 			if ($_GET['route'] === 'books') {
 				$this->frontController->getBooks();
 			}
+			elseif ($_GET['route'] === 'book') {
+				$this->frontController->getABook();
+			}
 		} else {
 			$display = new View('home');
 			$display->render();
