@@ -14,7 +14,7 @@ class Opinion
 
 	public function hydrate(array $data){
 		foreach($data as $key => $value){
-			$method = 'set'.ucfirst($key);
+			$method = 'set' . ucfirst($key);
 			if (method_exists($this, $method)) {
 				$this->$method($value);
 			}
@@ -47,11 +47,11 @@ class Opinion
 		$this->isbn = $isbn;
 	}
 
-	public function comment($comment){
+	public function setComment($comment){
 		$this->comment = $comment;
 	}
 
-	public function dateOfComment($dateOfComment){
+	public function setDateOfComment($dateOfComment){
 		$this->dateOfComment = $dateOfComment;
 	}
 }

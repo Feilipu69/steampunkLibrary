@@ -18,7 +18,7 @@ class Router
 				$this->frontController->getBooks();
 			}
 			elseif ($_GET['route'] === 'book') {
-				$this->frontController->getABook();
+				$this->frontController->getABook($_GET['isbn']);
 			}
 		} else {
 			$display = new View('home');
