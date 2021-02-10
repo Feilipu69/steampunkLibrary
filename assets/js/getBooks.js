@@ -9,7 +9,7 @@ async function livres(){
 			.then((response) => response.json())
 			.then((data) => {
 				titleElement.textContent = data.items[0].volumeInfo.title;
-				linkElement.href = isbn;
+				linkElement.href = host + "/" + isbn;
 				img.src = data.items[0].volumeInfo.imageLinks.thumbnail;
 				img.alt = "couverture " + data.items[0].volumeInfo.title;
 				document.body.appendChild(div);
