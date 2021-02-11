@@ -9,5 +9,5 @@ if (isset($opinion)) {
 ?>
 <script type="text/javascript" src="https://www.google.com/books/jsapi.js"></script>
 <script>let isbn = <?= $_GET['isbn'] ?></script>
-<script src="assets/js/getABook.js"></script>
+<script src="../assets/js/getABook.js"></script>
 
