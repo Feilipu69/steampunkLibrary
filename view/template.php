@@ -10,7 +10,7 @@
 			<h1><a href="<?= HOST; ?>">La Bibliothèque à Vapeur</a></h1>
 			<nav>
 				<ul>
-					<li><a href="<?= HOST; ?>">Acceuil</a></li>
+					<li><a href="<?= HOST; ?>">Accueil</a></li>
 					<li><a href="<?= HOST; ?>/books">Bibliothèque</a></li>
 					<!-- Si inscription/connexion 
 					<li><a href="">Forum></a></li>
