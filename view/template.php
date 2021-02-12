@@ -12,12 +12,17 @@
 				<ul>
 					<li><a href="<?= HOST; ?>">Accueil</a></li>
 					<li><a href="<?= HOST; ?>/books">Bibliothèque</a></li>
-					<!-- Si inscription/connexion 
-					<li><a href="">Forum></a></li>
+					<!-- Si inscription/connexion/si session[login] 
+					<li><a href="compte">compte</a></li>
+					<li><a href="">Forum><a></li>
 					<li><a href="">Newsletter</a></li>
 					-->
-					<li><a href="">Inscription</a></li>
+					<!-- si connection retirer ces deux liens -->
+					<li><a href="<?= HOST; ?>/register">Inscription</a></li>
 					<li><a href="">Connexion</a></li>
+					<!-- si connecté 
+					<li><a href="deconnexion">Déconnexion</a></li> 
+					-->
 				</ul>
 			</nav>
 		</header>

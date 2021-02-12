@@ -20,6 +20,9 @@ class Router
 			elseif ($_GET['route'] === 'book') {
 				$this->frontController->getABook($_GET['isbn']);
 			}
+			elseif ($_GET['route'] === 'register') {
+				$this->frontController->register($_POST);
+			}
 		} else {
 			$display = new View('home');
 			$display->render();
