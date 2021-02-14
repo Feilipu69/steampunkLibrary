@@ -23,9 +23,12 @@ class Router
 			elseif ($_GET['route'] === 'register') {
 				$this->frontController->register($_POST);
 			}
+			elseif ($_GET['route'] === 'connection') {
+				$this->frontController->connection($_POST);
+			}
 		} else {
 			$display = new View('home');
-			$display->render();
+			$display->render([]);
 		}
 	}
 }
