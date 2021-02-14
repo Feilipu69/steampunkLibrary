@@ -36,11 +36,33 @@ class FrontController
 				else {
 					$subscriber->register($post);
 					$_SESSION['login'] = $post['login'];
+					header('Location:' . HOST);
 				}
 			}
 		}
 
 		$displayRegisterForm = new View('register');
-		$displayRegisterForm->render();
+		$displayRegisterForm->render([]);
+	}
+
+	public function connection($post){
+		if (isset($post['connection'])) {
+			if (!empty($post['login']) && !empty($post['password'])) {
+				$subscriber = new SubscriberManager();
+				if ($subscriber->checkPassword($post)) {
+					$_SESSION['login'] = $post['login'];
+					$subscriberData = $subscriber->getASubscriber();
+					$role = $subscriberData->getRole();
+					$_SESSION['role'] = $role;
+					header('Location:' . HOST);
+				}
+				else {
+					$_SESSION['error'] = "Login ou mot de passe incorrects";
+				}
+			}
+		}
+
+		$displayConnection = new View('connection');
+		$displayConnection->render([]);
 	}
 }
