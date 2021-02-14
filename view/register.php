@@ -1,3 +1,4 @@
+<h3>Inscription</h3>
 <form method="post" action="<?= HOST; ?>/register">
 	<label for="login">Pseudo : </label>
 	<input type="text" name="login" required />
@@ -6,7 +7,7 @@
 	<input type="password" name="password" required />
 	<br>
 	<label for="mail">Courriel : </label>
-	<input type="email" name="email" />
+	<input type="email" name="email" required />
 	<br>
 	<input type="submit" name="register" value="Inscription" />
 	<button onclick="window.location.href='<?= HOST; ?>/register';">Annuler</button>
