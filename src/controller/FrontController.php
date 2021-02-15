@@ -36,6 +36,8 @@ class FrontController
 				else {
 					$subscriber->register($post);
 					$_SESSION['login'] = $post['login'];
+					$subscriberData = $subscriber->getASubscriber();
+					$_SESSION['subscriberId'] = $subscriberData->getId();
 					header('Location:' . HOST);
 				}
 			}
@@ -46,6 +48,10 @@ class FrontController
 	}
 
 	public function connection($post){
+		if (isset($_SESSION['error'])) {
+			unset($_SESSION['error']);
+		}
+
 		if (isset($post['connection'])) {
 			if (!empty($post['login']) && !empty($post['password'])) {
 				$subscriber = new SubscriberManager();
@@ -54,6 +60,7 @@ class FrontController
 					$subscriberData = $subscriber->getASubscriber();
 					$role = $subscriberData->getRole();
 					$_SESSION['role'] = $role;
+					$_SESSION['subscriberId'] = $subscriberData->getId();
 					header('Location:' . HOST);
 				}
 				else {
@@ -64,5 +71,42 @@ class FrontController
 
 		$displayConnection = new View('connection');
 		$displayConnection->render([]);
+	}
+
+	public function updateData($post){
+		if (isset($_SESSION['registerError'])) {
+			unset($_SESSION['registerError']);
+		}
+
+		if (isset($post['account'])) {
+			if (!empty($post['login']) && !empty($post['password']) && !empty($post['email'])) {
+				$subscriber = new SubscriberManager();
+				if ($subscriber->checkSubscriber($post)) {
+					$_SESSION['registerError'] = "Ce login existe déjà";
+				}
+				else {
+					$subscriber->updateData($post);
+					$_SESSION['login'] = $post['login'];
+					header('Location:' . HOST);
+				}
+			}
+		}
+
+		$displayForm = new View('updateData');
+		$displayForm->render([]);
+	}
+
+	public function disconnection(){
+		if (isset($_SESSION['login'])) {
+			unset($_SESSION['login']);
+			session_destroy();
+			header('Location:' . HOST);
+		}
+	}
+
+	public function deleteSubscriber(){
+		$subscriber = new SubscriberManager();
+		$subscriber->deleteSubscriber();
+		$this->disconnection();
 	}
 }
