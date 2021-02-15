@@ -15,16 +15,22 @@
 					<?php
 					if (isset($_SESSION['login'])) {
 						?>
-						<li><a href="">compte</a></li>
 						<li><a href="">Forum<a></li>
 						<li><a href="">Newsletter</a></li>
-						<li><a href="">Déconnexion</a></li> 
+						<li><a href="<?= HOST; ?>/account">Compte</a></li>
+						<?php
+						if (isset($_SESSION['role']) && $_SESSION['role'] === 'admin') {
+							?>
+							<li><a href="<?= HOST; ?>/Administration">Administration</a></li>
+							<?php
+						}
+						?>
+						<li><a href="<?= HOST; ?>/disconnection">Déconnexion</a></li> 
 						<?php
 					}
 
 					if (!isset($_SESSION['login'])) {
 						?>
-						<!-- si connection retirer ces deux liens -->
 						<li><a href="<?= HOST; ?>/register">Inscription</a></li>
 						<li><a href="<?= HOST; ?>/connection">Connexion</a></li>
 						<?php
