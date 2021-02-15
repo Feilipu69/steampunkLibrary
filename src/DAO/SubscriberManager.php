@@ -47,4 +47,21 @@ class SubscriberManager extends DbConnect
 			':email' => $subscriber->getEmail()
 		]);
 	}
+
+	public function updateData($post){
+		$req = $this->db->prepare('UPDATE subscribers SET login = :login, password = :password, email = :email WHERE id = :id');
+		$req->execute([
+			'login' => $post['login'],
+			'password' => password_hash($post['password'], PASSWORD_DEFAULT),
+			'email' => $post['email'],
+			'id' => $_SESSION['subscriberId']
+		]);
+	}
+
+	public function deleteSubscriber(){
+		$req = $this->db->prepare('DELETE FROM subscribers WHERE login = ?');
+		$req->execute([
+			$_SESSION['login']
+		]);
+	}
 }
