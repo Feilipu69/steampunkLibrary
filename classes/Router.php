@@ -26,6 +26,15 @@ class Router
 			elseif ($_GET['route'] === 'connection') {
 				$this->frontController->connection($_POST);
 			}
+			elseif ($_GET['route'] === 'account') {
+				$this->frontController->updateData($_POST);
+			}
+			elseif ($_GET['route'] === 'disconnection') {
+				$this->frontController->disconnection();
+			}
+			elseif ($_GET['route'] === 'deleteSubscriber') {
+				$this->frontController->deleteSubscriber();
+			}
 		} else {
 			$display = new View('home');
 			$display->render([]);
