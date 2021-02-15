@@ -11,9 +11,9 @@
 </form>
 
 <?php
-if (isset($_SESSION['registerError'])) {
+if (isset($_SESSION['error'])) {
 	?>
-	<div><?= $_SESSION['registerError']; ?></div>
+	<div><?= $_SESSION['error']; ?></div>
 	<?php
 }
 ?>
