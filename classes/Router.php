@@ -1,8 +1,12 @@
 <?php
 namespace Bihin\steampunkLibrary\classes;
 
+use Bihin\steampunkLibrary\src\controller\{
+	FrontController,
+	AdminController
+};
+
 use Bihin\steampunkLibrary\utils\View;
-use Bihin\steampunkLibrary\src\controller\FrontController;
 
 class Router
 {
@@ -10,6 +14,7 @@ class Router
 
 	public function __construct(){
 		$this->frontController = new FrontController();
+		$this->adminController = new AdminController();
 	}
 
 	public function renderController(){
@@ -19,6 +24,9 @@ class Router
 			}
 			elseif ($_GET['route'] === 'book') {
 				$this->frontController->getABook($_GET['isbn']);
+			}
+			elseif ($_GET['route'] === 'addABook') {
+				$this->adminController->addABook($_POST);
 			}
 			elseif ($_GET['route'] === 'register') {
 				$this->frontController->register($_POST);
