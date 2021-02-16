@@ -15,8 +15,7 @@
 					<?php
 					if (isset($_SESSION['login'])) {
 						?>
-						<li><a href="">Forum<a></li>
-						<li><a href="">Newsletter</a></li>
+						<li><a href="<?= HOST; ?>/forum">Forum<a></li>
 						<li><a href="<?= HOST; ?>/account">Compte</a></li>
 						<?php
 						if (isset($_SESSION['role']) && $_SESSION['role'] === 'admin') {
