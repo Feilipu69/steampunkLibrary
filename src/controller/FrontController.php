@@ -2,6 +2,7 @@
 namespace Bihin\steampunkLibrary\src\controller;
 
 use Bihin\steampunkLibrary\src\DAO\{
+	BooksCatalogueManager,
 	OpinionManager,
 	SubscriberManager
 };
@@ -11,8 +12,12 @@ use Bihin\steampunkLibrary\utils\View;
 class FrontController
 {
 	public function getBooks(){
+		$booksCatalogue = new BooksCatalogueManager();
+		$catalogue = $booksCatalogue->getBooks();
 		$displayBooks = new View('books');
-		$displayBooks->render();
+		$displayBooks->render([
+			'catalogue' => $catalogue
+		]);
 	}
 
 	public function getABook($isbn){
