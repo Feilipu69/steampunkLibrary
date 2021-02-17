@@ -23,7 +23,7 @@ class Router
 				$this->frontController->getBooks();
 			}
 			elseif ($_GET['route'] === 'book') {
-				$this->frontController->getABook($_GET['isbn']);
+				$this->frontController->getABook($_GET['parameter']);
 			}
 			elseif ($_GET['route'] === 'addABook') {
 				$this->adminController->addABook($_POST);
@@ -42,6 +42,9 @@ class Router
 			}
 			elseif ($_GET['route'] === 'deleteSubscriber') {
 				$this->frontController->deleteSubscriber();
+			}
+			elseif ($_GET['route'] === 'administration') {
+				$this->adminController->administration();
 			}
 		} else {
 			$display = new View('home');
