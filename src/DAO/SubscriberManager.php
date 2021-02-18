@@ -6,10 +6,19 @@ use Bihin\steampunkLibrary\src\model\Subscriber;
 
 class SubscriberManager extends DbConnect
 {
-	public function getASubscriber(){
+	public function getSubscribers(){
+		$req = $this->db->query('SELECT * FROM subscribers');
+		while ($data = $req->fetch()) {
+			$subscribers[] = new Subscriber($data);
+		}
+		return $subscribers;
+	}
+
+	public function getASubscriber($data){
+		$subscriber = new Subscriber($data);
 		$req = $this->db->prepare('SELECT * FROM subscribers WHERE login = ?');
 		$req->execute([
-			$_SESSION['login']
+			$subscriber->getLogin()
 		]);
 		while ($data = $req->fetch()) {
 			$subscriber = new Subscriber($data);
@@ -62,6 +71,20 @@ class SubscriberManager extends DbConnect
 		$req = $this->db->prepare('DELETE FROM subscribers WHERE login = ?');
 		$req->execute([
 			$_SESSION['login']
+		]);
+	}
+
+	public function moderator($id){
+		$req = $this->db->prepare('UPDATE subscribers SET role = "moderateur" WHERE id = ?');
+		$req->execute([
+			$id
+		]);
+	}
+
+	public function member($id){
+		$req = $this->db->prepare('UPDATE subscribers SET role = "membre" WHERE id = ?');
+		$req->execute([
+			$id
 		]);
 	}
 }
