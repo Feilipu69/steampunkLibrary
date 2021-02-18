@@ -1,6 +1,6 @@
 <?php
 foreach ($catalogue as $book) {
-	$truc[] = $book->getIsbn();
+	$list[] = $book->getIsbn();
 }
 ?>
 <script type="text/javascript" src="https://www.google.com/books/jsapi.js"></script>
@@ -9,6 +9,6 @@ foreach ($catalogue as $book) {
 </script>
 
 <script>
-	let catalogue = <?= json_encode($truc); ?>;
+	let catalogue = <?= json_encode($list); ?>;
 </script>
 <script src="assets/js/getBooks.js"></script>
