@@ -44,4 +44,10 @@ class AdminController
 		$newMembre = $membre->member($id);
 		header('Location:' . HOST . '/administration');
 	}
+
+	public function deleteMember($id){
+		$member = new SubscriberManager();
+		$deleteMember = $member->deleteMember($id);
+		header('Location:' . HOST . '/administration');
+	}
 }

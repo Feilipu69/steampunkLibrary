@@ -52,6 +52,9 @@ class Router
 			elseif ($_GET['route'] === 'member') {
 				$this->adminController->member($_GET['parameter']);
 			}
+			elseif ($_GET['route'] === 'deleteMember') {
+				$this->adminController->deleteMember($_GET['parameter']);
+			}
 		} else {
 			$display = new View('home');
 			$display->render([]);

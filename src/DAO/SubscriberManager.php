@@ -87,4 +87,11 @@ class SubscriberManager extends DbConnect
 			$id
 		]);
 	}
+
+	public function deleteMember($id){
+		$req = $this->db->prepare('DELETE FROM subscribers WHERE id = ?');
+		$req->execute([
+			$id
+		]);
+	}
 }
