@@ -46,6 +46,12 @@ class Router
 			elseif ($_GET['route'] === 'administration') {
 				$this->adminController->administration();
 			}
+			elseif ($_GET['route'] === 'moderator') {
+				$this->adminController->moderator($_GET['parameter']);
+			}
+			elseif ($_GET['route'] === 'member') {
+				$this->adminController->member($_GET['parameter']);
+			}
 		} else {
 			$display = new View('home');
 			$display->render([]);
