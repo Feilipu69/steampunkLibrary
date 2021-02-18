@@ -41,7 +41,7 @@ class FrontController
 				else {
 					$subscriber->register($post);
 					$_SESSION['login'] = $post['login'];
-					$subscriberData = $subscriber->getASubscriber();
+					$subscriberData = $subscriber->getASubscriber($post);
 					$_SESSION['subscriberId'] = $subscriberData->getId();
 					header('Location:' . HOST);
 				}
@@ -62,7 +62,7 @@ class FrontController
 				$subscriber = new SubscriberManager();
 				if ($subscriber->checkPassword($post)) {
 					$_SESSION['login'] = $post['login'];
-					$subscriberData = $subscriber->getASubscriber();
+					$subscriberData = $subscriber->getASubscriber($post);
 					$role = $subscriberData->getRole();
 					$_SESSION['role'] = $role;
 					$_SESSION['subscriberId'] = $subscriberData->getId();
