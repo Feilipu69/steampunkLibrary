@@ -3,6 +3,7 @@ namespace Bihin\steampunkLibrary\src\controller;
 
 use Bihin\steampunkLibrary\src\DAO\{
 	BooksCatalogueManager,
+	MessageDesLeviathansManager,
 	SubscriberManager
 };
 
@@ -48,6 +49,14 @@ class AdminController
 	public function deleteMember($id){
 		$member = new SubscriberManager();
 		$deleteMember = $member->deleteMember($id);
+		header('Location:' . HOST . '/administration');
+	}
+
+	public function addMessageDesLeviathans($post){
+		if (isset($post['send'])) {
+			$message = new MessageDesLeviathansManager();
+			$addMessage = $message->addMessageDesLeviathans($post);
+		}
 		header('Location:' . HOST . '/administration');
 	}
 }
