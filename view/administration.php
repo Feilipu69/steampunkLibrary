@@ -26,3 +26,13 @@ foreach ($allSubscribers as $subscribers) {
 	<?php
 }
 ?>
+
+<h3>Newsletter</h3>
+<form method="post" action="<?= HOST; ?>/addMessageDesLeviathans">
+	<label for='title'>Titre du Message : </label>
+	<input type="text" name="title" id="title" />
+	<br>
+	<textarea name="message"></textarea>
+	<br>
+	<input type="submit" name="send" value="Envoyer" />
+</form>
