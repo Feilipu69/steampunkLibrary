@@ -46,6 +46,12 @@ class Router
 			elseif ($_GET['route'] === 'administration') {
 				$this->adminController->administration();
 			}
+			elseif ($_GET['route'] === 'addMessageDesLeviathans') {
+				$this->adminController->addMessageDesLeviathans($_POST);
+			}
+			elseif ($_GET['route'] === 'getMessagesDesLeviathans') {
+				$this->frontController->getMessagesDesLeviathans();
+			}
 			elseif ($_GET['route'] === 'moderator') {
 				$this->adminController->moderator($_GET['parameter']);
 			}
@@ -54,6 +60,9 @@ class Router
 			}
 			elseif ($_GET['route'] === 'deleteMember') {
 				$this->adminController->deleteMember($_GET['parameter']);
+			}
+			elseif ($_GET['route'] === 'forum') {
+				$this->frontController->forum();
 			}
 		} else {
 			$display = new View('home');
