@@ -9,16 +9,16 @@ foreach ($allSubscribers as $subscribers) {
 		if ($subscribers->getRole() != "admin") {
 			if ($subscribers->getRole() === 'membre') {
 				?>
-				<a href="<?= HOST; ?>/moderator/<?= $subscribers->getId(); ?>">Moderateur</a></li>
+				<a href="<?= HOST; ?>/moderator/<?= $subscribers->getId(); ?>">Moderateur</a>
 				<?php
 			}
 			else {
 				?>
-				<a href="<?= HOST; ?>/member/<?= $subscribers->getId(); ?>">Membre</a></li>
+				<a href="<?= HOST; ?>/member/<?= $subscribers->getId(); ?>">Membre</a>
 				<?php
 			}
 			?>
-			<a href="<?= HOST; ?>/deleteMember/<?= $subscribers->getId(); ?>">Supprimer le membre</a>
+			<a href="<?= HOST; ?>/deleteMember/<?= $subscribers->getId(); ?>">Supprimer le membre</a></li>
 			<?php
 		}
 		?>
