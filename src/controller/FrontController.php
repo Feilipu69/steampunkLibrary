@@ -116,13 +116,6 @@ class FrontController
 		$this->disconnection();
 	}
 
-	public function getMessagesDesLeviathans(){
-		$messages = new MessageDesLeviathansManager();
-		$messagesDesLeviathans = $messages->getMessagesDesLeviathans();
-		$displayMessagesDesLeviathans = new View('messageDesLeviathans');
-		$displayMessagesDesLeviathans->render([]);
-	}
-
 	public function forum(){
 		$messages = new MessageDesLeviathansManager();
 		$messagesDesLeviathans = $messages->getMessagesDesLeviathans();
