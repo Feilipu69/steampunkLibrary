@@ -12,7 +12,6 @@ use Bihin\steampunkLibrary\utils\View;
 class AdminController
 {
 	public function administration(){
-		//$subscribers = new SubscriberManager();
 		$allSubscribers = $this->getSubscribers();
 
 		$displayData = new View('administration');
