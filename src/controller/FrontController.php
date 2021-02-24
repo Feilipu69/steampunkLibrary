@@ -87,7 +87,8 @@ class FrontController
 		if (isset($post['account'])) {
 			if (!empty($post['login']) && !empty($post['password']) && !empty($post['email'])) {
 				$subscriber = new SubscriberManager();
-				if ($subscriber->checkSubscriber($post)) {
+				$subscriberData = $subscriber->getASubscriber($post);
+				if ($subscriberData->getLogin() != $_SESSION['login'] && $subscriber->checkSubscriber($post)) {
 					$_SESSION['registerError'] = "Ce login existe déjà";
 				}
 				else {
