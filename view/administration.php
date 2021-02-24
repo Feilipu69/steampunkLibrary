@@ -28,7 +28,7 @@ foreach ($allSubscribers as $subscribers) {
 ?>
 
 <h3>Newsletter</h3>
-<form method="post" action="<?= HOST; ?>/addMessageDesLeviathans">
+<form method="post" action="<?= HOST; ?>/addNewsletter">
 	<label for='title'>Titre du Message : </label>
 	<input type="text" name="title" id="title" />
 	<br>

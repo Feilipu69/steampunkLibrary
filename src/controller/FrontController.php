@@ -3,7 +3,7 @@ namespace Bihin\steampunkLibrary\src\controller;
 
 use Bihin\steampunkLibrary\src\DAO\{
 	BooksCatalogueManager,
-	MessageDesLeviathansManager,
+	NewsletterManager,
 	OpinionManager,
 	SubscriberManager
 };
@@ -117,12 +117,17 @@ class FrontController
 		$this->disconnection();
 	}
 
-	public function forum(){
-		$messages = new MessageDesLeviathansManager();
-		$messagesDesLeviathans = $messages->getMessagesDesLeviathans();
-		$displayForum = new View('forum');
-		$displayForum->render([
-			'messagesDesLeviathans' => $messagesDesLeviathans
+	public function newsletters(){
+		$messages = new NewsletterManager();
+		$newsletters = $messages->getNewsletters();
+		$displayLetter = new View('newsletters');
+		$displayLetter->render([
+			'newsletters' => $newsletters
 		]);
+	}
+
+	public function forum(){
+		$displayForum = new View('forum');
+		$displayForum->render([]);
 	}
 }
