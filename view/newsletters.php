@@ -98,9 +98,16 @@ foreach ($subscribers as $subscriber) {
 	}
 }
 */
+/*
 foreach ($newsletters as $messages) {
 	?>
 	<p>Titre : <?= $messages->getTitle(); ?></p>
 	<p>Message : <?= $messages->getMessage(); ?></p>
 	<?php
 }
+*/
+?>
+
+<iframe class="mj-w-res-iframe" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://app.mailjet.com/widget/iframe/6wGk/HS7" width="100%"></iframe>
+
+<script type="text/javascript" src="https://app.mailjet.com/statics/js/iframeResizer.min.js"></script>

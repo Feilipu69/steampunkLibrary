@@ -4,7 +4,7 @@
     "authors": [
         {
             "name": "Bihin Philippe",
-            "email": "feilipu@protonmail.com"
+            "email": "philippe.bihin@protonmail.com"
         }
     ],
 	"autoload": {
@@ -14,5 +14,7 @@
 			"Bihin\\steampunkLibrary\\utils\\": "utils/"
 		}
 	},
-    "require": {}
+    "require": {
+        "mailjet/mailjet-apiv3-php": "^1.5"
+    }
 }
