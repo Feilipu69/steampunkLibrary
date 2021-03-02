@@ -4,9 +4,10 @@ namespace Bihin\steampunkLibrary\src\model;
 class Opinion
 {
 	private $id;
-	private $isbn;
+	private $idSubscriber;
+	private $idForum;
 	private $comment;
-	private $dateOfComment;
+	private $date;
 
 	public function __construct(array $data){
 		$this->hydrate($data);
@@ -25,16 +26,20 @@ class Opinion
 		return $this->id;
 	}
 
-	public function getIsbn(){
-		return $this->isbn;
+	public function getIdSubscriber(){
+		return $this->idSubscriber;
+	}
+
+	public function getIdForum(){
+		return $this->idForum;
 	}
 
 	public function getComment(){
 		return $this->comment;
 	}
 
-	public function getDateOfComment(){
-		return $this->dateOfComment;
+	public function getDate(){
+		return $this->date;
 	}
 
 	public function setId(int $id){
@@ -43,15 +48,23 @@ class Opinion
 		}
 	}
 
-	public function setIsbn($isbn){
-		$this->isbn = $isbn;
+	public function setIdSubscriber(int $idSubscriber){
+		if ($idDubscriber > 0) {
+			$this->idSubscriber = $idSubscriber;
+		}
+	}
+
+	public function setIdForum(int $idForum){
+		if ($idForum > 0) {
+			$this->idForum = $idForum;
+		}
 	}
 
 	public function setComment($comment){
 		$this->comment = $comment;
 	}
 
-	public function setDateOfComment($dateOfComment){
-		$this->dateOfComment = $dateOfComment;
+	public function setDate($date){
+		$this->date = $date;
 	}
 }
