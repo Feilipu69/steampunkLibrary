@@ -4,6 +4,7 @@ namespace Bihin\steampunkLibrary\src\controller;
 use Bihin\steampunkLibrary\src\DAO\{
 	BooksCatalogueManager,
 	NewsletterManager,
+	ForumSubjectsManager,
 	OpinionManager,
 	SubscriberManager
 };
@@ -22,10 +23,8 @@ class FrontController
 	}
 
 	public function getABook($isbn){
-		$opinions = new OpinionManager();
-		$opinion = $opinions->getOpinions($isbn);
 		$displayABook = new View('book');
-		$displayABook->render(['opinion' => $opinion]);
+		$displayABook->render([]);
 	}
 
 	public function register($post){
@@ -79,6 +78,11 @@ class FrontController
 		$displayConnection->render([]);
 	}
 
+	public function account(){
+		$displayAccount = new View('account');
+		$displayAccount->render([]);
+	}
+
 	public function updateData($post){
 		if (isset($_SESSION['registerError'])) {
 			unset($_SESSION['registerError']);
@@ -103,6 +107,15 @@ class FrontController
 		$displayForm->render([]);
 	}
 
+	public function mySubjects(){
+		$subjects = new ForumSubjectsManager();
+		$mySubjects = $subjects->mySubjects();
+		$displaySubjects = new View('mySubjects');
+		$displaySubjects->render([
+			'mySubjects' => $mySubjects
+		]);
+	}
+
 	public function disconnection(){
 		if (isset($_SESSION['login'])) {
 			unset($_SESSION['login']);
@@ -118,16 +131,31 @@ class FrontController
 	}
 
 	public function newsletters(){
-		$messages = new NewsletterManager();
-		$newsletters = $messages->getNewsletters();
 		$displayLetter = new View('newsletters');
-		$displayLetter->render([
-			'newsletters' => $newsletters
-		]);
+		$displayLetter->render([]);
 	}
 
 	public function forum(){
 		$displayForum = new View('forum');
 		$displayForum->render([]);
+	}
+
+	public function forumThemes($parameter){
+		$subject = new ForumSubjectsManager();
+		$getSubject = $subject->getSubject($parameter);
+		$displayForumTheme = new View('forumThemes');
+		$displayForumTheme->render([
+			'getSubject' => $getSubject
+		]);
+	}
+
+	public function forumFormular(){
+		$displayFormular = new View('forumFormular');
+		$displayFormular->render([]);
+	}
+	public function addForumTheme($post){
+		$newTheme = new ForumSubjectsManager();
+		$forumTheme = $newTheme->addForumTheme($post);
+		header('Location:' . HOST . '/forum');
 	}
 }
