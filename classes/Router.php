@@ -35,7 +35,13 @@ class Router
 				$this->frontController->connection($_POST);
 			}
 			elseif ($_GET['route'] === 'account') {
+				$this->frontController->account();
+			}
+			elseif ($_GET['route'] === 'updateData') {
 				$this->frontController->updateData($_POST);
+			}
+			elseif ($_GET['route'] === 'mySubjects') {
+				$this->frontController->mySubjects();
 			}
 			elseif ($_GET['route'] === 'disconnection') {
 				$this->frontController->disconnection();
@@ -58,14 +64,20 @@ class Router
 			elseif ($_GET['route'] === 'newsletters') {
 				$this->frontController->newsletters();
 			}
-			elseif ($_GET['route'] === 'addNewsletter') {
-				$this->adminController->addNewsletter($_POST);
-			}
-			elseif ($_GET['route'] === 'getNewsletters') {
-				$this->frontController->getNewsletters();
-			}
 			elseif ($_GET['route'] === 'forum') {
 				$this->frontController->forum();
+			}
+			elseif ($_GET['route'] === 'forumThemes') {
+				$this->frontController->forumThemes($_GET['parameter']);
+			}
+			elseif ($_GET['route'] === 'forumFormular') {
+				$this->frontController->forumFormular();
+			}
+			elseif ($_GET['route'] == 'addForumTheme') {
+				$this->frontController->addForumTheme($_POST);
+			}
+			elseif ($_GET['route'] === 'opinionFormular') {
+				$this->frontController->opinionFormular($_GET['parameter']);
 			}
 		} else {
 			$display = new View('home');
