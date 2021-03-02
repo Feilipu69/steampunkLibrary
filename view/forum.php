@@ -1,11 +1,8 @@
-<ul>
-	<li><a href=""></a>Bibliothèque à vapeur</li>
-	<li><a href=""></a>Mysterium</li>
-	<li><a href=""></a>Cinématographe</li>
-	<li><a href=""></a>Phonographe</li>
-	<li><a href=""></a>Salon de jeux</li>
-	<li><a href=""></a>Boutiques</li>
-	<li><a href=""></a>Evénements et sorties</li>
-	<li><a href=""></a>Clubs</li>
-	<li><a href=""></a>Bric à brac</li>
-</ul>
+<a href="<?= HOST; ?>/forumThemes/bibliotheque">Bibliothèque</a>
+<a href="<?= HOST; ?>/forumThemes/mysterium">Mysterium</a>
+<a href="<?= HOST; ?>/forumThemes/cinematographe">Cinématographe</a>
+<a href="<?= HOST; ?>/forumThemes/phonographe">Phonographe</a>
+<a href="<?= HOST; ?>/forumThemes/games">Salon de jeux</a>
+<a href="<?= HOST; ?>/forumThemes/events">Evénements et sorties</a>
+<a href="<?= HOST; ?>/forumThemes/guilds">Guildes</a>
+<a href="<?= HOST; ?>/forumThemes/knickKnacks">Bric à brac</a>
