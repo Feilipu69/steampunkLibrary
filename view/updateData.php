@@ -1,5 +1,5 @@
 <h3>Modification de vos données</h3>
-<form method="post" action="<?= HOST; ?>/account">
+<form method="post" action="<?= HOST; ?>/updateData">
 	<label for="login">Pseudo : </label>
 	<input type="text" name="login" required />
 	<br>
