@@ -55,23 +55,4 @@ class AdminController
 		$deleteMember = $member->deleteMember($id);
 		header('Location:' . HOST . '/administration');
 	}
-
-	public function addNewsletter($post){
-		if (isset($post['send'])) {
-			if (!empty($post['title']) && !empty($post['message'])) {
-				$message = new NewsletterManager();
-				$addMessage = $message->addNewsletter($post);
-			}
-			$subscriber = new SubscriberManager();
-			$subscribers = $subscriber->getSubscribers();
-		}
-		header('Location:' . HOST . '/administration');
-		/*
-		$displayData = new View('mail');
-		$displayData->render([
-			'subscribers' => $subscribers
-		]);
-		*/
-		
-	}
 }
