@@ -11,6 +11,11 @@ if (isset($getSubject)) {
 		<h4><a href="<?= HOST ; ?>/subjectAndComments/<?= $subject->getId(); ?>"><?= strip_tags($subject->getTitle()); ?></a></h4>
 		<em>publié le : <?= $subject->getDate(); ?> par <?= strip_tags($subject->getLoginSubscriber()); ?></em>
 		<?php
+		if (isset($_SESSION['role']) && ($_SESSION['role'] != 'member')) {
+			?>
+			<a href="<?= HOST; ?>/deleteSubject/<?= $subject->getId(); ?>">Supprimer le sujet</a>
+			<?php
+		}
 	}
 }
 ?>
