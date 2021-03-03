@@ -21,7 +21,7 @@
 						<li><a href="<?= HOST; ?>/forum">Forum<a></li>
 						<li><a href="<?= HOST; ?>/account">Compte</a></li>
 						<?php
-						if (isset($_SESSION['role']) && $_SESSION['role'] === 'admin') {
+						if (isset($_SESSION['role']) && ($_SESSION['role'] === 'admin' || $_SESSION['role'] === 'moderateur')) {
 							?>
 							<li><a href="<?= HOST; ?>/administration">Administration</a></li>
 							<?php
