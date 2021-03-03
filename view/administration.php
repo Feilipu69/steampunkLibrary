@@ -4,7 +4,7 @@
 foreach ($allSubscribers as $subscribers) {
 	?>
 	<ul>
-		<li><?= $subscribers->getLogin(); ?> <?= $subscribers->getRole(); ?> 
+		<li><?= strip_tags($subscribers->getLogin()); ?> <?= $subscribers->getRole(); ?> 
 		<?php
 		if ($subscribers->getRole() != "admin") {
 			if ($subscribers->getRole() === 'membre') {
