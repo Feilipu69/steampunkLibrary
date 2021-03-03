@@ -88,10 +88,10 @@ class FrontController
 			unset($_SESSION['registerError']);
 		}
 
-		if (isset($post['account'])) {
+		if (isset($post['send'])) {
 			if (!empty($post['login']) && !empty($post['password']) && !empty($post['email'])) {
 				$subscriber = new SubscriberManager();
-				$subscriberData = $subscriber->getASubscriber($post);
+				$subscriberData = $subscriber->getASubscriber();
 				if ($subscriberData->getLogin() != $_SESSION['login'] && $subscriber->checkSubscriber($post)) {
 					$_SESSION['registerError'] = "Ce login existe déjà";
 				}
@@ -116,8 +116,13 @@ class FrontController
 		]);
 	}
 
-	public function subjectAndComments($parameter){
+	public function subjectAndComments($post, $parameter){
 		$subject = new ForumSubjectsManager();
+		if (isset($post['send'])) {
+			if (!empty($post['login'] && !empty($post['comment']))) {
+				$opinion = $subject->addOpinion($post, $parameter);
+			}
+		}
 		$opinions = $subject->getOpinions($parameter);
 		$subjectData = $subject->getSubjectById($parameter);	
 		$displaySubjectAndComments = new View('subjectAndComments');
@@ -125,6 +130,25 @@ class FrontController
 			'subjectData' => $subjectData,
 			'opinions' => $opinions
 		]);
+	}
+
+	public function updateSubject($post, $parameter){
+		if (isset($post['send'])) {
+			if (!empty($post['title']) && !empty($post['content'])) {
+				$subject = new ForumSubjectsManager();
+				$updateSubject = $subject->updateSubject($post, $parameter);
+				header('Location:' . HOST . '/mySubjects');
+			}
+		}
+
+		$displayFormular = new View('updateSubjectFormular');
+		$displayFormular->render([]);
+	}
+
+	public function deleteSubject($parameter){
+		$subject = new ForumSubjectsManager();
+		$deleteSubject = $subject->deleteSubject($parameter);
+		header('Location:' . HOST . '/mySubjects');
 	}
 
 	public function disconnection(){
@@ -160,27 +184,16 @@ class FrontController
 		]);
 	}
 
-	public function forumFormular(){
-		$displayFormular = new View('forumFormular');
-		$displayFormular->render([]);
-	}
-	public function addForumTheme($post){
+	public function addForumTheme($post, $parameter){
 		if (isset($post['send'])) {
-			if (!empty($post['subject']) && !empty($post['title']) && !empty($post['content'])) {
+			if (!empty($post['title']) && !empty($post['content'])) {
 				$newTheme = new ForumSubjectsManager();
-				$forumTheme = $newTheme->addForumTheme($post);
+				$forumTheme = $newTheme->addForumTheme($post, $parameter);
 				header('Location:' . HOST . '/forum');
 			}
 		}
-	}
 
-	public function addOpinion($post, $parameter){
-		if (isset($post['send'])) {
-			if (!empty($post['login'] && !empty($post['comment']))) {
-				$newOpinion = new ForumSubjectsManager();
-				$opinion = $newOpinion->addOpinion($post, $parameter);
-				header('Location:' . HOST . '/subjectAndComments/' . $parameter);
-			}
-		}
+		$displayFormular = new View('forumFormular');
+		$displayFormular->render([]);
 	}
 }
