@@ -14,11 +14,10 @@ class SubscriberManager extends DbConnect
 		return $subscribers;
 	}
 
-	public function getASubscriber($data){
-		$subscriberData = new Subscriber($data);
+	public function getASubscriber(){
 		$req = $this->db->prepare('SELECT * FROM subscribers WHERE login = ?');
 		$req->execute([
-			$subscriberData->getLogin()
+			$_SESSION['login']
 		]);
 		while ($data = $req->fetch()) {
 			$subscriber = new Subscriber($data);
