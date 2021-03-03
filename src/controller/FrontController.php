@@ -148,7 +148,7 @@ class FrontController
 	public function deleteSubject($parameter){
 		$subject = new ForumSubjectsManager();
 		$deleteSubject = $subject->deleteSubject($parameter);
-		header('Location:' . HOST . '/mySubjects');
+		header('Location:' . HOST . '/forum');
 	}
 
 	public function disconnection(){
