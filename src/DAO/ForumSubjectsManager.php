@@ -35,11 +35,11 @@ class ForumSubjectsManager extends DbConnect{
 		return $id;
 	}
 
-	public function addForumTheme($post){
+	public function addForumTheme($post, $parameter){
 		$req = $this->db->prepare('INSERT INTO forumSubjects (loginSubscriber, subject, title, content, date) VALUES (:loginSubscriber, :subject, :title, :content, NOW())');
 		$req->execute([
 			'loginSubscriber' => $_SESSION['login'],
-			'subject' => $post['subject'],
+			'subject' => $_GET['parameter'],
 			'title' => $post['title'],
 			'content' => $post['content']
 		]);
@@ -56,6 +56,23 @@ class ForumSubjectsManager extends DbConnect{
 		if (isset($mySubjects)) {
 			return $mySubjects;
 		}
+	}
+
+	public function updateSubject($post, $parameter){
+		$req = $this->db->prepare('UPDATE forumSubjects SET loginSubscriber = :loginSubscriber, title = :title, content = :content, date = NOW() WHERE id = :id');
+		$req->execute([
+			'loginSubscriber' => $_SESSION['login'],
+			'title' => $post['title'],
+			'content' => $post['content'],
+			'id' => $parameter
+		]);
+	}
+
+	public function deleteSubject($parameter){
+		$req = $this->db->prepare('DELETE FROM forumSubjects WHERE id = ?');
+		$req->execute([
+			$parameter
+		]);
 	}
 
 	public function addOpinion($post, $parameter){
