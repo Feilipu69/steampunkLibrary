@@ -10,7 +10,7 @@
 	<input type="email" name="email" required />
 	<br>
 	<input type="submit" name="account" value="Modifications" />
-	<button onclick="window.location.href='<?= HOST; ?>/account';">Annuler</button>
+	<button onclick="window.location.href='<?= HOST; ?>/updateData';">Annuler</button>
 	<button onclick="window.location.href='<?= HOST; ?>/deleteSubscriber';">Suppression</button>
 </form>
 
