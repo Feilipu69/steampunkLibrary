@@ -116,6 +116,17 @@ class FrontController
 		]);
 	}
 
+	public function subjectAndComments($parameter){
+		$subject = new ForumSubjectsManager();
+		$opinions = $subject->getOpinions($parameter);
+		$subjectData = $subject->getSubjectById($parameter);	
+		$displaySubjectAndComments = new View('subjectAndComments');
+		$displaySubjectAndComments->render([
+			'subjectData' => $subjectData,
+			'opinions' => $opinions
+		]);
+	}
+
 	public function disconnection(){
 		if (isset($_SESSION['login'])) {
 			unset($_SESSION['login']);
@@ -154,8 +165,22 @@ class FrontController
 		$displayFormular->render([]);
 	}
 	public function addForumTheme($post){
-		$newTheme = new ForumSubjectsManager();
-		$forumTheme = $newTheme->addForumTheme($post);
-		header('Location:' . HOST . '/forum');
+		if (isset($post['send'])) {
+			if (!empty($post['subject']) && !empty($post['title']) && !empty($post['content'])) {
+				$newTheme = new ForumSubjectsManager();
+				$forumTheme = $newTheme->addForumTheme($post);
+				header('Location:' . HOST . '/forum');
+			}
+		}
+	}
+
+	public function addOpinion($post, $parameter){
+		if (isset($post['send'])) {
+			if (!empty($post['login'] && !empty($post['comment']))) {
+				$newOpinion = new ForumSubjectsManager();
+				$opinion = $newOpinion->addOpinion($post, $parameter);
+				header('Location:' . HOST . '/subjectAndComments/' . $parameter);
+			}
+		}
 	}
 }
