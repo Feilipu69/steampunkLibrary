@@ -9,7 +9,7 @@
 	<label for="mail">Courriel : </label>
 	<input type="email" name="email" required />
 	<br>
-	<input type="submit" name="account" value="Modifications" />
+	<input type="submit" name="send" value="Modifications" />
 	<button onclick="window.location.href='<?= HOST; ?>/updateData';">Annuler</button>
 	<button onclick="window.location.href='<?= HOST; ?>/deleteSubscriber';">Suppression</button>
 </form>
