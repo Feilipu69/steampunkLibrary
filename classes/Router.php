@@ -44,7 +44,13 @@ class Router
 				$this->frontController->mySubjects();
 			}
 			elseif ($_GET['route'] === 'subjectAndComments') {
-				$this->frontController->subjectAndComments($_GET['parameter']);
+				$this->frontController->subjectAndComments($_POST, $_GET['parameter']);
+			}
+			elseif ($_GET['route'] === 'updateSubject') {
+				$this->frontController->updateSubject($_POST, $_GET['parameter']);
+			}
+			elseif ($_GET['route'] === 'deleteSubject') {
+				$this->frontController->deleteSubject($_GET['parameter']);
 			}
 			elseif ($_GET['route'] === 'disconnection') {
 				$this->frontController->disconnection();
@@ -73,14 +79,8 @@ class Router
 			elseif ($_GET['route'] === 'forumThemes') {
 				$this->frontController->forumThemes($_GET['parameter']);
 			}
-			elseif ($_GET['route'] === 'forumFormular') {
-				$this->frontController->forumFormular();
-			}
 			elseif ($_GET['route'] === 'addForumTheme') {
-				$this->frontController->addForumTheme($_POST);
-			}
-			elseif ($_GET['route'] === 'addOpinion') {
-				$this->frontController->addOpinion($_POST, $_GET['parameter']);
+				$this->frontController->addForumTheme($_POST, $_GET['parameter']);
 			}
 		} else {
 			$display = new View('home');
