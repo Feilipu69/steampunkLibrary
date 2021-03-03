@@ -4,7 +4,7 @@ namespace Bihin\steampunkLibrary\src\model;
 class Opinion
 {
 	private $id;
-	private $idSubscriber;
+	private $login;
 	private $idForum;
 	private $comment;
 	private $date;
@@ -26,8 +26,8 @@ class Opinion
 		return $this->id;
 	}
 
-	public function getIdSubscriber(){
-		return $this->idSubscriber;
+	public function getLogin(){
+		return $this->login;
 	}
 
 	public function getIdForum(){
@@ -48,10 +48,8 @@ class Opinion
 		}
 	}
 
-	public function setIdSubscriber(int $idSubscriber){
-		if ($idDubscriber > 0) {
-			$this->idSubscriber = $idSubscriber;
-		}
+	public function setLogin($login){
+		$this->login = $login;
 	}
 
 	public function setIdForum(int $idForum){
