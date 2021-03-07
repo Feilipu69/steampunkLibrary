@@ -19,6 +19,7 @@ class Router
 
 	public function renderController(){
 		if (isset($_GET['route'])) {
+			// render books
 			if ($_GET['route'] === 'books') {
 				$this->frontController->getBooks();
 			}
@@ -28,19 +29,26 @@ class Router
 			elseif ($_GET['route'] === 'addABook') {
 				$this->adminController->addABook($_POST);
 			}
-			elseif ($_GET['route'] === 'register') {
+
+			// render member
+			if ($_GET['route'] === 'register') {
 				$this->frontController->register($_POST);
 			}
 			elseif ($_GET['route'] === 'connection') {
 				$this->frontController->connection($_POST);
 			}
-			elseif ($_GET['route'] === 'account') {
-				$this->frontController->account();
+			elseif ($_GET['route'] === 'disconnection') {
+				$this->frontController->disconnection();
 			}
 			elseif ($_GET['route'] === 'updateData') {
 				$this->frontController->updateData($_POST);
 			}
-			elseif ($_GET['route'] === 'mySubjects') {
+			elseif ($_GET['route'] === 'deleteSubscriber') {
+				$this->frontController->deleteSubscriber();
+			}
+
+			// render subjects and comments
+			if ($_GET['route'] === 'mySubjects') {
 				$this->frontController->mySubjects();
 			}
 			elseif ($_GET['route'] === 'subjectAndComments') {
@@ -52,13 +60,9 @@ class Router
 			elseif ($_GET['route'] === 'deleteSubject') {
 				$this->frontController->deleteSubject($_GET['parameter']);
 			}
-			elseif ($_GET['route'] === 'disconnection') {
-				$this->frontController->disconnection();
-			}
-			elseif ($_GET['route'] === 'deleteSubscriber') {
-				$this->frontController->deleteSubscriber();
-			}
-			elseif ($_GET['route'] === 'administration') {
+
+			// render administration
+			if ($_GET['route'] === 'administration') {
 				$this->adminController->administration();
 			}
 			elseif ($_GET['route'] === 'moderator') {
@@ -70,10 +74,14 @@ class Router
 			elseif ($_GET['route'] === 'deleteMember') {
 				$this->adminController->deleteMember($_GET['parameter']);
 			}
-			elseif ($_GET['route'] === 'newsletters') {
+
+			// render newsletter
+			if ($_GET['route'] === 'newsletters') {
 				$this->frontController->newsletters();
 			}
-			elseif ($_GET['route'] === 'forum') {
+
+			// render forum
+			if ($_GET['route'] === 'forum') {
 				$this->frontController->forum();
 			}
 			elseif ($_GET['route'] === 'forumThemes') {
