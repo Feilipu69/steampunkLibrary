@@ -78,11 +78,6 @@ class FrontController
 		$displayConnection->render([]);
 	}
 
-	public function account(){
-		$displayAccount = new View('account');
-		$displayAccount->render([]);
-	}
-
 	public function updateData($post){
 		if (isset($_SESSION['registerError'])) {
 			unset($_SESSION['registerError']);
@@ -118,12 +113,16 @@ class FrontController
 
 	public function subjectAndComments($post, $parameter){
 		$subject = new ForumSubjectsManager();
+		$opinion = new OpinionManager();
+
 		if (isset($post['send'])) {
 			if (!empty($post['login'] && !empty($post['comment']))) {
-				$opinion = $subject->addOpinion($post, $parameter);
+				$newOpinion = $opinion->addOpinion($post, $parameter);
 			}
 		}
-		$opinions = $subject->getOpinions($parameter);
+
+		$opinions = $opinion->getOpinions($parameter);
+
 		$subjectData = $subject->getSubjectById($parameter);	
 		$displaySubjectAndComments = new View('subjectAndComments');
 		$displaySubjectAndComments->render([
