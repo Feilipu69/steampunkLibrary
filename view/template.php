@@ -4,7 +4,6 @@
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
-		<script>tinymce.init({selector:'textarea'});</script>
 		<title>La Bibliothèque à Vapeur</title>
 	</head>
 	<body>
@@ -19,8 +18,13 @@
 						?>
 						<li><a href="<?= HOST; ?>/newsletters">Newsletter<a></li>
 						<li><a href="<?= HOST; ?>/forum">Forum<a></li>
-						<li><a href="<?= HOST; ?>/account">Compte</a></li>
 						<?php
+						if (isset($_SESSION['role'])) {
+							?>
+							<li><a href="<?= HOST; ?>/updateData">Gestion de vos données</a></li>
+							<li><a href="<?= HOST; ?>/mySubjects">Mes sujets</a></li>
+							<?php
+						}
 						if (isset($_SESSION['role']) && ($_SESSION['role'] === 'admin' || $_SESSION['role'] === 'moderateur')) {
 							?>
 							<li><a href="<?= HOST; ?>/administration">Administration</a></li>
@@ -53,5 +57,12 @@
 		</section>
 		<footer>
 		</footer>
+		<script>
+			tinymce.init({
+				selector:'textarea',
+				plugins: 'advlist autolink lists link image charmap print preview hr anchor pagebreak',
+				toolbar_mode: 'floating'
+			});
+		</script>
 	</body>
 </html>
