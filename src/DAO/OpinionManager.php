@@ -38,21 +38,22 @@ class OpinionManager extends DbConnect
 		return $opinionData;
 	}
 
-	public function opinionAgree($parameter){
+	public function AddOpinionAgree($opinionId){
 		$req = $this->db->prepare('UPDATE opinions SET agree = ? WHERE id = ?');
 		$req->execute([
 			$_SESSION['subscriberId'],
-			$parameter
+			$opinionId
 		]);
 	}
 
-	public function opinionDeleteAgree($parameter){
+	public function removeOpinionAgree($opinionId){
 		$req = $this->db->prepare('UPDATE opinions SET agree = 0 WHERE id = ?');
 		$req->execute([
-			$parameter
+			$opinionId
 		]);
 	}
 
+	/*
 	public function opinionDisagree($parameter){
 		$req = $this->db->prepare('UPDATE opinions SET disagree = ? WHERE id = ?');
 		$req->execute([
@@ -67,4 +68,5 @@ class OpinionManager extends DbConnect
 			$parameter
 		]);
 	}
+	*/
 }
