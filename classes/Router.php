@@ -65,6 +65,9 @@ class Router
 			if ($_GET['route'] === "addRemoveAgree") {
 				$this->frontController->addRemoveAgree($_GET['parameter']);
 			}
+			elseif ($_GET['route'] === "addRemoveDisagree") {
+				$this->frontController->addRemoveDisagree($_GET['parameter']);
+			}
 
 			// render administration
 			if ($_GET['route'] === 'administration') {
