@@ -7,7 +7,9 @@ class Opinion
 	private $login;
 	private $idForum;
 	private $comment;
-	private $date;
+	private $dateOfComment;
+	private $agree;
+	private $disagree;
 
 	public function __construct(array $data){
 		$this->hydrate($data);
@@ -38,8 +40,16 @@ class Opinion
 		return $this->comment;
 	}
 
-	public function getDate(){
-		return $this->date;
+	public function getDateOfComment(){
+		return $this->dateOfComment;
+	}
+
+	public function getAgree(){
+		return $this->agree;
+	}
+
+	public function getDisagree(){
+		return $this->disaAgree;
 	}
 
 	public function setId(int $id){
@@ -62,7 +72,15 @@ class Opinion
 		$this->comment = $comment;
 	}
 
-	public function setDate($date){
-		$this->date = $date;
+	public function setDateOfComment($dateOfComment){
+		$this->dateOfComment = $dateOfComment;
+	}
+
+	public function setAgree($agree){
+		$this->agree = $agree;
+	}
+
+	public function setDisagree($disagree){
+		$this->disagree = $disagree;
 	}
 }
