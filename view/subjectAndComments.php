@@ -26,7 +26,7 @@ if (isset($opinions)) {
 		?>
 		<p><strong><?= strip_tags($opinion->getLogin()); ?></strong> a écrit : </p>
 		<p><?= strip_tags($opinion->getComment()); ?></p>
-		<em><a href="">Agree</a></em> <em><a href="">Disagree</a></em>
+		<em><a href="<?= HOST; ?>/addRemoveAgree/<?= $opinion->getId(); ?>">Agree</a> : <?= $opinion->getAgree()[0]; ?></em> <em><a href="">Disagree</a></em>
 		<?php
 	}
 }
