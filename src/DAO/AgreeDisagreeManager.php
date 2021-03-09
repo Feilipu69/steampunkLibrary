@@ -39,4 +39,38 @@ class AgreeDisagreeManager extends DbConnect
 			$opinionId
 		]);
 	}
+
+	public function countAllDisagreeOpinion($opinionId){
+		$req = $this->db->prepare('SELECT COUNT(*) FROM flagOpinions WHERE opinionId = ?');
+		$req->execute([
+			$opinionId
+		]);
+		$data = $req->fetch();
+		return $data;
+	}
+
+	public function countDisagreeOpinion($opinionId){
+		$req = $this->db->prepare('SELECT COUNT(*) FROM flagOpinions WHERE subscriberIdDisagree = ? AND opinionId = ?');
+		$req->execute([
+			$_SESSION['subscriberId'],
+			$opinionId
+		]);
+		$data = $req->fetch();
+		return $data;
+	}
+
+	public function addDisagree($opinionId){
+		$req = $this->db->prepare('INSERT INTO flagOpinions (opinionId, subscriberLogin, forumSubjectsId, subscriberIdDisagree) SELECT id, login, idForum, disagree FROM opinions WHERE id = ?');
+		$req->execute([
+			$opinionId
+		]);
+	}
+
+	public function removeDisagree($opinionId){
+		$req = $this->db->prepare('DELETE FROM flagOpinions WHERE subscriberIdDisagree = ? AND opinionId = ?');
+		$req->execute([
+			$_SESSION['subscriberId'],
+			$opinionId
+		]);
+	}
 }
