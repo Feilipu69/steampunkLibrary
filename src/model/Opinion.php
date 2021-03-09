@@ -49,7 +49,7 @@ class Opinion
 	}
 
 	public function getDisagree(){
-		return $this->disaAgree;
+		return $this->disagree;
 	}
 
 	public function setId(int $id){
