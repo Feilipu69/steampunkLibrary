@@ -61,6 +61,11 @@ class Router
 				$this->frontController->deleteSubject($_GET['parameter']);
 			}
 
+			// agree disagree
+			if ($_GET['route'] === "addRemoveAgree") {
+				$this->frontController->addRemoveAgree($_GET['parameter']);
+			}
+
 			// render administration
 			if ($_GET['route'] === 'administration') {
 				$this->adminController->administration();
