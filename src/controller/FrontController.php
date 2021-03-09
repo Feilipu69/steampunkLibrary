@@ -2,6 +2,7 @@
 namespace Bihin\steampunkLibrary\src\controller;
 
 use Bihin\steampunkLibrary\src\DAO\{
+	AgreeDisagreeManager,
 	BooksCatalogueManager,
 	NewsletterManager,
 	ForumSubjectsManager,
@@ -122,6 +123,13 @@ class FrontController
 		}
 
 		$opinions = $opinion->getOpinions($parameter);
+		if (!empty($opinions)) {
+			$opinionsAgree = new AgreeDisagreeManager();
+			foreach ($opinions as $opinion) {
+				$agree = $opinion->setAgree($opinionsAgree->countAllAgreeOpinion($opinion->getId()));
+				//$disagree = $opinion->setDisagree($opinionDisaAgree->countAlDisaAgreeOpinion($opinion->getId()));
+			}
+		}
 
 		$subjectData = $subject->getSubjectById($parameter);	
 		$displaySubjectAndComments = new View('subjectAndComments');
@@ -194,5 +202,25 @@ class FrontController
 
 		$displayFormular = new View('forumFormular');
 		$displayFormular->render([]);
+	}
+
+	public function addRemoveAgree($opinionId){
+		$flagOpinionAgree = new AgreeDisagreeManager();
+		$opinions = new OpinionManager();
+
+		$flagByOpinion = $flagOpinionAgree->countAgreeOpinion($opinionId);
+		if ($flagByOpinion[0] === '0') {
+			$opinions->addOpinionAgree($opinionId);
+			$flagAgree = $flagOpinionAgree->addAgree($opinionId);
+		}
+		else {
+			$opinions->removeOpinionAgree($opinionId);
+			$flagAgree = $flagOpinionAgree->removeAgree($opinionId);
+		}
+
+		$getOpinion = $opinions->getAOpinion($opinionId);
+		$subject = $getOpinion->getIdForum();
+
+		header('Location:' . HOST . '/subjectAndComments/' . $subject);
 	}
 }
