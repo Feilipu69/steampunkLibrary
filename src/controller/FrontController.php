@@ -123,11 +123,12 @@ class FrontController
 		}
 
 		$opinions = $opinion->getOpinions($parameter);
+
 		if (!empty($opinions)) {
-			$opinionsAgree = new AgreeDisagreeManager();
+			$opinionsAgreeDisagree = new AgreeDisagreeManager();
 			foreach ($opinions as $opinion) {
-				$agree = $opinion->setAgree($opinionsAgree->countAllAgreeOpinion($opinion->getId()));
-				//$disagree = $opinion->setDisagree($opinionDisaAgree->countAlDisaAgreeOpinion($opinion->getId()));
+				$agree = $opinion->setAgree($opinionsAgreeDisagree->countAllAgreeOpinion($opinion->getId()));
+				$disagree = $opinion->setDisagree($opinionsAgreeDisagree->countAllDisagreeOpinion($opinion->getId()));
 			}
 		}
 
@@ -216,6 +217,26 @@ class FrontController
 		else {
 			$opinions->removeOpinionAgree($opinionId);
 			$flagAgree = $flagOpinionAgree->removeAgree($opinionId);
+		}
+
+		$getOpinion = $opinions->getAOpinion($opinionId);
+		$subject = $getOpinion->getIdForum();
+
+		header('Location:' . HOST . '/subjectAndComments/' . $subject);
+	}
+
+	public function addRemoveDisagree($opinionId){
+		$flagOpinionDisagree = new AgreeDisagreeManager();
+		$opinions = new OpinionManager();
+
+		$flagByOpinion = $flagOpinionDisagree->countDisagreeOpinion($opinionId);
+		if ($flagByOpinion[0] === '0') {
+			$opinions->addOpinionDisagree($opinionId);
+			$flagDisagree = $flagOpinionDisagree->addDisagree($opinionId);
+		}
+		else {
+			$opinions->removeOpinionDisagree($opinionId);
+			$flagDisagree = $flagOpinionDisagree->removeDisagree($opinionId);
 		}
 
 		$getOpinion = $opinions->getAOpinion($opinionId);
