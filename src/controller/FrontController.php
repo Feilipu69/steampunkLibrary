@@ -115,6 +115,7 @@ class FrontController
 	public function subjectAndComments($post, $parameter){
 		$subject = new ForumSubjectsManager();
 		$opinion = new OpinionManager();
+		$opinionsAgreeDisagree = new AgreeDisagreeManager();
 
 		if (isset($post['send'])) {
 			if (!empty($post['login'] && !empty($post['comment']))) {
@@ -122,13 +123,27 @@ class FrontController
 			}
 		}
 
-		$opinions = $opinion->getOpinions($parameter);
+		// Pagination
+		if (isset($_GET['page']) && !empty($_GET['page'])) {
+			$currentPage = (int) strip_tags($_GET['page']);
+		} else {
+			$currentPage = 1;
+		}
 
+		$numberOfComments = $opinionsAgreeDisagree->countAllOpinions($parameter, 'opinions', 'idForum');
+		$numberOfCommentsByPage = 5;
+		$allPages = ceil($numberOfComments[0]/$numberOfCommentsByPage);
+		$firstComment = ($currentPage * $numberOfCommentsByPage) - $numberOfCommentsByPage;
+		$opinionsAgreeDisagree->getAllOpinions($parameter, 'opinions', $firstComment, $numberOfCommentsByPage);
+		// Fin pagination
+
+		$opinions = $opinion->getOpinions($parameter, $firstComment, $numberOfCommentsByPage);
+
+		// likes/dislikes
 		if (!empty($opinions)) {
-			$opinionsAgreeDisagree = new AgreeDisagreeManager();
 			foreach ($opinions as $opinion) {
-				$agree = $opinion->setAgree($opinionsAgreeDisagree->countAllAgreeOpinion($opinion->getId()));
-				$disagree = $opinion->setDisagree($opinionsAgreeDisagree->countAllDisagreeOpinion($opinion->getId()));
+				$agree = $opinion->setAgree($opinionsAgreeDisagree->countAllOpinions($opinion->getId(), 'agreeOpinions', 'opinionId'));
+				$disagree = $opinion->setDisagree($opinionsAgreeDisagree->countAllOpinions($opinion->getId(), 'disagreeOpinions', 'opinionId'));
 			}
 		}
 
@@ -136,7 +151,9 @@ class FrontController
 		$displaySubjectAndComments = new View('subjectAndComments');
 		$displaySubjectAndComments->render([
 			'subjectData' => $subjectData,
-			'opinions' => $opinions
+			'opinions' => $opinions,
+			'currentPage' => $currentPage,
+			'allPages' => $allPages
 		]);
 	}
 
@@ -205,38 +222,20 @@ class FrontController
 		$displayFormular->render([]);
 	}
 
-	public function addRemoveAgree($opinionId){
-		$flagOpinionAgree = new AgreeDisagreeManager();
+	public function addRemoveOpinions($opinionId, $table, $subscriberIdOpinion, $opinion, $otherTable, $otherSubscriberIdOpinion, $otherOpinion ){
+		$flagOpinion= new AgreeDisagreeManager();
 		$opinions = new OpinionManager();
 
-		$flagByOpinion = $flagOpinionAgree->countAgreeOpinion($opinionId);
-		if ($flagByOpinion[0] === '0') {
-			$opinions->addOpinionAgree($opinionId);
-			$flagAgree = $flagOpinionAgree->addAgree($opinionId);
+		$opinionsAgree = $flagOpinion->countOpinion($opinionId, $table, $subscriberIdOpinion);
+		if ($opinionsAgree[0] === '0') {
+			$opinions->addLikeDislike($opinionId, $opinion);
+			$flagAgree = $flagOpinion->addOpinion($opinionId, $table, $subscriberIdOpinion, $opinion);
+			$opinions->removeOpinion($opinionId, $otherOpinion);
+			$flagDisagree = $flagOpinion->removeOpinion($opinionId, $otherTable, $otherSubscriberIdOpinion);
 		}
 		else {
-			$opinions->removeOpinionAgree($opinionId);
-			$flagAgree = $flagOpinionAgree->removeAgree($opinionId);
-		}
-
-		$getOpinion = $opinions->getAOpinion($opinionId);
-		$subject = $getOpinion->getIdForum();
-
-		header('Location:' . HOST . '/subjectAndComments/' . $subject);
-	}
-
-	public function addRemoveDisagree($opinionId){
-		$flagOpinionDisagree = new AgreeDisagreeManager();
-		$opinions = new OpinionManager();
-
-		$flagByOpinion = $flagOpinionDisagree->countDisagreeOpinion($opinionId);
-		if ($flagByOpinion[0] === '0') {
-			$opinions->addOpinionDisagree($opinionId);
-			$flagDisagree = $flagOpinionDisagree->addDisagree($opinionId);
-		}
-		else {
-			$opinions->removeOpinionDisagree($opinionId);
-			$flagDisagree = $flagOpinionDisagree->removeDisagree($opinionId);
+			$opinions->removeOpinion($opinionId, $opinion);
+			$flagAgree = $flagOpinion->removeOpinion($opinionId, $table, $subscriberIdOpinion);
 		}
 
 		$getOpinion = $opinions->getAOpinion($opinionId);
