@@ -15,8 +15,8 @@ class OpinionManager extends DbConnect
 		]);
 	}
 
-	public function getOpinions($parameter){
-		$req = $this->db->prepare('SELECT * FROM opinions WHERE idForum = ?');
+	public function getOpinions($parameter, $first, $byPage){
+		$req = $this->db->prepare('SELECT * FROM opinions WHERE idForum = ? LIMIT ' . $first . ', ' . $byPage);
 		$req->execute([
 			$parameter
 		]);
@@ -38,25 +38,17 @@ class OpinionManager extends DbConnect
 		return $opinionData;
 	}
 
-	public function addOpinionAgree($opinionId){
-		$req = $this->db->prepare('UPDATE opinions SET agree = ? WHERE id = ?');
+	public function addLikeDislike($opinionId, $opinion){
+		$req = $this->db->prepare('UPDATE opinions SET ' . $opinion . ' = ? WHERE id = ?');
 		$req->execute([
 			$_SESSION['subscriberId'],
 			$opinionId
 		]);
 	}
 
-	public function removeOpinionAgree($opinionId){
-		$req = $this->db->prepare('UPDATE opinions SET agree = 0 WHERE id = ?');
+	public function removeOpinion($opinionId, $opinion){
+		$req = $this->db->prepare('UPDATE opinions SET ' . $opinion . ' = 0 WHERE id = ?');
 		$req->execute([
-			$opinionId
-		]);
-	}
-
-	public function addOpinionDisagree($opinionId){
-		$req = $this->db->prepare('UPDATE opinions SET disagree = ? WHERE id = ?');
-		$req->execute([
-			$_SESSION['subscriberId'],
 			$opinionId
 		]);
 	}
@@ -67,11 +59,11 @@ class OpinionManager extends DbConnect
 			$parameter
 		]);
 	}
-
-	public function removeOpinionDisagree($opinionId){
-		$req = $this->db->prepare('UPDATE opinions SET disagree = 0 WHERE id = ?');
+	
+	public function deleteOpinion($id){
+		$req = $this->db->prepare('DELETE FROM opinions WHERE id = ?');
 		$req->execute([
-			$opinionId
+			$id
 		]);
 	}
 }
