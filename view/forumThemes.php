@@ -8,7 +8,7 @@ if (isset($_GET['parameter'])) {
 if (isset($getSubject)) {
 	foreach ($getSubject as $subject) {
 		?>
-		<h4><a href="<?= HOST ; ?>/subjectAndComments/<?= $subject->getId(); ?>"><?= strip_tags($subject->getTitle()); ?></a></h4>
+		<h4><a href="<?= HOST ; ?>/subjectAndComments/<?= $subject->getId(); ?>/1"><?= strip_tags($subject->getTitle()); ?></a></h4>
 		<em>publié le : <?= $subject->getDate(); ?> par <?= strip_tags($subject->getLoginSubscriber()); ?></em>
 		<?php
 		if (isset($_SESSION['role']) && ($_SESSION['role'] != 'member')) {
