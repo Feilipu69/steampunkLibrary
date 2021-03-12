@@ -4,6 +4,7 @@ namespace Bihin\steampunkLibrary\src\controller;
 use Bihin\steampunkLibrary\src\DAO\{
 	BooksCatalogueManager,
 	NewsletterManager,
+	OpinionManager,
 	SubscriberManager
 };
 
@@ -54,5 +55,11 @@ class AdminController
 		$member = new SubscriberManager();
 		$deleteMember = $member->deleteMember($id);
 		header('Location:' . HOST . '/administration');
+	}
+
+	public function deleteOpinion($parameter, $page, $id){
+		$opinion = new OpinionManager();
+		$deleteOpinion = $opinion->deleteOpinion($id);
+		header('Location:' . HOST . '/subjectAndComments/' . $parameter . '/' . $page);
 	}
 }
