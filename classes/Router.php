@@ -79,7 +79,7 @@ class Router
 			$this->frontController->mySubjects();
 		}
 		elseif ($_GET['route'] === 'subjectAndComments') {
-			$this->frontController->subjectAndComments($_POST, $_GET['parameter'], $_GET['page']);
+			$this->frontController->subjectAndComments($_POST, $_GET['parameter']);
 		}
 		elseif ($_GET['route'] === 'updateSubject') {
 			$this->frontController->updateSubject($_POST, $_GET['parameter']);
@@ -91,9 +91,9 @@ class Router
 
 	public function renderAgreeDisagree(){
 		if ($_GET['route'] === "addRemoveAgree") {
-			$this->frontController->addRemoveOpinions($_GET['parameter'], 'agreeOpinions', 'subscriberIdAgree', 'agree', 'disagreeOpinions', 'subscriberIdDisagree', 'disagree');
+			$this->frontController->addRemoveOpinions($_GET['parameter'], $_GET['page'], 'agreeOpinions', 'subscriberIdAgree', 'agree', 'disagreeOpinions', 'subscriberIdDisagree', 'disagree');
 		} elseif ($_GET['route'] === 'addRemoveDisagree') {
-			$this->frontController->addRemoveOpinions($_GET['parameter'], 'disagreeOpinions', 'subscriberIdDisagree', 'disagree', 'agreeOpinions', 'subscriberIdAgree', 'agree');
+			$this->frontController->addRemoveOpinions($_GET['parameter'], $_GET['page'], 'disagreeOpinions', 'subscriberIdDisagree', 'disagree', 'agreeOpinions', 'subscriberIdAgree', 'agree');
 		}
 	}
 

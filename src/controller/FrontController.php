@@ -222,7 +222,7 @@ class FrontController
 		$displayFormular->render([]);
 	}
 
-	public function addRemoveOpinions($opinionId, $table, $subscriberIdOpinion, $opinion, $otherTable, $otherSubscriberIdOpinion, $otherOpinion ){
+	public function addRemoveOpinions($opinionId, $page, $table, $subscriberIdOpinion, $opinion, $otherTable, $otherSubscriberIdOpinion, $otherOpinion ){
 		$flagOpinion= new AgreeDisagreeManager();
 		$opinions = new OpinionManager();
 
@@ -241,6 +241,6 @@ class FrontController
 		$getOpinion = $opinions->getAOpinion($opinionId);
 		$subject = $getOpinion->getIdForum();
 
-		header('Location:' . HOST . '/subjectAndComments/' . $subject);
+		header('Location:' . HOST . '/subjectAndComments/' . $subject . '/' . $page);
 	}
 }
