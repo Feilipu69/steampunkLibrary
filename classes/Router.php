@@ -91,10 +91,10 @@ class Router
 
 	public function renderAgreeDisagree(){
 		if ($_GET['route'] === "addRemoveAgree") {
-			$this->frontController->addRemoveOpinions($_GET['parameter'], $_GET['page'], 'agreeOpinions', 'subscriberIdAgree', 'agree', 'disagreeOpinions', 'subscriberIdDisagree', 'disagree');
-		} elseif ($_GET['route'] === 'addRemoveDisagree') {
-			$this->frontController->addRemoveOpinions($_GET['parameter'], $_GET['page'], 'disagreeOpinions', 'subscriberIdDisagree', 'disagree', 'agreeOpinions', 'subscriberIdAgree', 'agree');
-		}
+			$this->frontController->addRemoveVote($_GET['parameter'], $_GET['page'], 'subscriberIdAgree');
+		} elseif ($_GET['route'] === "addRemoveDisagree") {
+			$this->frontController->addRemoveVote($_GET['parameter'], $_GET['page'], 'subscriberIdDisagree');
+		}  
 	}
 
 	public function renderAdministration(){

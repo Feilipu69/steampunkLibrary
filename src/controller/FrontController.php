@@ -112,14 +112,14 @@ class FrontController
 		]);
 	}
 
-	public function subjectAndComments($post, $parameter){
+	public function subjectAndComments($post, $subjectId){
 		$subject = new ForumSubjectsManager();
 		$opinion = new OpinionManager();
 		$opinionsAgreeDisagree = new AgreeDisagreeManager();
 
 		if (isset($post['send'])) {
 			if (!empty($post['login'] && !empty($post['comment']))) {
-				$newOpinion = $opinion->addOpinion($post, $parameter);
+				$newOpinion = $opinion->addOpinion($post, $subjectId);
 			}
 		}
 
@@ -130,24 +130,23 @@ class FrontController
 			$currentPage = 1;
 		}
 
-		$numberOfComments = $opinionsAgreeDisagree->countAllOpinions($parameter, 'opinions', 'idForum');
+		$numberOfComments = $opinionsAgreeDisagree->countAllOpinions($subjectId, 'opinions', 'idForum');
 		$numberOfCommentsByPage = 5;
 		$allPages = ceil($numberOfComments[0]/$numberOfCommentsByPage);
 		$firstComment = ($currentPage * $numberOfCommentsByPage) - $numberOfCommentsByPage;
-		$opinionsAgreeDisagree->getAllOpinions($parameter, 'opinions', $firstComment, $numberOfCommentsByPage);
+		$opinionsAgreeDisagree->getAllOpinions($subjectId, 'opinions', $firstComment, $numberOfCommentsByPage);
 		// Fin pagination
 
-		$opinions = $opinion->getOpinions($parameter, $firstComment, $numberOfCommentsByPage);
+		$opinions = $opinion->getOpinions($subjectId, $firstComment, $numberOfCommentsByPage);
 
-		// likes/dislikes
 		if (!empty($opinions)) {
 			foreach ($opinions as $opinion) {
-				$agree = $opinion->setAgree($opinionsAgreeDisagree->countAllOpinions($opinion->getId(), 'agreeOpinions', 'opinionId'));
-				$disagree = $opinion->setDisagree($opinionsAgreeDisagree->countAllOpinions($opinion->getId(), 'disagreeOpinions', 'opinionId'));
+				$agree = $opinion->setAgree($opinionsAgreeDisagree->countAllVotes($opinion->getId(), 'likeDislike', 'opinionId', 'subscriberIdAgree'));
+				$disagree = $opinion->setDisagree($opinionsAgreeDisagree->countAllVotes($opinion->getId(), 'likeDislike', 'opinionId', 'subscriberIdDisagree'));
 			}
 		}
 
-		$subjectData = $subject->getSubjectById($parameter);	
+		$subjectData = $subject->getSubjectById($subjectId);	
 		$displaySubjectAndComments = new View('subjectAndComments');
 		$displaySubjectAndComments->render([
 			'subjectData' => $subjectData,
@@ -222,20 +221,26 @@ class FrontController
 		$displayFormular->render([]);
 	}
 
-	public function addRemoveOpinions($opinionId, $page, $table, $subscriberIdOpinion, $opinion, $otherTable, $otherSubscriberIdOpinion, $otherOpinion ){
-		$flagOpinion= new AgreeDisagreeManager();
+	public function addRemoveVote($opinionId, $page, $vote){
+		$agreeDisagree = new AgreeDisagreeManager();
 		$opinions = new OpinionManager();
 
-		$opinionsAgree = $flagOpinion->countOpinion($opinionId, $table, $subscriberIdOpinion);
-		if ($opinionsAgree[0] === '0') {
-			$opinions->addLikeDislike($opinionId, $opinion);
-			$flagAgree = $flagOpinion->addOpinion($opinionId, $table, $subscriberIdOpinion, $opinion);
-			$opinions->removeOpinion($opinionId, $otherOpinion);
-			$flagDisagree = $flagOpinion->removeOpinion($opinionId, $otherTable, $otherSubscriberIdOpinion);
-		}
-		else {
-			$opinions->removeOpinion($opinionId, $opinion);
-			$flagAgree = $flagOpinion->removeOpinion($opinionId, $table, $subscriberIdOpinion);
+		if ($vote === 'subscriberIdAgree') {
+			$numberOpinions = $agreeDisagree->countVotes($opinionId, $vote);
+			if ($numberOpinions[0] === '0') {
+				$addOpinion = $agreeDisagree->likeDislikeOpinion($opinionId, $vote);
+				$removeOpinion = $agreeDisagree->removeVote($opinionId, 'subscriberIdDisagree');
+			} else {
+				$removeOpinion = $agreeDisagree->removeVote($opinionId, $vote);
+			}
+		} elseif ($vote === 'subscriberIdDisagree') {
+			$numberOpinions = $agreeDisagree->countVotes($opinionId, $vote);
+			if ($numberOpinions[0] === '0') {
+				$addOpinion = $agreeDisagree->likeDislikeOpinion($opinionId, $vote);
+				$removeOpinion = $agreeDisagree->removeVote($opinionId, 'subscriberIdAgree');
+			} else {
+				$removeOpinion = $agreeDisagree->removeVote($opinionId, $vote);
+			}
 		}
 
 		$getOpinion = $opinions->getAOpinion($opinionId);
