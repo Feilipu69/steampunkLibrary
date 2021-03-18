@@ -130,19 +130,19 @@ class FrontController
 			$currentPage = 1;
 		}
 
-		$numberOfComments = $opinionsAgreeDisagree->countAllOpinions($subjectId, 'opinions', 'idForum');
+		$numberOfComments = $opinionsAgreeDisagree->countAllOpinions($subjectId);
 		$numberOfCommentsByPage = 5;
 		$allPages = ceil($numberOfComments[0]/$numberOfCommentsByPage);
 		$firstComment = ($currentPage * $numberOfCommentsByPage) - $numberOfCommentsByPage;
-		$opinionsAgreeDisagree->getAllOpinions($subjectId, 'opinions', $firstComment, $numberOfCommentsByPage);
+		$opinionsAgreeDisagree->getAllOpinions($subjectId, $firstComment, $numberOfCommentsByPage);
 		// Fin pagination
 
 		$opinions = $opinion->getOpinions($subjectId, $firstComment, $numberOfCommentsByPage);
 
 		if (!empty($opinions)) {
 			foreach ($opinions as $opinion) {
-				$agree = $opinion->setAgree($opinionsAgreeDisagree->countAllVotes($opinion->getId(), 'likeDislike', 'opinionId', 'subscriberIdAgree'));
-				$disagree = $opinion->setDisagree($opinionsAgreeDisagree->countAllVotes($opinion->getId(), 'likeDislike', 'opinionId', 'subscriberIdDisagree'));
+				$agree = $opinion->setAgree($opinionsAgreeDisagree->countAllVotes($opinion->getId(), 'subscriberIdAgree'));
+				$disagree = $opinion->setDisagree($opinionsAgreeDisagree->countAllVotes($opinion->getId(), 'subscriberIdDisagree'));
 			}
 		}
 
@@ -245,7 +245,8 @@ class FrontController
 
 		$getOpinion = $opinions->getAOpinion($opinionId);
 		$subject = $getOpinion->getIdForum();
-
+		//$result = $agreeDisagree->countVotes($opinionId, $vote);
+		//echo json_encode($result);
 		header('Location:' . HOST . '/subjectAndComments/' . $subject . '/' . $page);
 	}
 }
