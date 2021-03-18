@@ -7,16 +7,16 @@ use Bihin\steampunkLibrary\src\model\AgreeDisagree;
 class AgreeDisagreeManager extends DbConnect 
 {
 
-	public function getAllOpinions($opinionId, $table, $first, $quantity){
-		$req = $this->db->prepare('SELECT * FROM ' . $table . ' WHERE idForum = ? LIMIT ' . $first . ', ' . $quantity);
+	public function getAllOpinions($opinionId, $first, $quantity){
+		$req = $this->db->prepare('SELECT * FROM opinions WHERE idForum = ? LIMIT ' . $first . ', ' . $quantity);
 		$req->execute([
 			$opinionId
 		]);
 		$data = $req->fetchAll();
 	}
 
-	public function countAllOpinions($opinionId, $table, $column){
-		$req = $this->db->prepare('SELECT COUNT(*) FROM ' . $table . ' WHERE ' . $column . ' = ?');
+	public function countAllOpinions($opinionId){
+		$req = $this->db->prepare('SELECT COUNT(*) FROM opinions WHERE idForum = ?');
 		$req->execute([
 			$opinionId
 		]);
@@ -24,23 +24,49 @@ class AgreeDisagreeManager extends DbConnect
 		return $data;
 	}
 
-	public function countAllVotes($opinionId, $table, $column, $vote){
-		$req = $this->db->prepare('SELECT COUNT(*) FROM ' . $table . ' WHERE ' . $column . ' = ? AND '. $vote . ' != 0');
+	public function getAllVotes($opinionId){
+		$req = $this->db->prepare('SELECT * FROM likeDislike WHERE opinionId = ?');
 		$req->execute([
 			$opinionId
 		]);
-		$data = $req->fetch();
-		return $data;
 	}
 
-	public function countVotes($opinionId, $subscriberIdOpinion){
-			$req = $this->db->prepare('SELECT COUNT(*) FROM likeDislike WHERE opinionId = ? AND ' . $subscriberIdOpinion . ' = ?');
+	public function countAllVotes($opinionId, $vote){
+		if ($vote === 'subscriberIdAgree') {
+			$req = $this->db->prepare('SELECT COUNT(*) FROM likeDislike WHERE opinionId = ? AND subscriberIdAgree != 0');
+			$req->execute([
+				$opinionId
+			]);
+			$data = $req->fetch();
+			return $data;
+		} elseif ($vote === 'subscriberIdDisagree') {
+			$req = $this->db->prepare('SELECT COUNT(*) FROM likeDislike WHERE opinionId = ? AND subscriberIdDisagree != 0');
+			$req->execute([
+				$opinionId
+			]);
+			$data = $req->fetch();
+			return $data;
+		}
+	}
+
+	public function countVotes($opinionId, $vote){
+		if ($vote === 'subscriberIdAgree') {
+			$req = $this->db->prepare('SELECT COUNT(*) FROM likeDislike WHERE opinionId = ? AND subscriberIdAgree = ?');
 			$req->execute([
 				$opinionId,
 				$_SESSION['subscriberId']
 			]);
 			$data = $req->fetch();
 			return $data;
+		} elseif ($vote === 'subscriberIdDisagree') {
+			$req = $this->db->prepare('SELECT COUNT(*) FROM likeDislike WHERE opinionId = ? AND subscriberIdDisagree = ?');
+			$req->execute([
+				$opinionId,
+				$_SESSION['subscriberId']
+			]);
+			$data = $req->fetch();
+			return $data;
+		}
 	}
 
 	public function likeDislikeOpinion($opinionId, $subscriberIdOpinion){
