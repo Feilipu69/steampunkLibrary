@@ -12,10 +12,10 @@ use Bihin\steampunkLibrary\src\model\{
 };
 
 class ForumSubjectsManager extends DbConnect{
-	public function getSubject($parameter){
+	public function getSubject($theme){
 		$req = $this->db->prepare('SELECT id, loginSubscriber, subject, title, content, DATE_FORMAT(date, "%d/%m/%Y") AS date FROM forumSubjects WHERE subject = ?');
 		$req->execute([
-			$parameter
+			$theme
 		]);
 		while ($data = $req->fetch()) {
 			$subject[] = new ForumSubjects($data);
@@ -25,17 +25,17 @@ class ForumSubjectsManager extends DbConnect{
 		}
 	}
 
-	public function getSubjectById($parameter){
+	public function getSubjectById($forumId){
 		$req = $this->db->prepare('SELECT id, loginSubscriber, subject, title, content, DATE_FORMAT(date, "%d/%m/%Y") AS date FROM forumSubjects WHERE id = ?');
 		$req->execute([
-			$parameter
+			$forumId
 		]);
 		$data = $req->fetch();
-		$id = new ForumSubjects($data);
-		return $id;
+		$subject = new ForumSubjects($data);
+		return $subject;
 	}
 
-	public function addForumTheme($post, $parameter){
+	public function addForumTheme($post){
 		$req = $this->db->prepare('INSERT INTO forumSubjects (loginSubscriber, subject, title, content, date) VALUES (:loginSubscriber, :subject, :title, :content, NOW())');
 		$req->execute([
 			'loginSubscriber' => $_SESSION['login'],
@@ -58,7 +58,7 @@ class ForumSubjectsManager extends DbConnect{
 		}
 	}
 
-	public function updateSubject($post, $parameter){
+	public function updateSubject($post, $id){
 		$req = $this->db->prepare('UPDATE forumSubjects SET loginSubscriber = :loginSubscriber, title = :title, content = :content, date = NOW() WHERE id = :id');
 		$req->execute([
 			'loginSubscriber' => $_SESSION['login'],
@@ -68,10 +68,10 @@ class ForumSubjectsManager extends DbConnect{
 		]);
 	}
 
-	public function deleteSubject($parameter){
+	public function deleteSubject($id){
 		$req = $this->db->prepare('DELETE FROM forumSubjects WHERE id = ?');
 		$req->execute([
-			$parameter
+			$id
 		]);
 	}
 }

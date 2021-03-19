@@ -112,14 +112,13 @@ class FrontController
 		]);
 	}
 
-	public function subjectAndComments($post, $subjectId){
+	public function subjectAndComments($post, $forumId){
 		$subject = new ForumSubjectsManager();
 		$opinion = new OpinionManager();
 		$opinionsAgreeDisagree = new AgreeDisagreeManager();
-
 		if (isset($post['send'])) {
 			if (!empty($post['login'] && !empty($post['comment']))) {
-				$newOpinion = $opinion->addOpinion($post, $subjectId);
+				$newOpinion = $opinion->addOpinion($post, $forumId);
 			}
 		}
 
@@ -130,23 +129,23 @@ class FrontController
 			$currentPage = 1;
 		}
 
-		$numberOfComments = $opinionsAgreeDisagree->countAllOpinions($subjectId);
+		$numberOfComments = $opinion->countAllOpinions($forumId);
 		$numberOfCommentsByPage = 5;
 		$allPages = ceil($numberOfComments[0]/$numberOfCommentsByPage);
 		$firstComment = ($currentPage * $numberOfCommentsByPage) - $numberOfCommentsByPage;
-		$opinionsAgreeDisagree->getAllOpinions($subjectId, $firstComment, $numberOfCommentsByPage);
+		$opinion->getOpinions($forumId, $firstComment, $numberOfCommentsByPage);
 		// Fin pagination
 
-		$opinions = $opinion->getOpinions($subjectId, $firstComment, $numberOfCommentsByPage);
+		$opinions = $opinion->getOpinions($forumId, $firstComment, $numberOfCommentsByPage);
 
 		if (!empty($opinions)) {
 			foreach ($opinions as $opinion) {
-				$agree = $opinion->setAgree($opinionsAgreeDisagree->countAllVotes($opinion->getId(), 'subscriberIdAgree'));
-				$disagree = $opinion->setDisagree($opinionsAgreeDisagree->countAllVotes($opinion->getId(), 'subscriberIdDisagree'));
+				$agree = $opinion->setAgree($opinionsAgreeDisagree->countAllVotes($opinion->getId(), 'agree'));
+				$disagree = $opinion->setDisagree($opinionsAgreeDisagree->countAllVotes($opinion->getId(), 'disagree'));
 			}
 		}
 
-		$subjectData = $subject->getSubjectById($subjectId);	
+		$subjectData = $subject->getSubjectById($forumId);	
 		$displaySubjectAndComments = new View('subjectAndComments');
 		$displaySubjectAndComments->render([
 			'subjectData' => $subjectData,
@@ -156,11 +155,11 @@ class FrontController
 		]);
 	}
 
-	public function updateSubject($post, $parameter){
+	public function updateSubject($post, $id){
 		if (isset($post['send'])) {
 			if (!empty($post['title']) && !empty($post['content'])) {
 				$subject = new ForumSubjectsManager();
-				$updateSubject = $subject->updateSubject($post, $parameter);
+				$updateSubject = $subject->updateSubject($post, $id);
 				header('Location:' . HOST . '/mySubjects');
 			}
 		}
@@ -169,9 +168,9 @@ class FrontController
 		$displayFormular->render([]);
 	}
 
-	public function deleteSubject($parameter){
+	public function deleteSubject($id){
 		$subject = new ForumSubjectsManager();
-		$deleteSubject = $subject->deleteSubject($parameter);
+		$deleteSubject = $subject->deleteSubject($id);
 		header('Location:' . HOST . '/forum');
 	}
 
@@ -199,20 +198,20 @@ class FrontController
 		$displayForum->render([]);
 	}
 
-	public function forumThemes($parameter){
+	public function forumThemes($theme){
 		$subject = new ForumSubjectsManager();
-		$getSubject = $subject->getSubject($parameter);
+		$getSubject = $subject->getSubject($theme);
 		$displayForumTheme = new View('forumThemes');
 		$displayForumTheme->render([
 			'getSubject' => $getSubject
 		]);
 	}
 
-	public function addForumTheme($post, $parameter){
+	public function addForumTheme($post){
 		if (isset($post['send'])) {
 			if (!empty($post['title']) && !empty($post['content'])) {
 				$newTheme = new ForumSubjectsManager();
-				$forumTheme = $newTheme->addForumTheme($post, $parameter);
+				$forumTheme = $newTheme->addForumTheme($post);
 				header('Location:' . HOST . '/forum');
 			}
 		}
@@ -225,28 +224,26 @@ class FrontController
 		$agreeDisagree = new AgreeDisagreeManager();
 		$opinions = new OpinionManager();
 
-		if ($vote === 'subscriberIdAgree') {
-			$numberOpinions = $agreeDisagree->countVotes($opinionId, $vote);
+		if ($vote === 'agree') {
+			$numberOpinions = $agreeDisagree->countSubscriberVotes($opinionId, $vote);
 			if ($numberOpinions[0] === '0') {
 				$addOpinion = $agreeDisagree->likeDislikeOpinion($opinionId, $vote);
-				$removeOpinion = $agreeDisagree->removeVote($opinionId, 'subscriberIdDisagree');
+				$removeOpinion = $agreeDisagree->removeVote($opinionId, 'disagree');
 			} else {
 				$removeOpinion = $agreeDisagree->removeVote($opinionId, $vote);
 			}
-		} elseif ($vote === 'subscriberIdDisagree') {
-			$numberOpinions = $agreeDisagree->countVotes($opinionId, $vote);
+		} elseif ($vote === 'disagree') {
+			$numberOpinions = $agreeDisagree->countSubscriberVotes($opinionId, $vote);
 			if ($numberOpinions[0] === '0') {
 				$addOpinion = $agreeDisagree->likeDislikeOpinion($opinionId, $vote);
-				$removeOpinion = $agreeDisagree->removeVote($opinionId, 'subscriberIdAgree');
+				$removeOpinion = $agreeDisagree->removeVote($opinionId, 'agree');
 			} else {
 				$removeOpinion = $agreeDisagree->removeVote($opinionId, $vote);
 			}
 		}
-
-		$getOpinion = $opinions->getAOpinion($opinionId);
-		$subject = $getOpinion->getIdForum();
-		//$result = $agreeDisagree->countVotes($opinionId, $vote);
-		//echo json_encode($result);
+		
+		$getOpinion = $opinions->getAnOpinion($opinionId);
+		$subject = $getOpinion->getForumId();
 		header('Location:' . HOST . '/subjectAndComments/' . $subject . '/' . $page);
 	}
 }

@@ -5,7 +5,7 @@ class Opinion
 {
 	private $id;
 	private $login;
-	private $idForum;
+	private $forumId;
 	private $comment;
 	private $dateOfComment;
 	private $agree;
@@ -32,8 +32,8 @@ class Opinion
 		return $this->login;
 	}
 
-	public function getIdForum(){
-		return $this->idForum;
+	public function getForumId(){
+		return $this->forumId;
 	}
 
 	public function getComment(){
@@ -62,9 +62,9 @@ class Opinion
 		$this->login = $login;
 	}
 
-	public function setIdForum(int $idForum){
-		if ($idForum > 0) {
-			$this->idForum = $idForum;
+	public function setForumId(int $forumId){
+		if ($forumId > 0) {
+			$this->forumId = $forumId;
 		}
 	}
 

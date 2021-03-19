@@ -6,19 +6,28 @@ use Bihin\steampunkLibrary\src\model\Opinion;
 
 class OpinionManager extends DbConnect
 {
-	public function addOpinion($post, $parameter){
-		$req = $this->db->prepare('INSERT INTO opinions (login, idForum, comment, dateOfComment) VALUES (:login, :idForum, :comment, NOW())');
+	public function addOpinion($post, $forumId){
+		$req = $this->db->prepare('INSERT INTO opinions (login, forumId, comment, dateOfComment) VALUES (:login, :forumId, :comment, NOW())');
 		$req->execute([
 			':login' => $post['login'],
-			':idForum' => $parameter,
+			':forumId' => $forumId,
 			':comment' => $post['comment']
 		]);
 	}
 
-	public function getOpinions($parameter, $first, $byPage){
-		$req = $this->db->prepare('SELECT * FROM opinions WHERE idForum = ? LIMIT ' . $first . ', ' . $byPage);
+	public function countAllOpinions($forumId){
+		$req = $this->db->prepare('SELECT COUNT(*) FROM opinions WHERE forumId = ?');
 		$req->execute([
-			$parameter
+			$forumId
+		]);
+		$data = $req->fetch();
+		return $data;
+	}
+
+	public function getOpinions($forumId, $first, $byPage){
+		$req = $this->db->prepare('SELECT * FROM opinions WHERE forumId = ? LIMIT ' . $first . ', ' . $byPage);
+		$req->execute([
+			$forumId
 		]);
 		while ($data = $req->fetch()) {
 			$opinions[] = new Opinion($data);
@@ -28,10 +37,10 @@ class OpinionManager extends DbConnect
 		}
 	}
 
-	public function getAOpinion($parameter){
+	public function getAnOpinion($id){
 		$req = $this->db->prepare('SELECT * FROM opinions WHERE id = ?');
 		$req->execute([
-			$parameter
+			$id
 		]);
 		$data = $req->fetch();
 		$opinionData = new Opinion($data);

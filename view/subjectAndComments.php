@@ -35,22 +35,22 @@ if (isset($opinions)) {
 				<?php
 			}
 			?>
+
 			<button onclick="agree(<?= $opinion->getId(); ?>)"><img src="<?= HOST; ?>/public/thumbUp.svg" /></button> : <em><?= $opinion->getAgree()[0]; ?></em>
 			<button onclick="disagree(<?= $opinion->getId(); ?>)"><img src="<?= HOST; ?>/public/thumbDown.svg" /></button> : <em><?= $opinion->getDisagree()[0]; ?></em>
 		</div>
 		<script>
 			function agree(opinionId){
 				fetch("<?= HOST; ?>/addRemoveAgree/" + opinionId + "/<?= $_GET['page']; ?>")
-				//.then(response => response.json())
-				.then(response => console.log(response))
+				//.then(response => console.log(response))
 			}
 
 			function disagree(opinionId){
 				fetch("<?= HOST; ?>/addRemoveDisagree/" + opinionId + "/<?= $_GET['page']; ?>")
-				//.then(response => response.json())
-				.then(response => console.log(response))
+				//.then(response => console.log(response))
 			}
 		</script>
+
 		<?php
 	}
 	?>
