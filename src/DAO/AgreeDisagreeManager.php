@@ -7,7 +7,8 @@ use Bihin\steampunkLibrary\src\model\AgreeDisagree;
 class AgreeDisagreeManager extends DbConnect 
 {
 	public function getAllVotes($opinionId){
-		$req = $this->db->prepare('SELECT * FROM likeDislike WHERE opinionId = ?');
+		$votes = [];
+		$req = $this->db->prepare('SELECT agree, disagree FROM likeDislike WHERE opinionId = ?');
 		$req->execute([
 			$opinionId
 		]);
