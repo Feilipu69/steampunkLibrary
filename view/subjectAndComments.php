@@ -35,12 +35,22 @@ if (isset($opinions)) {
 				<?php
 			}
 			?>
-			<em><a href="<?= HOST; ?>/addRemoveAgree/<?= $opinion->getId(); ?>/<?= $_GET['page']; ?>"><img src="<?= HOST; ?>/public/thumbUp.svg" /></a> : <?= $opinion->getAgree()[0]; ?></em>
-			<em><a href="<?= HOST; ?>/addRemoveDisagree/<?= $opinion->getId(); ?>/<?= $_GET['page']; ?>"><img src="<?= HOST; ?>/public/thumbDown.svg" /></a> : <?= $opinion->getDisagree()[0]; ?></em>
+
+			<a href="<?= HOST; ?>/addRemoveAgree/<?= $opinion->getId(); ?>/<?= $_GET['page']; ?>"><img src="<?= HOST; ?>/public/thumbUp.svg" /></a> : <span id="agreeOpinions"><?= $opinion->getAgree()[0]; ?></span>
+			<a href="<?= HOST; ?>/addRemoveDisagree/<?= $opinion->getId(); ?>/<?= $_GET['page']; ?>"><img src="<?= HOST; ?>/public/thumbDown.svg" /></a> : <span id="disagreeOpinions"><?= $opinion->getDisagree()[0]; ?></span>
 		</div>
 		<?php
 	}
 	?>
+
+	<script src="<?= HOST; ?>/assets/js/getAgreeDisagree.js"></script>
+	<script>
+		let host = "<?= HOST; ?>";
+	</script>
+	<script>
+		let page = <?= $_GET['page']; ?>;
+	</script>
+
 	<div class="container-fluid">
 		<ul class="pagination">
 			<li class="page-item <?= ($currentPage == 1) ? "disabled" : ""; ?>"><a class="page-link" href="<?= HOST; ?>/subjectAndComments/<?= $_GET['parameter']; ?>/<?= $currentPage - 1; ?>">Précédente</a></li>
