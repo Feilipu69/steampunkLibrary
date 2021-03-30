@@ -116,6 +116,7 @@ class FrontController
 		$subject = new ForumSubjectsManager();
 		$opinion = new OpinionManager();
 		$opinionsAgreeDisagree = new AgreeDisagreeManager();
+
 		if (isset($post['send'])) {
 			if (!empty($post['login'] && !empty($post['comment']))) {
 				$newOpinion = $opinion->addOpinion($post, $forumId);

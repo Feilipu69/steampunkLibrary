@@ -43,14 +43,6 @@ if (isset($opinions)) {
 	}
 	?>
 
-	<script src="<?= HOST; ?>/assets/js/getAgreeDisagree.js"></script>
-	<script>
-		let host = "<?= HOST; ?>";
-	</script>
-	<script>
-		let page = <?= $_GET['page']; ?>;
-	</script>
-
 	<div class="container-fluid">
 		<ul class="pagination">
 			<li class="page-item <?= ($currentPage == 1) ? "disabled" : ""; ?>"><a class="page-link" href="<?= HOST; ?>/subjectAndComments/<?= $_GET['parameter']; ?>/<?= $currentPage - 1; ?>">Précédente</a></li>
