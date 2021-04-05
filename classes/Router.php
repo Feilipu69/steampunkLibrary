@@ -94,7 +94,9 @@ class Router
 			$this->frontController->addRemoveVote($_GET['parameter'], $_GET['page'], 'agree');
 		} elseif ($_GET['route'] === "addRemoveDisagree") {
 			$this->frontController->addRemoveVote($_GET['parameter'], $_GET['page'], 'disagree');
-		}  
+		} elseif ($_GET['route'] === "getAllVotes") {
+			$this->frontController->getAllVotes($_GET['parameter']);
+		}   
 	}
 
 	public function renderAdministration(){
