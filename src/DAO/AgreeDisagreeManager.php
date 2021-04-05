@@ -7,33 +7,12 @@ use Bihin\steampunkLibrary\src\model\AgreeDisagree;
 class AgreeDisagreeManager extends DbConnect 
 {
 	public function getAllVotes($opinionId){
-		$votes = [];
 		$req = $this->db->prepare('SELECT agree, disagree FROM likeDislike WHERE opinionId = ?');
 		$req->execute([
 			$opinionId
 		]);
-		while ($data = $req->fetch()) {
-			$votes[] = $data;
-		}
-		return $votes;
-	}
-
-	public function countAllVotes($opinionId, $vote){
-		if ($vote === 'agree') {
-			$req = $this->db->prepare('SELECT COUNT(*) FROM likeDislike WHERE opinionId = ? AND agree != 0');
-			$req->execute([
-				$opinionId
-			]);
-			$data = $req->fetch();
-			return $data;
-		} elseif ($vote === 'disagree') {
-			$req = $this->db->prepare('SELECT COUNT(*) FROM likeDislike WHERE opinionId = ? AND disagree != 0');
-			$req->execute([
-				$opinionId
-			]);
-			$data = $req->fetch();
-			return $data;
-		}
+		$data = $req->fetchAll(); 
+		return $data;
 	}
 
 	public function countSubscriberVotes($opinionId, $vote){
