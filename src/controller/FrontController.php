@@ -134,15 +134,14 @@ class FrontController
 		$numberOfCommentsByPage = 5;
 		$allPages = ceil($numberOfComments[0]/$numberOfCommentsByPage);
 		$firstComment = ($currentPage * $numberOfCommentsByPage) - $numberOfCommentsByPage;
-		$opinion->getOpinions($forumId, $firstComment, $numberOfCommentsByPage);
+		// avoir les données des 5 commentaires de la page souhaitée
+		$opinions = $opinion->getOpinions($forumId, $firstComment, $numberOfCommentsByPage);
 		// Fin pagination
 
-		$opinions = $opinion->getOpinions($forumId, $firstComment, $numberOfCommentsByPage);
 
 		if (!empty($opinions)) {
 			foreach ($opinions as $opinion) {
-				$agree = $opinion->setAgree($opinionsAgreeDisagree->countAllVotes($opinion->getId(), 'agree'));
-				$disagree = $opinion->setDisagree($opinionsAgreeDisagree->countAllVotes($opinion->getId(), 'disagree'));
+				$opinionsId[] = $opinion->getId();
 			}
 		}
 
@@ -151,6 +150,7 @@ class FrontController
 		$displaySubjectAndComments->render([
 			'subjectData' => $subjectData,
 			'opinions' => $opinions,
+			'opinionsId' => json_encode($opinionsId),
 			'currentPage' => $currentPage,
 			'allPages' => $allPages
 		]);
@@ -246,5 +246,11 @@ class FrontController
 		$getOpinion = $opinions->getAnOpinion($opinionId);
 		$subject = $getOpinion->getForumId();
 		header('Location:' . HOST . '/subjectAndComments/' . $subject . '/' . $page);
+	}
+
+	public function getAllVotes($opinionId){
+		$votes = new AgreeDisagreeManager();
+		$allVotes = $votes->getAllVotes($opinionId);
+		echo json_encode($allVotes);
 	}
 }
