@@ -1,16 +1,18 @@
 <?php
 if (isset($_GET['parameter']) && isset($_GET['page']) && isset($_SESSION['login'])) {
 	?>
-	<h3>Ajouter un commentaire</h3>
-	<form method="post" action="<?= HOST; ?>/subjectAndComments/<?=$_GET['parameter']; ?>">
+	<div>
+	<button onclick="comment()">Ajouter un commentaire</button>
+	<form method="post" action="<?= HOST; ?>/subjectAndComments/<?=$_GET['parameter']; ?>" id="comment" style="display:none">
 		<label for="login">Pseudo : </label>
 		<input type="text" name="login" id="login" value="<?= $_SESSION['login']; ?>" />
 		<br>
 		<textarea name="comment"></textarea>
 		<br>
-		<input type="submit" name="send" value="Envoyer" />
+		<input type="submit" name="send" id="send" value="Envoyer" />
 		<button onclick="window.location.href='<?= HOST; ?>/subjectAndComments/<?= $_GET['parameter']; ?>';">Annuler</button>
 	</form>
+	</div>
 	<?php
 }
 ?>
@@ -36,13 +38,13 @@ if (isset($opinions)) {
 			}
 			?>
 
-			<a href="<?= HOST; ?>/addRemoveAgree/<?= $opinion->getId(); ?>/<?= $_GET['page']; ?>"><img src="<?= HOST; ?>/public/thumbUp.svg" /></a> : <span id="agreeOpinions"><?= $opinion->getAgree()[0]; ?></span>
-			<a href="<?= HOST; ?>/addRemoveDisagree/<?= $opinion->getId(); ?>/<?= $_GET['page']; ?>"><img src="<?= HOST; ?>/public/thumbDown.svg" /></a> : <span id="disagreeOpinions"><?= $opinion->getDisagree()[0]; ?></span>
+			<button onclick="addRemoveAgree(<?= $opinion->getId(); ?>)"><img src="<?= HOST; ?>/public/thumbUp.svg" /></button> : <span id="agreeOpinions<?= $opinion->getId(); ?>"></span>
+			<button onclick="addRemoveDisagree(<?= $opinion->getId(); ?>)"><img src="<?= HOST; ?>/public/thumbDown.svg" /></button> : <span id="disagreeOpinions<?= $opinion->getId(); ?>"></span>
+
 		</div>
 		<?php
 	}
 	?>
-
 	<div class="container-fluid">
 		<ul class="pagination">
 			<li class="page-item <?= ($currentPage == 1) ? "disabled" : ""; ?>"><a class="page-link" href="<?= HOST; ?>/subjectAndComments/<?= $_GET['parameter']; ?>/<?= $currentPage - 1; ?>">Précédente</a></li>
@@ -59,3 +61,10 @@ if (isset($opinions)) {
 	<?php
 }
 ?>
+<script>
+	let host = "<?= HOST; ?>";
+	let page = <?= $_GET['page']; ?>;
+	let opinionsId = <?= $opinionsId; ?>;
+</script>
+<script src="<?= HOST; ?>/assets/js/comment.js"></script>
+<script src="<?= HOST; ?>/assets/js/votes.js"></script>
