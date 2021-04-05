@@ -6,3 +6,4 @@ function comment() {
     x.style.display = "none";
   }
 } 
+
