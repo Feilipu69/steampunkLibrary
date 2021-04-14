@@ -221,7 +221,7 @@ class FrontController
 		$displayFormular->render([]);
 	}
 
-	public function addRemoveVote($opinionId, $page, $vote){
+	public function addRemoveVote($opinionId, $vote){
 		$agreeDisagree = new AgreeDisagreeManager();
 		$opinions = new OpinionManager();
 
@@ -245,7 +245,7 @@ class FrontController
 		
 		$getOpinion = $opinions->getAnOpinion($opinionId);
 		$subject = $getOpinion->getForumId();
-		header('Location:' . HOST . '/subjectAndComments/' . $subject . '/' . $page);
+		//header('Location:' . HOST . '/subjectAndComments/' . $subject . '/' . $page);
 	}
 
 	public function getAllVotes($opinionId){
