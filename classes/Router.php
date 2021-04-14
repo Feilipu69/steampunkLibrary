@@ -91,9 +91,9 @@ class Router
 
 	public function renderAgreeDisagree(){
 		if ($_GET['route'] === "addRemoveAgree") {
-			$this->frontController->addRemoveVote($_GET['parameter'], $_GET['page'], 'agree');
+			$this->frontController->addRemoveVote($_GET['parameter'], 'agree');
 		} elseif ($_GET['route'] === "addRemoveDisagree") {
-			$this->frontController->addRemoveVote($_GET['parameter'], $_GET['page'], 'disagree');
+			$this->frontController->addRemoveVote($_GET['parameter'], 'disagree');
 		} elseif ($_GET['route'] === "getAllVotes") {
 			$this->frontController->getAllVotes($_GET['parameter']);
 		}   
