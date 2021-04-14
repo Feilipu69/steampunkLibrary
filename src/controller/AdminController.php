@@ -13,7 +13,8 @@ use Bihin\steampunkLibrary\utils\View;
 class AdminController
 {
 	public function administration(){
-		$allSubscribers = $this->getSubscribers();
+		$subscribers = new SubscriberManager();
+		$allSubscribers = $subscribers->getSubscribers();
 
 		$displayData = new View('administration');
 		$displayData->render([
@@ -31,12 +32,6 @@ class AdminController
 
 		$displayForm = new View('newBook');
 		$displayForm->render([]);
-	}
-
-	public function getSubscribers(){
-		$subscriber = new SubscriberManager();
-		$subscribers = $subscriber->getSubscribers();
-		return $subscribers;
 	}
 
 	public function moderator($id){
