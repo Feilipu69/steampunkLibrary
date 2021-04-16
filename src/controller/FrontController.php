@@ -138,7 +138,7 @@ class FrontController
 		$opinions = $opinion->getOpinions($forumId, $firstComment, $numberOfCommentsByPage);
 		// Fin pagination
 
-
+		$opinionsId = [];
 		if (!empty($opinions)) {
 			foreach ($opinions as $opinion) {
 				$opinionsId[] = $opinion->getId();
