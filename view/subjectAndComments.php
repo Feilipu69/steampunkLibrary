@@ -32,7 +32,7 @@ if (isset($opinions)) {
 			<?php
 			if (isset($_SESSION['role']) && $_SESSION['role'] != 'membre') {
 				?>
-				<a href="<?= HOST; ?>/deleteOpinion/<?= $_GET['parameter']; ?>/<?= $_GET['page']; ?>/<?= $opinion->getId(); ?>">Supprimer le commentaire</a>
+				<a href="<?= HOST; ?>/deleteOpinion/<?= $_GET['parameter']; ?>/<?= $opinion->getId(); ?>">Supprimer le commentaire</a>
 				<br>
 				<?php
 			}
