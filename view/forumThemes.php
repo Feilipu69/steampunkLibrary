@@ -2,6 +2,7 @@
 if (isset($_GET['parameter'])) {
 	?>
 	<h2><?= $_GET['parameter']; ?></h2>
+	<a href="<?= HOST; ?>/forum">Retour</a>
 	<h3><a href="<?= HOST; ?>/addForumTheme/<?= $_GET['parameter']; ?>">Nouveau sujet</a></h3>
 	<?php
 }

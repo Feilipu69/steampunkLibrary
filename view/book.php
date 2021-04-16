@@ -1,4 +1,4 @@
-<script type="text/javascript" src="https://www.google.com/books/jsapi.js"></script>
+<a href="<?= HOST; ?>/books">Retour</a>
 <?php
 if (isset($_GET['parameter'])) {
 	?>
@@ -7,4 +7,5 @@ if (isset($_GET['parameter'])) {
 	<?php
 }
 ?>
+<script type="text/javascript" src="https://www.google.com/books/jsapi.js"></script>
 
