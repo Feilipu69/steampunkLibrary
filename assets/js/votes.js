@@ -16,10 +16,13 @@ function getAllVotes(opinionId){
 			document.getElementById(`agreeOpinions${opinionId}`).textContent = agreeOpinions;
 			document.getElementById(`disagreeOpinions${opinionId}`).textContent = disagreeOpinions;
 		})
+		.catch(error => console.log(`Erreur : ${error}`));
 }
 
-for(id of opinionsId){
-	getAllVotes(id);
+if (opinionsId != null) {
+	for(id of opinionsId){
+		getAllVotes(id);
+	}
 }
 
 // Modification des votes par l'utilisateur
@@ -28,6 +31,7 @@ function addRemoveAgree(opinionId){
 		.then(response => {
 			getAllVotes(`${opinionId}`);
 		})
+		.catch(error => console.log(`Erreur : ${error}`));
 }
 
 function addRemoveDisagree(opinionId){
@@ -35,4 +39,5 @@ function addRemoveDisagree(opinionId){
 		.then(response => {
 			getAllVotes(`${opinionId}`);
 		})
+		.catch(error => console.log(`Erreur : ${error}`));
 }
