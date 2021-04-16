@@ -29,9 +29,7 @@ class AdminController
 				$newBook->addABook($book);
 			}
 		}
-
-		$displayForm = new View('newBook');
-		$displayForm->render([]);
+		$this->administration();
 	}
 
 	public function moderator($id){
