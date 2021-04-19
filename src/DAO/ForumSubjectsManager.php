@@ -64,7 +64,7 @@ class ForumSubjectsManager extends DbConnect{
 			'loginSubscriber' => $_SESSION['login'],
 			'title' => $post['title'],
 			'content' => $post['content'],
-			'id' => $parameter
+			'id' => $id
 		]);
 	}
 
