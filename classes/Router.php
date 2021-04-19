@@ -102,6 +102,9 @@ class Router
 	public function renderAdministration(){
 		if ($_GET['route'] === 'administration') {
 			$this->adminController->administration();
+		} 
+		elseif ($_GET['route'] === 'getRole') {
+			$this->adminController->getRole($_GET['parameter']);
 		}
 		elseif ($_GET['route'] === 'moderator') {
 			$this->adminController->moderator($_GET['parameter']);
