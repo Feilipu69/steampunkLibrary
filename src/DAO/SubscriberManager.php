@@ -73,15 +73,24 @@ class SubscriberManager extends DbConnect
 		]);
 	}
 
+	public function getRole($id){
+		$req = $this->db->prepare('SELECT role FROM subscribers WHERE id = ?');
+		$req->execute([
+			$id
+		]);
+		$data = $req->fetch();
+		return $data;
+	}
+
 	public function moderator($id){
-		$req = $this->db->prepare('UPDATE subscribers SET role = "moderateur" WHERE id = ?');
+		$req = $this->db->prepare('UPDATE subscribers SET role = "moderator" WHERE id = ?');
 		$req->execute([
 			$id
 		]);
 	}
 
 	public function member($id){
-		$req = $this->db->prepare('UPDATE subscribers SET role = "membre" WHERE id = ?');
+		$req = $this->db->prepare('UPDATE subscribers SET role = "member" WHERE id = ?');
 		$req->execute([
 			$id
 		]);
