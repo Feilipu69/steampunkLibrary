@@ -15,7 +15,7 @@ class AdminController
 	public function administration(){
 		$subscribers = new SubscriberManager();
 		$allSubscribers = $subscribers->getSubscribers();
-
+		
 		$displayData = new View('administration');
 		$displayData->render([
 			'allSubscribers' => $allSubscribers
@@ -32,16 +32,22 @@ class AdminController
 		$this->administration();
 	}
 
+	public function getRole($id){
+		$subscriber = new SubscriberManager();
+		$role = $subscriber->getRole($id);
+		echo json_encode($role);
+	}
+
 	public function moderator($id){
 		$moderator = new SubscriberManager();
 		$newModerator = $moderator->moderator($id);
-		header('Location:' . HOST . '/administration');
+		//header('Location:' . HOST . '/administration');
 	}
 
 	public function member($id){
 		$membre = new SubscriberManager();
 		$newMembre = $membre->member($id);
-		header('Location:' . HOST . '/administration');
+		//header('Location:' . HOST . '/administration');
 	}
 
 	public function deleteMember($id){
