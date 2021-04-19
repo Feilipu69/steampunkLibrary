@@ -243,8 +243,8 @@ class FrontController
 			}
 		}
 		
-		$getOpinion = $opinions->getAnOpinion($opinionId);
-		$subject = $getOpinion->getForumId();
+		//$getOpinion = $opinions->getAnOpinion($opinionId);
+		//$subject = $getOpinion->getForumId();
 		//header('Location:' . HOST . '/subjectAndComments/' . $subject . '/' . $page);
 	}
 
