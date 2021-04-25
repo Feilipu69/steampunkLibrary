@@ -40,7 +40,6 @@ if (isset($opinions)) {
 
 			<button onclick="addRemoveAgree(<?= $opinion->getId(); ?>, 'agree')"><img src="<?= HOST; ?>/public/thumbUp.svg" /></button> : <span id="agreeOpinions<?= $opinion->getId(); ?>"></span>
 			<button onclick="addRemoveDisagree(<?= $opinion->getId(); ?>, 'disagree')"><img src="<?= HOST; ?>/public/thumbDown.svg" /></button> : <span id="disagreeOpinions<?= $opinion->getId(); ?>"></span>
-
 		</div>
 		<?php
 	}
