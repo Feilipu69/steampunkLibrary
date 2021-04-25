@@ -242,10 +242,6 @@ class FrontController
 				$removeOpinion = $agreeDisagree->removeVote($opinionId, $vote);
 			}
 		}
-		
-		//$getOpinion = $opinions->getAnOpinion($opinionId);
-		//$subject = $getOpinion->getForumId();
-		//header('Location:' . HOST . '/subjectAndComments/' . $subject . '/' . $page);
 	}
 
 	public function getAllVotes($opinionId){
