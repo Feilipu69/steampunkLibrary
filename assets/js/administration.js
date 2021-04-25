@@ -23,3 +23,10 @@ function member(subscriberId){
 			document.getElementById(`memberRole${subscriberId}`).textContent = 'member';
 		})
 }
+
+function deleteMember(subscriberId){
+	fetch(`${host}/deleteMember/${subscriberId}`)
+		.then(response => {
+			document.getElementById(`member${subscriberId}`).style.display = 'none';
+		})
+}
