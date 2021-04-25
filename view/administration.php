@@ -12,8 +12,8 @@ foreach ($allSubscribers as $subscribers) {
 		<?php
 		if ($subscribers->getRole() != 'admin') {
 			?>
-			<li>
-				<?= $subscribers->getLogin();?> : <span id="memberRole<?= $subscribers->getId(); ?>"><?= $subscribers->getRole(); ?></span> <button id="role" onclick="role(<?= $subscribers->getId(); ?>)">Modifier le rôle</button>
+			<li id="member<?= $subscribers->getId(); ?>">
+				<?= $subscribers->getLogin();?> : <span id="memberRole<?= $subscribers->getId(); ?>"><?= $subscribers->getRole(); ?></span> <button id="role" onclick="role(<?= $subscribers->getId(); ?>)">Modifier le rôle</button> <button onclick="deleteMember(<?= $subscribers->getId(); ?>)">Supprimer</button> 
 			</li>
 			<?php
 		}
