@@ -15,10 +15,16 @@ class AdminController
 	public function administration(){
 		$subscribers = new SubscriberManager();
 		$allSubscribers = $subscribers->getSubscribers();
+
+		$subscriberId = [];
+		foreach ($allSubscribers as $subscriber) {
+			$subscribersId[] = $subscriber->getId();
+		}
 		
 		$displayData = new View('administration');
 		$displayData->render([
-			'allSubscribers' => $allSubscribers
+			'allSubscribers' => $allSubscribers,
+			'subscribersId' => json_encode($subscribersId)
 		]);
 	}
 
@@ -41,13 +47,13 @@ class AdminController
 	public function moderator($id){
 		$moderator = new SubscriberManager();
 		$newModerator = $moderator->moderator($id);
-		//header('Location:' . HOST . '/administration');
+		header('Location:' . HOST . '/administration');
 	}
 
 	public function member($id){
-		$membre = new SubscriberManager();
-		$newMembre = $membre->member($id);
-		//header('Location:' . HOST . '/administration');
+		$member = new SubscriberManager();
+		$newMember = $member->member($id);
+		header('Location:' . HOST . '/administration');
 	}
 
 	public function deleteMember($id){
