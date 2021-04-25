@@ -47,13 +47,11 @@ class AdminController
 	public function moderator($id){
 		$moderator = new SubscriberManager();
 		$newModerator = $moderator->moderator($id);
-		header('Location:' . HOST . '/administration');
 	}
 
 	public function member($id){
 		$member = new SubscriberManager();
 		$newMember = $member->member($id);
-		header('Location:' . HOST . '/administration');
 	}
 
 	public function deleteMember($id){
