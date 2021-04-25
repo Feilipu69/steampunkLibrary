@@ -7,34 +7,22 @@
 </form>
 <?php
 foreach ($allSubscribers as $subscribers) {
-	$subscribersId[] = $subscribers->getId();
 	?>
 	<ul>
-		<li><?= strip_tags($subscribers->getLogin()); ?> <?= $subscribers->getRole(); ?> 
 		<?php
-		if ($subscribers->getRole() != "admin") {
-			if ($subscribers->getRole() === 'member') {
-				?>
-				<button onclick="moderator(<?= $subscribers->getId(); ?>)"><span id="moderator<?= $subscribers->getId(); ?>"></span></button>
-				<?php
-			}
-			else {
-				?>
-				<button onclick="member(<?= $subscribers->getId(); ?>)"><span id="member<?= $subscribers->getId(); ?>"></span></button>
-				<?php
-			}
+		if ($subscribers->getRole() != 'admin') {
 			?>
-			<a href="<?= HOST; ?>/deleteMember/<?= $subscribers->getId(); ?>">Supprimer le membre</a>
+			<li>
+				<?= $subscribers->getLogin();?> : <span id="memberRole<?= $subscribers->getId(); ?>"><?= $subscribers->getRole(); ?></span> <button id="role" onclick="role(<?= $subscribers->getId(); ?>)">Modifier le rôle</button>
+			</li>
 			<?php
 		}
 		?>
-	</li>
-</ul>
+	</ul>
 	<?php
 }
 ?>
 <script>
-	let host = "<?= HOST; ?>";
-	let subscribersId = <?= json_encode($subscribersId); ?>;
+	let host = '<?= HOST; ?>';
 </script>
-<script src="<?= HOST; ?>/assets/js/getRole.js"></script>
+<script src="<?= HOST; ?>/assets/js/administration.js"></script>
