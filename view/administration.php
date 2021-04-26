@@ -5,6 +5,7 @@
 	<input type="text" name="isbn" />
 	<input type="submit" name="addABook" value="Envoyer" />
 </form>
+<h3>Gestion des membres</h3>
 <?php
 foreach ($allSubscribers as $subscribers) {
 	?>
