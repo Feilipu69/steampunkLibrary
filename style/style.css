@@ -1,0 +1,26 @@
+@font-face {
+	font-family: "steamwreck";
+	src: url("steamwreck/Steamwreck.otf");
+}
+
+body {
+	font-family: "steamwreck";
+	font-size: 30px;
+}
+
+h1 {
+	font-size: 70px;
+}
+
+a {
+	color: #c27f5d;
+}
+
+a:hover {
+	color: #c15620;
+}
+
+footer {
+	font-size: 20px;
+	color: #c15620;
+}
