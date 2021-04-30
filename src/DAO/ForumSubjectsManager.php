@@ -11,7 +11,8 @@ use Bihin\steampunkLibrary\src\model\{
 	Opinion
 };
 
-class ForumSubjectsManager extends DbConnect{
+class ForumSubjectsManager extends DbConnect 
+{
 	public function getSubject($theme){
 		$req = $this->db->prepare('SELECT id, loginSubscriber, subject, title, content, DATE_FORMAT(date, "%d/%m/%Y") AS date FROM forumSubjects WHERE subject = ?');
 		$req->execute([
