@@ -13,7 +13,7 @@ class BooksCatalogueManager extends DbConnect
 		}
 		return $books;
 	}
-	public function addABook($post){
+	public function addOneBook($post){
 		$book = new BooksCatalogue($post);
 		$req = $this->db->prepare('INSERT INTO booksCatalogue (isbn) VALUES (:isbn)');
 		$req->execute([

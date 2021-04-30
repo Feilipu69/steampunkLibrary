@@ -14,7 +14,7 @@ class SubscriberManager extends DbConnect
 		return $subscribers;
 	}
 
-	public function getASubscriber(){
+	public function getOneSubscriber(){
 		$req = $this->db->prepare('SELECT * FROM subscribers WHERE login = ?');
 		$req->execute([
 			$_SESSION['login']
