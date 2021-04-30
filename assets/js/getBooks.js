@@ -2,6 +2,7 @@ async function livres() {
   for (parameter of catalogue) {
     let div = document.createElement("div");
     div.setAttribute("id", parameter);
+    div.setAttribute("class", "container");
     let titleElement = document.createElement("p");
     let linkElement = document.createElement("a");
     let img = document.createElement("img");
