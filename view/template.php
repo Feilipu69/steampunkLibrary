@@ -3,6 +3,7 @@
 	<head>
 		<meta charset="utf-8">
 		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+		<link rel="stylesheet" href="<?= HOST; ?>/style/style.css" />
 		<script src="https://cdn.tiny.cloud/1/wh9z1mfuolvg4lwiul6nr0x5ur1txczi3ksrn9vm58r2itps/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 		<title>La Bibliothèque à Vapeur</title>
@@ -10,37 +11,37 @@
 	<body>
 		<div class="container">
 			<header>
-				<h1><a href="<?= HOST; ?>">La Bibliothèque à Vapeur</a></h1>
+				<h1><a href="<?= HOST; ?>" class="text-decoration-none">La Bibliothèque à Vapeur</a></h1>
 				<nav>
-					<ul>
-						<li><a href="<?= HOST; ?>">Accueil</a></li>
-						<li><a href="<?= HOST; ?>/books">Bibliothèque</a></li>
+					<ul class="nav">
+						<li class="nav-item"><a class="nav-link" href="<?= HOST; ?>">Accueil</a></li>
+						<li class="nav-item"><a class="nav-link" href="<?= HOST; ?>/books">Bibliothèque</a></li>
 						<?php
 						if (isset($_SESSION['login'])) {
 							?>
-							<li><a href="<?= HOST; ?>/newsletters">Newsletter</a></li>
-							<li><a href="<?= HOST; ?>/forum">Forum</a></li>
+							<li class="nav-item"><a class="nav-link" href="<?= HOST; ?>/newsletters">Newsletter</a></li>
+							<li class="nav-item"><a class="nav-link" href="<?= HOST; ?>/forum">Forum</a></li>
 							<?php
 							if (isset($_SESSION['role'])) {
 								?>
-								<li><a href="<?= HOST; ?>/updateData">Gestion de vos données</a></li>
-								<li><a href="<?= HOST; ?>/mySubjects">Mes sujets</a></li>
+								<li class="nav-item"><a class="nav-link" href="<?= HOST; ?>/updateData">Gestion de vos données</a></li>
+								<li class="nav-item"><a class="nav-link" href="<?= HOST; ?>/mySubjects">Mes sujets</a></li>
 								<?php
 							}
 							if (isset($_SESSION['role']) && ($_SESSION['role'] === 'admin' || $_SESSION['role'] === 'moderator')) {
 								?>
-								<li><a href="<?= HOST; ?>/administration">Administration</a></li>
+								<li class="nav-item"><a class="nav-link" href="<?= HOST; ?>/administration">Administration</a></li>
 								<?php
 							}
 							?>
-							<li><a href="<?= HOST; ?>/disconnection">Déconnexion</a></li> 
+							<li class="nav-item"><a class="nav-link" href="<?= HOST; ?>/disconnection">Déconnexion</a></li> 
 							<?php
 						}
 
 						if (!isset($_SESSION['login'])) {
 							?>
-							<li><a href="<?= HOST; ?>/register">Inscription</a></li>
-							<li><a href="<?= HOST; ?>/connection">Connexion</a></li>
+							<li class="nav-item"><a class="nav-link" href="<?= HOST; ?>/register">Inscription</a></li>
+							<li class="nav-item"><a class="nav-link" href="<?= HOST; ?>/connection">Connexion</a></li>
 							<?php
 						}
 						?>
@@ -62,6 +63,7 @@
 		</div>
 		<div class="container">
 			<footer>
+				<p>&copy; 2021 apprenti-développeur</p>
 			</footer>
 		</div>
 		<script>
