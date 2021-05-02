@@ -1,25 +1,12 @@
 async function livres() {
-  for (parameter of catalogue) {
-    let div = document.createElement("div");
-    div.setAttribute("id", parameter);
-    div.setAttribute("class", "container");
-    let titleElement = document.createElement("p");
-    let linkElement = document.createElement("a");
-    let img = document.createElement("img");
-    await fetch("https://www.googleapis.com/books/v1/volumes?q=" + parameter)
-      .then((response) => response.json())
-      .then((data) => {
-        titleElement.textContent = data.items[0].volumeInfo.title;
-        linkElement.href = `${host}/book/${parameter}`;
-        img.src = data.items[0].volumeInfo.imageLinks.thumbnail;
-        img.alt = "couverture " + data.items[0].volumeInfo.title;
-        document.body.appendChild(div);
-        div.appendChild(titleElement);
-        div.appendChild(linkElement);
-        linkElement.appendChild(img);
-      })
-      .catch((error) => console.log("Erreur " + error));
-  }
+	for(parameter of catalogue){
+		await fetch("https://www.googleapis.com/books/v1/volumes?q=" + parameter)
+			.then((response) => response.json())
+			.then(data => {
+				document.getElementById("cardHeader" + parameter).textContent = data.items[0].volumeInfo.title;
+				document.getElementById("cardBody" + parameter).innerHTML = "<a href=" + `${host}/book/${parameter}` + "><img src=" + data.items[0].volumeInfo.imageLinks.thumbnail + " alt = 'couverture '" + data.items[0].volumeInfo.title + " /></a>";
+			})
+	}
 }
 
 livres();
