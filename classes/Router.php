@@ -39,7 +39,7 @@ class Router
 		elseif ($_GET['route'] === 'book') {
 			$this->frontController->getOneBook($_GET['parameter']);
 		}
-		elseif ($_GET['route'] === 'addABook') {
+		elseif ($_GET['route'] === 'addOneBook') {
 			$this->adminController->addOneBook($_POST);
 		}
 	}
