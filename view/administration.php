@@ -1,9 +1,9 @@
 <h3>Administration</h3>
 <h3>Nouveau livre</h3>
-<form method="post" action="<?= HOST; ?>/addABook">
+<form method="post" action="<?= HOST; ?>/addOneBook">
 	<label for="isbn">Isbn</label>
 	<input type="text" name="isbn" />
-	<input type="submit" name="addABook" value="Envoyer" />
+	<input type="submit" name="addOneBook" value="Envoyer" />
 </form>
 <h3>Gestion des membres</h3>
 <?php
