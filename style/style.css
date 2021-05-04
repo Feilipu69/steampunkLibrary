@@ -4,7 +4,6 @@
 }
 
 body {
-	#background-color: #152024;
 	font-family: "steamwreck";
 	font-size: 30px;
 }
@@ -13,12 +12,26 @@ h1 {
 	font-size: 70px;
 }
 
-a {
-	color: #c27f5d;
+a, #buttonBurger {
+	color: #c15620;
 }
 
 a:hover {
-	color: #c15620;
+	color: #c27f5d;
+}
+
+.card {
+	border-color: #c15620;
+}
+
+.card-header, #submit, #cancel {
+	background-image: url("../public/fondCuivre.jpg");
+	color: white;
+}
+
+#bookDescription {
+	font-family: Arial;
+	font-size: 20px;
 }
 
 footer {
