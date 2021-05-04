@@ -1,4 +1,4 @@
-<div class="row">
+<div class="container row">
 <?php
 foreach ($catalogue as $book) {
 	?>
