@@ -1,3 +1,12 @@
-<div class="container">
-	<img src="<?= HOST; ?>/public/bibliotheque-steampunk.jpg" alt="dessin d'une grande bibliothèque circulaire sur plusieurs niveaux" class="w-100" />
+<p>Venez partager dans notre forum uchronique :</p>
+<div class="container jumbotron border shadow">
+	<ul id="home-description">
+		<li>Nos lectures</li>
+		<li>Nos discussions</li>
+		<li>Des informations diverses</li>
+		<li>Vous inscrire à notre bulletin mensuel</li>
+	</ul>
+</div>
+<div>
+	<img src="<?= HOST; ?>/public/bibliotheque-steampunk.jpg" alt="Bibliothèque circulaire" class="w-100" />
 </div>

@@ -1,8 +1,9 @@
-<div class="container row">
+<h3>Bibliothèque</h3>
+<div class="container row justify-content-center mt-5">
 <?php
 foreach ($catalogue as $book) {
 	?>
-	<div id="cardDeck" class="card-deck col-md-4">
+	<div id="cardDeck" class="card-deck col-md-4 text-center">
 		<div id="card<?= $book->getIsbn(); ?>" class="card mb-3">
 			<div id="cardHeader<?= $book->getIsbn(); ?>" class="card-header"></div>
 			<div id="cardBody<?= $book->getIsbn(); ?>" class="card-body"></div>

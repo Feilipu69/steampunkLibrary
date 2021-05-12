@@ -1,20 +1,20 @@
-<p class="container"><a href="<?= HOST; ?>/books">Retour</a></p>
+<p class="container"><a href="<?= HOST; ?>/books">Bibliothèque</a></p>
 <?php
 if (isset($_GET['parameter'])) {
 	?>
-	<div id="isbn" class="container">
-		<div class="d-flex">
-			<div class="mr-5">
+	<div id="isbn" class="container d-md-flex justify-content-around">
+		<div class="mr-md-5 mt-md-3">
+			<div id="image"></div>
+			<p id="publisher"></p>
+			<p id="date"></p>
+		</div>
+		<div>
+			<div class="ml-md-5 mt-md-3">
 				<p id="title"></p>
-				<p id="publisher"></p>
-			</div>
-			<div>
 				<p id="author"></p>
-				<p id="date"></p>
+				<p class="mt-2 p-3 border border-dark rounded" id="bookDescription"></p>
 			</div>
 		</div>
-		<div id="image"></div>
-		<p id="bookDescription"></p>
 	</div>
 	<script>let isbn = <?= $_GET['parameter'] ?></script>
 	<script src="../assets/js/getOneBook.js"></script>

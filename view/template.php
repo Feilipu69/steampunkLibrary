@@ -4,6 +4,8 @@
 		<meta charset="utf-8">
 		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 		<link rel="stylesheet" href="<?= HOST; ?>/style/style.css" />
+		<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Old+Standard+TT:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
 		<script src="https://cdn.tiny.cloud/1/wh9z1mfuolvg4lwiul6nr0x5ur1txczi3ksrn9vm58r2itps/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 		<title>La Bibliothèque à Vapeur</title>
@@ -11,14 +13,14 @@
 	<body>
 		<div class="container">
 			<header>
-				<h1><a href="<?= HOST; ?>" class="text-decoration-none">La Bibliothèque à Vapeur</a></h1>
-				<nav id="navbar" class="navbar navbar-expand-md navbar-light text-center">
+				<h1 class="text-center mt-5"><img src="<?= HOST; ?>/public/gear-animated.gif" alt="rouages animés" class="d-none d-md-inline" /><a href="<?= HOST; ?>" class="text-decoration-none">La Bibliothèque à Vapeur</a><img src="<?= HOST; ?>/public/gear-animated.gif" alt="rouages animés" class="d-none d-md-inline" /></h1>
+				<nav id="navbar" class="navbar navbar-expand-md navbar-light border-top border-bottom border-warning mb-3">
 					<button id="buttonBurger" class="navbar-toggler mx-auto" type="button" data-toggle="collapse" data-target="#navbarContent">
 						<svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" fill="currentColor" class="bi bi-list" viewBox="0 0 16 16">
 							<path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"/>
 							</svg>
 						</button>
-						<div id="navbarContent" class="collapse navbar-collapse">
+						<div id="navbarContent" class="collapse navbar-collapse justify-content-center">
 							<ul class="nav">
 								<li class="nav-item"><a class="nav-link" href="<?= HOST; ?>">Accueil</a></li>
 								<li class="nav-item"><a class="nav-link" href="<?= HOST; ?>/books">Bibliothèque</a></li>
@@ -61,7 +63,7 @@
 					<?php
 					if (isset($_SESSION['login'])) {
 						?>
-						<p>Bienvenue <?= $_SESSION['login']; ?>
+						<p>Bienvenue <?= $_SESSION['login']; ?></p>
 						<?php
 					}
 					?>

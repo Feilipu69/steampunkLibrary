@@ -8,11 +8,17 @@ body {
 	font-size: 30px;
 }
 
+.form-control {
+	font-size: 30px;
+}
+
 h1 {
 	font-size: 70px;
 }
 
-a, #buttonBurger {
+a,
+#buttonBurger,
+h3 {
 	color: #c15620;
 }
 
@@ -24,14 +30,42 @@ a:hover {
 	border-color: #c15620;
 }
 
-.card-header, #submit, #cancel {
+.card-header,
+#submit,
+#cancel,
+#welcome {
 	background-image: url("../public/fondCuivre.jpg");
 	color: white;
 }
 
-#bookDescription {
-	font-family: Arial;
+#bookDescription, .jumbotron {
+	font-family: "Old Standard TT", serif;
 	font-size: 20px;
+	background-image: url("../public/parchment.svg");
+}
+
+.steampunk-border {
+	margin-left: 8%;
+}
+
+.steampunk-border-2 {
+	margin-left: 5%;
+}
+
+.small-steampunk-border {
+	margin-left: 15%;
+}
+
+.small-steampunk-border-2 {
+	margin-left: 9%;
+}
+
+#home-description li {
+	list-style-image: url("../public/top-hat.png");
+}
+
+#administration li {
+	list-style-image: url("../public/goggles.png");
 }
 
 footer {

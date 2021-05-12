@@ -9,14 +9,27 @@ if (isset($_GET['parameter'])) {
 if (isset($getSubject)) {
 	foreach ($getSubject as $subject) {
 		?>
-		<h4><a href="<?= HOST ; ?>/subjectAndComments/<?= $subject->getId(); ?>/1"><?= strip_tags($subject->getTitle()); ?></a></h4>
-		<em>publié le : <?= $subject->getDate(); ?> par <?= strip_tags($subject->getLoginSubscriber()); ?></em>
+		<div class="d-flex justify-content-between">
+			<img src="<?= HOST; ?>/public/gear.png" alt="rouage" />
+			<img src="<?= HOST; ?>/public/gear.png" alt="rouage" />
+		</div>
+		<div class="border-top border-bottom border-warning mb-3 pt-3 pb-3">
+			<div class="ml-md-5">
+				<div>
+					<img src="<?= HOST; ?>/public/index-finger.png" alt="index" />
+					<h3 class="d-inline"><a href="<?= HOST ; ?>/subjectAndComments/<?= $subject->getId(); ?>/1"> <?= strip_tags($subject->getTitle()); ?></a></h3>
+				</div>
+				<em>publié le : <?= $subject->getDate(); ?> par <?= strip_tags($subject->getLoginSubscriber()); ?></em>
+				<?php
+				if (isset($_SESSION['role']) && ($_SESSION['role'] != 'member')) {
+					?>
+					<a href="<?= HOST; ?>/deleteSubject/<?= $subject->getId(); ?>">Supprimer le sujet</a>
+					<?php
+				}
+				?>
+			</div>
+		</div>
 		<?php
-		if (isset($_SESSION['role']) && ($_SESSION['role'] != 'member')) {
-			?>
-			<a href="<?= HOST; ?>/deleteSubject/<?= $subject->getId(); ?>">Supprimer le sujet</a>
-			<?php
-		}
 	}
 }
 ?>
