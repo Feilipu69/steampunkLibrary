@@ -3,6 +3,11 @@
 	src: url("steamwreck/Steamwreck.otf");
 }
 
+@font-face {
+	font-family: "Edmundsbury Serif";
+	src: url("edmundsbury_serif/Edmundsbury Serif.ttf");
+}
+
 body {
 	font-family: "steamwreck";
 	font-size: 30px;
@@ -39,9 +44,14 @@ a:hover {
 }
 
 #bookDescription, .jumbotron {
-	font-family: "Old Standard TT", serif;
-	font-size: 20px;
+	font-family: "Edmundsbury Serif", serif;
+	font-size: 27px;
 	background-image: url("../public/parchment.svg");
+}
+
+.content {
+	font-family: "Edmundsbury Serif", serif;
+	font-size: 27px;
 }
 
 .steampunk-border {

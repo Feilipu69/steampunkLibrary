@@ -2,7 +2,7 @@
 	<div class="border border-warning p-3 mb-3">
 	<h3><?= strip_tags($subjectData->getTitle()); ?></h3>
 	<em>Publié par <?= strip_tags($subjectData->getLoginSubscriber()); ?> le <?= $subjectData->getDate(); ?></em>
-	<p><?= strip_tags($subjectData->getContent()); ?></p>
+	<p class="content"><?= strip_tags($subjectData->getContent()); ?></p>
 	</div>
 </div>
 
@@ -35,7 +35,7 @@ if (isset($opinions)) {
 				<p><strong><?= strip_tags($opinion->getLogin()); ?></strong> a écrit : </p>
 				</div>
 				<div class="card-body">
-				<p><?= strip_tags($opinion->getComment()); ?></p>
+				<p class="content"><?= strip_tags($opinion->getComment()); ?></p>
 				<?php
 				if (isset($_SESSION['role']) && $_SESSION['role'] != 'membre') {
 					?>

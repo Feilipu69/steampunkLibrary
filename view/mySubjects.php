@@ -5,7 +5,7 @@ if (isset($mySubjects)) {
 		<div class="container border shadow p-5">
 			<h3><?= strip_tags($subjects->getTitle()); ?></h3>
 			<p>Sujet : <?= strip_tags($subjects->getSubject()); ?></p>
-			<p><?= strip_tags($subjects->getcontent()); ?></p>
+			<p class="content"><?= strip_tags($subjects->getcontent()); ?></p>
 			<em>Publié le : <?= $subjects->getDate(); ?> </em>
 			<br>
 			<button onclick="window.location.href='<?= HOST; ?>/updateSubject/<?=$subjects->getId(); ?>';">Modifier</button> 
