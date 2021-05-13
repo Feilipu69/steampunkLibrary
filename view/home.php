@@ -1,4 +1,4 @@
-<p>Venez partager dans notre forum uchronique :</p>
+<p>Venez partager dans notre bibliothèque à vapeur :</p>
 <div class="container jumbotron border shadow">
 	<ul id="home-description">
 		<li>Nos lectures</li>
