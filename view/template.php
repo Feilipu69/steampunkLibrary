@@ -12,10 +12,10 @@
 		<title>La Bibliothèque à Vapeur</title>
 	</head>
 	<body>
-		<div class="container">
-			<header>
-				<h1 class="text-center mt-5"><img src="<?= HOST; ?>/public/gear-animated.gif" alt="rouages animés" class="d-none d-md-inline" /><a href="<?= HOST; ?>" class="text-decoration-none">La Bibliothèque à Vapeur</a><img src="<?= HOST; ?>/public/gear-animated.gif" alt="rouages animés" class="d-none d-md-inline" /></h1>
-				<nav id="navbar" class="navbar navbar-expand-md navbar-light border-top border-bottom border-warning mb-3">
+		<div class="container rounded">
+			<header class="pb-3 mb-3">
+				<h1 class="text-center mt-5"><img src="<?= HOST; ?>/public/gear-animated.gif" alt="engrenages animés" class="d-none d-lg-inline" /><a href="<?= HOST; ?>" class="text-decoration-none">La Bibliothèque à Vapeur</a><img src="<?= HOST; ?>/public/gear-animated.gif" alt="engrenages animés" class="d-none d-lg-inline" /></h1>
+				<nav id="navbar" class="navbar navbar-expand-md navbar-light border-top border-bottom border-warning">
 					<button id="buttonBurger" class="navbar-toggler mx-auto" type="button" data-toggle="collapse" data-target="#navbarContent">
 						<svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" fill="currentColor" class="bi bi-list" viewBox="0 0 16 16">
 							<path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"/>
@@ -59,19 +59,19 @@
 					</nav>
 				</header>
 			</div>
-			<div class="container">
+			<div class="container rounded pt-3">
 				<section>
 					<?php
 					if (isset($_SESSION['login'])) {
 						?>
-						<p>Bienvenue <?= $_SESSION['login']; ?></p>
+						<p class="container">Bienvenue <?= $_SESSION['login']; ?></p>
 						<?php
 					}
 					?>
 					<?= $content; ?>
 				</section>
 			</div>
-			<div class="container">
+			<div class="container rounded">
 				<footer>
 					<p>&copy; 2021 apprenti-développeur</p>
 				</footer>

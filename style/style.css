@@ -10,7 +10,12 @@
 
 body {
 	font-family: "steamwreck";
-	font-size: 30px;
+	font-size: 25px;
+	background-image: url("../public/red-velvet.jpg");
+}
+
+body .container {
+	background-color: white;
 }
 
 .form-control {
@@ -45,7 +50,7 @@ a:hover {
 
 #bookDescription, .jumbotron {
 	font-family: "Edmundsbury Serif", serif;
-	font-size: 27px;
+	font-size: 22px;
 	background-image: url("../public/parchment.svg");
 }
 
@@ -54,20 +59,19 @@ a:hover {
 	font-size: 27px;
 }
 
-.steampunk-border {
-	margin-left: 8%;
+.steampunk-border, .steampunk-border-2 {
+	width: auto;
+	margin: auto;
 }
 
-.steampunk-border-2 {
-	margin-left: 5%;
+.medium-steampunk-border, .medium-steampunk-border-2 {
+	width: auto;
+	margin: auto;
 }
 
-.small-steampunk-border {
-	margin-left: 15%;
-}
-
-.small-steampunk-border-2 {
-	margin-left: 9%;
+.small-steampunk-border, .small-steampunk-border-2 {
+	width: auto;
+	margin-left: 12%;
 }
 
 #home-description li {
@@ -76,6 +80,14 @@ a:hover {
 
 #administration li {
 	list-style-image: url("../public/goggles.png");
+}
+
+.page-item .page-link {
+	color: black;
+}
+
+em, #deleteSubject {
+	font-size: 25px;
 }
 
 footer {
