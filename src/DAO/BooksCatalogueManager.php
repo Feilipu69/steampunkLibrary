@@ -7,7 +7,7 @@ use Bihin\steampunkLibrary\src\model\BooksCatalogue;
 class BooksCatalogueManager extends DbConnect
 {
 	public function getBooks(){
-		$req = $this->db->query('SELECT * FROM booksCatalogue');
+		$req = $this->db->query('SELECT * FROM booksCatalogue ORDER BY id DESC');
 		while ($data = $req->fetch()) {
 			$books[] = new BooksCatalogue($data);
 		}
