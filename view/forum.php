@@ -1,4 +1,4 @@
-<h3>Forum</h3>
+<h3 class="container">Forum</h3>
 <div class="steampunk-border"><img src="<?= HOST; ?>/public/steampunk-border.png" alt="Bordure" class="steampunk-border d-none d-lg-block mb-5" /></div>
 <div class="medium-steampunk-border"><img src="<?= HOST; ?>/public/medium-steampunk-border.png" alt="Bordure" class="medium-steampunk-border d-none d-md-block d-lg-none mb-5" /></div>
 <div class="small-steampunk-border"><img src="<?= HOST; ?>/public/small-steampunk-border.png" alt="Petite bordure" class="small-steampunk-border d-md-none d-lg-none" /></div>
