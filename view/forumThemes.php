@@ -19,7 +19,7 @@ if (isset($getSubject)) {
 			<img src="<?= HOST; ?>/public/smallGear.png" alt="rouage" />
 			<img src="<?= HOST; ?>/public/smallGear.png" alt="rouage" />
 		</div>
-		<div class="border-top border-bottom border-warning mb-3 pt-3 pb-3">
+		<div class="border-top border-bottom border-warning mb-3 pt-3">
 			<div class="ml-md-5">
 				<div>
 					<img src="<?= HOST; ?>/public/index-finger.png" alt="index" />
