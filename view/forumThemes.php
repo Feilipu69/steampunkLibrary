@@ -11,15 +11,11 @@ if (isset($_GET['parameter'])) {
 if (isset($getSubject)) {
 	foreach ($getSubject as $subject) {
 		?>
-		<div class="d-none d-md-flex justify-content-between">
-			<img src="<?= HOST; ?>/public/gear.png" alt="rouage" />
-			<img src="<?= HOST; ?>/public/gear.png" alt="rouage" />
-		</div>
-		<div class="d-md-none d-flex justify-content-between">
+		<div class="d-flex justify-content-between">
 			<img src="<?= HOST; ?>/public/smallGear.png" alt="rouage" />
 			<img src="<?= HOST; ?>/public/smallGear.png" alt="rouage" />
 		</div>
-		<div class="border-top border-bottom border-warning mb-3 pt-3">
+		<div class="border-top border-bottom border-warning pt-3">
 			<div class="ml-md-5">
 				<div>
 					<img src="<?= HOST; ?>/public/index-finger.png" alt="index" />

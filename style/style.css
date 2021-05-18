@@ -36,6 +36,10 @@ a:hover {
 	color: #c27f5d;
 }
 
+.section {
+	text-align: center;
+}
+
 .card {
 	border-color: #c15620;
 }
@@ -57,21 +61,6 @@ a:hover {
 .content {
 	font-family: "Edmundsbury Serif", serif;
 	font-size: 27px;
-}
-
-.steampunk-border, .steampunk-border-2 {
-	width: auto;
-	margin: auto;
-}
-
-.medium-steampunk-border, .medium-steampunk-border-2 {
-	width: auto;
-	margin: auto;
-}
-
-.small-steampunk-border, .small-steampunk-border-2 {
-	width: auto;
-	margin-left: 9%;
 }
 
 #home-description li {
