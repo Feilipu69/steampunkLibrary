@@ -6,15 +6,15 @@
 		<h3>Inscription</h3>
 		<form method="post" action="<?= HOST; ?>/register">
 			<div class="form-group">
-			<label for="login">Pseudo : </label>
+			<label>Pseudo : </label>
 			<input type="text" name="login" required class="form-control" />
 			</div>
 			<div class="form-group">
-			<label for="password">Mot de passe : </label>
+			<label>Mot de passe : </label>
 			<input type="password" name="password" required class="form-control" />
 			</div>
 			<div class="form-group">
-			<label for="mail">Courriel : </label>
+			<label>Courriel : </label>
 			<input type="email" name="email" required class="form-control" />
 			</div>
 			<input type="submit" id="submit" name="register" value="Inscription" />

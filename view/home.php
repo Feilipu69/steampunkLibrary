@@ -1,4 +1,4 @@
-<p>Venez partager dans notre bibliothèque à vapeur :</p>
+<h2>Venez partager dans notre bibliothèque à vapeur :</h2>
 <div class="container jumbotron border shadow">
 	<ul id="home-description">
 		<li>Nos lectures</li>

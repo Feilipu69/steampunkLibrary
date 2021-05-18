@@ -5,7 +5,7 @@
 		<h3>Nouveau livre</h3>
 		<form method="post" action="<?= HOST; ?>/addOneBook">
 			<div class="form-group">
-				<label for="isbn">Isbn</label>
+				<label>Isbn</label>
 				<input type="text" name="isbn" />
 				<input type="submit" name="addOneBook" value="Envoyer" />
 			</div>
@@ -13,33 +13,30 @@
 	</div>
 	<img src="<?= HOST; ?>/public/steampunk-border-2.png" alt="bordure" class="img-fluid" />
 </div>
-<div>
-	<h3>Gestion des membres</h3>
-	<div class="container d-md-flex justify-content-between">
-		<div>
+<h3>Gestion des membres</h3>
+<div class="container d-md-flex justify-content-between">
+	<div>
+		<ul id="administration">
 			<?php
 			foreach ($allSubscribers as $subscribers) {
 				?>
-				<ul id="administration">
-					<?php
-					if ($subscribers->getRole() != 'admin') {
-						?>
-						<li id="member<?= $subscribers->getId(); ?>">
-							<?= $subscribers->getLogin();?> : <span id="memberRole<?= $subscribers->getId(); ?>"><?= $subscribers->getRole(); ?></span> <button id="role" onclick="role(<?= $subscribers->getId(); ?>)">Modifier le rôle</button> <button onclick="deleteMember(<?= $subscribers->getId(); ?>)">Supprimer</button> 
-						</li>
-						<?php
-					}
+				<?php
+				if ($subscribers->getRole() != 'admin') {
 					?>
-				</ul>
+					<li id="member<?= $subscribers->getId(); ?>">
+						<?= $subscribers->getLogin();?> : <span id="memberRole<?= $subscribers->getId(); ?>"><?= $subscribers->getRole(); ?></span> <button id="role" onclick="role(<?= $subscribers->getId(); ?>)">Modifier le rôle</button> <button onclick="deleteMember(<?= $subscribers->getId(); ?>)">Supprimer</button> 
+					</li>
+					<?php
+				}
+				?>
 				<?php
 			}
 			?>
-		</div>
-		<div class="mr-5">
-			<img src="<?= HOST; ?>/public/retro-bicycle.png" alt="vélo rétro" />
-		</div>
+		</ul>
 	</div>
-</div>
+	<div class="mr-5">
+		<img src="<?= HOST; ?>/public/retro-bicycle.png" alt="vélo rétro" />
+	</div>
 </div>
 <script>
 	let host = '<?= HOST; ?>';

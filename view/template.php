@@ -5,7 +5,7 @@
 		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 		<link rel="stylesheet" href="<?= HOST; ?>/style/style.css" />
 		<link rel="preconnect" href="https://fonts.gstatic.com">
-<link href="https://fonts.googleapis.com/css2?family=Old+Standard+TT:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+		<link href="https://fonts.googleapis.com/css2?family=Old+Standard+TT:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
 		<script src="https://cdn.tiny.cloud/1/wh9z1mfuolvg4lwiul6nr0x5ur1txczi3ksrn9vm58r2itps/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 		<meta name="description" content="Blog de litterature steampunk avec un forum échanger des idées de livres ou pour commenter les livres présentés">
@@ -59,18 +59,16 @@
 					</nav>
 				</header>
 			</div>
-			<div class="container rounded pt-3">
-				<section>
-					<?php
-					if (isset($_SESSION['login'])) {
-						?>
-						<p class="container">Bienvenue <?= $_SESSION['login']; ?></p>
-						<?php
-					}
+			<section class="container rounded pt-3">
+				<?php
+				if (isset($_SESSION['login'])) {
 					?>
-					<?= $content; ?>
-				</section>
-			</div>
+					<p class="container">Bienvenue <?= $_SESSION['login']; ?></p>
+					<?php
+				}
+				?>
+				<?= $content; ?>
+			</section>
 			<div class="container rounded">
 				<footer>
 					<p>&copy; 2021 apprenti-développeur</p>

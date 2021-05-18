@@ -45,8 +45,8 @@ if (isset($opinions)) {
 				?>
 				</div>
 				<div class="footer pl-3 pb-3">
-				<button onclick="addRemoveAgree(<?= $opinion->getId(); ?>, 'agree')"><img src="<?= HOST; ?>/public/thumbUp.svg" /></button> : <span id="agreeOpinions<?= $opinion->getId(); ?>"></span>
-				<button onclick="addRemoveDisagree(<?= $opinion->getId(); ?>, 'disagree')"><img src="<?= HOST; ?>/public/thumbDown.svg" /></button> : <span id="disagreeOpinions<?= $opinion->getId(); ?>"></span>
+				<button onclick="addRemoveAgree(<?= $opinion->getId(); ?>, 'agree')"><img src="<?= HOST; ?>/public/thumbUp.svg" alt="pouce pointant vers le haut" /></button> : <span id="agreeOpinions<?= $opinion->getId(); ?>"></span>
+				<button onclick="addRemoveDisagree(<?= $opinion->getId(); ?>, 'disagree')"><img src="<?= HOST; ?>/public/thumbDown.svg" alt="pouce pointant vers le bas" /></button> : <span id="disagreeOpinions<?= $opinion->getId(); ?>"></span>
 				</div>
 			</div>
 			<?php

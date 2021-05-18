@@ -1,4 +1,4 @@
-<p class="container"><a href="<?= HOST; ?>/books">Bibliothèque</a></p>
+<h2 class="container"><a href="<?= HOST; ?>/books">Bibliothèque</a></h2>
 <?php
 if (isset($_GET['parameter'])) {
 	?>
@@ -21,5 +21,5 @@ if (isset($_GET['parameter'])) {
 	<?php
 }
 ?>
-<script type="text/javascript" src="https://www.google.com/books/jsapi.js"></script>
+<script src="https://www.google.com/books/jsapi.js"></script>
 
