@@ -5,8 +5,8 @@
 		<h3>Nouveau livre</h3>
 		<form method="post" action="<?= HOST; ?>/addOneBook">
 			<div class="form-group">
-				<label>Isbn</label>
-				<input type="text" name="isbn" />
+				<label for="isbn">Isbn</label>
+				<input type="text" name="isbn" id="isbn" />
 				<input type="submit" name="addOneBook" value="Envoyer" />
 			</div>
 		</form>

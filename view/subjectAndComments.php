@@ -1,8 +1,8 @@
 <div class="container">
 	<div class="border border-warning p-3 mb-3">
-	<h3><?= strip_tags($subjectData->getTitle()); ?></h3>
-	<em>Publié par <?= strip_tags($subjectData->getLoginSubscriber()); ?> le <?= $subjectData->getDate(); ?></em>
-	<p class="content"><?= strip_tags($subjectData->getContent()); ?></p>
+		<h3><?= strip_tags($subjectData->getTitle()); ?></h3>
+		<em>Publié par <?= strip_tags($subjectData->getLoginSubscriber()); ?> le <?= $subjectData->getDate(); ?></em>
+		<p class="content"><?= strip_tags($subjectData->getContent()); ?></p>
 	</div>
 </div>
 
@@ -11,15 +11,19 @@ if (isset($_GET['parameter']) && isset($_GET['page']) && isset($_SESSION['login'
 	?>
 	<div class="container">
 		<button onclick="comment()">Ajouter un commentaire</button>
-		<form method="post" action="<?= HOST; ?>/subjectAndComments/<?=$_GET['parameter']; ?>" id="comment" style="display:none">
-			<label for="login">Pseudo : </label>
-			<input type="text" name="login" id="login" value="<?= $_SESSION['login']; ?>" />
-			<br>
-			<textarea name="comment"></textarea>
-			<br>
-			<input type="submit" name="send" id="send" value="Envoyer" />
-			<button onclick="window.location.href='<?= HOST; ?>/subjectAndComments/<?= $_GET['parameter']; ?>';">Annuler</button>
-		</form>
+		<div class="mt-3">
+			<form method="post" action="<?= HOST; ?>/subjectAndComments/<?=$_GET['parameter']; ?>" id="comment" style="display:none">
+				<div class="form-goup">
+					<label for="login">Pseudo : </label>
+					<input type="text" name="login" id="login" value="<?= $_SESSION['login']; ?>" />
+				</div>
+				<div class="form-group">
+					<textarea name="comment"></textarea>
+				</div>
+				<input type="submit" name="send" id="send" value="Envoyer" />
+				<button onclick="window.location.href='<?= HOST; ?>/subjectAndComments/<?= $_GET['parameter']; ?>';">Annuler</button>
+			</form>
+		</div>
 	</div>
 	<?php
 }
@@ -32,21 +36,21 @@ if (isset($opinions)) {
 			?>
 			<div class="card mb-3">
 				<div class="card-header">
-				<p><strong><?= strip_tags($opinion->getLogin()); ?></strong> a écrit : </p>
+					<p><strong><?= strip_tags($opinion->getLogin()); ?></strong> a écrit : </p>
 				</div>
 				<div class="card-body">
-				<p class="content"><?= strip_tags($opinion->getComment()); ?></p>
-				<?php
-				if (isset($_SESSION['role']) && $_SESSION['role'] != 'membre') {
-					?>
-					<a href="<?= HOST; ?>/deleteOpinion/<?= $_GET['parameter']; ?>/<?= $opinion->getId(); ?>">Supprimer le commentaire</a>
+					<p class="content"><?= strip_tags($opinion->getComment()); ?></p>
 					<?php
-				}
-				?>
+					if (isset($_SESSION['role']) && $_SESSION['role'] != 'membre') {
+						?>
+						<a href="<?= HOST; ?>/deleteOpinion/<?= $_GET['parameter']; ?>/<?= $opinion->getId(); ?>">Supprimer le commentaire</a>
+						<?php
+					}
+					?>
 				</div>
 				<div class="footer pl-3 pb-3">
-				<button onclick="addRemoveAgree(<?= $opinion->getId(); ?>, 'agree')"><img src="<?= HOST; ?>/public/thumbUp.svg" alt="pouce pointant vers le haut" /></button> : <span id="agreeOpinions<?= $opinion->getId(); ?>"></span>
-				<button onclick="addRemoveDisagree(<?= $opinion->getId(); ?>, 'disagree')"><img src="<?= HOST; ?>/public/thumbDown.svg" alt="pouce pointant vers le bas" /></button> : <span id="disagreeOpinions<?= $opinion->getId(); ?>"></span>
+					<button onclick="addRemoveAgree(<?= $opinion->getId(); ?>, 'agree')"><img src="<?= HOST; ?>/public/thumbUp.svg" alt="pouce pointant vers le haut" /></button> : <span id="agreeOpinions<?= $opinion->getId(); ?>"></span>
+					<button onclick="addRemoveDisagree(<?= $opinion->getId(); ?>, 'disagree')"><img src="<?= HOST; ?>/public/thumbDown.svg" alt="pouce pointant vers le bas" /></button> : <span id="disagreeOpinions<?= $opinion->getId(); ?>"></span>
 				</div>
 			</div>
 			<?php
