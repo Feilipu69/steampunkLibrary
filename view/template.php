@@ -14,7 +14,7 @@
 	<body>
 		<div class="container rounded">
 			<header class="pb-3 mb-3">
-				<div class="text-center mt-5"><img src="<?= HOST; ?>/public/gear-animated.gif" alt="engrenages animés" class="d-none d-lg-inline" /><h1 class="d-inline"><a href="<?= HOST; ?>" class="text-decoration-none">La Bibliothèque à Vapeur</a></h1><img src="<?= HOST; ?>/public/gear-animated.gif" alt="engrenages animés" class="d-none d-lg-inline" /></div>
+				<div class="text-center mt-5"><img src="<?= HOST; ?>/public/gear-animated.gif" alt="engrenages animés" class="d-none d-lg-inline" /><h1 class="d-inline"><a href="<?= HOST; ?>" class="text-decoration-none">La Bibliothèque à Vapeur</a></h1><img src="<?= HOST; ?>/public/gear-animated.gif" alt="engrenages animés" id="gear" class="d-none d-lg-inline" /></div>
 				<nav id="navbar" class="navbar navbar-expand-md navbar-light border-top border-bottom border-warning">
 					<button id="buttonBurger" class="navbar-toggler mx-auto" type="button" data-toggle="collapse" data-target="#navbarContent">
 						<svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" fill="currentColor" class="bi bi-list" viewBox="0 0 16 16">
