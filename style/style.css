@@ -12,6 +12,7 @@ body {
 	font-family: "steamwreck";
 	font-size: 25px;
 	background-image: url("../public/red-velvet.jpg");
+	background-size: cover;
 }
 
 body .container {
@@ -34,6 +35,10 @@ h3 {
 
 a:hover {
 	color: #c27f5d;
+}
+
+#gear {
+	transform: rotateY(180deg);
 }
 
 .section {
