@@ -18,7 +18,7 @@ body .container {
 	background-color: white;
 }
 
-.form-control {
+nav li, .form-control {
 	font-size: 30px;
 }
 
