@@ -59,7 +59,7 @@
 					</nav>
 				</header>
 			</div>
-			<section class="container rounded pt-3">
+			<section class="container rounded pt-3 pb-3">
 				<?php
 				if (isset($_SESSION['login'])) {
 					?>
@@ -69,7 +69,7 @@
 				?>
 				<?= $content; ?>
 			</section>
-			<footer>
+			<footer class="mt-3">
 				<div class="container rounded d-lg-flex justify-content-between">
 					<div>
 						Liens :

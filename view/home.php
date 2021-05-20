@@ -1,6 +1,6 @@
 <h2>Venez partager dans notre bibliothèque à vapeur :</h2>
 <div class="container jumbotron border shadow">
-	<ul id="home-description">
+	<ul class="d-lg-flex justify-content-between" id="home-description">
 		<li>Nos lectures</li>
 		<li>Nos discussions</li>
 		<li>Des informations diverses</li>

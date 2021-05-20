@@ -11,19 +11,17 @@ if (isset($_GET['parameter']) && isset($_GET['page']) && isset($_SESSION['login'
 	?>
 	<div class="container">
 		<button onclick="comment()">Ajouter un commentaire</button>
-		<div class="mt-3">
-			<form method="post" action="<?= HOST; ?>/subjectAndComments/<?=$_GET['parameter']; ?>" id="comment" style="display:none">
-				<div class="form-goup">
-					<label for="login">Pseudo : </label>
-					<input type="text" name="login" id="login" value="<?= $_SESSION['login']; ?>" />
-				</div>
-				<div class="form-group">
-					<textarea name="comment"></textarea>
-				</div>
-				<input type="submit" name="send" id="send" value="Envoyer" />
-				<button onclick="window.location.href='<?= HOST; ?>/subjectAndComments/<?= $_GET['parameter']; ?>';">Annuler</button>
-			</form>
-		</div>
+		<form method="post" action="<?= HOST; ?>/subjectAndComments/<?=$_GET['parameter']; ?>" id="comment" style="display:none">
+			<div class="form-goup">
+				<label for="login">Pseudo : </label>
+				<input type="text" name="login" id="login" value="<?= $_SESSION['login']; ?>" />
+			</div>
+			<div class="form-group">
+				<textarea name="comment"></textarea>
+			</div>
+			<input type="submit" name="send" id="send" value="Envoyer" />
+			<button onclick="window.location.href='<?= HOST; ?>/subjectAndComments/<?= $_GET['parameter']; ?>';">Annuler</button>
+		</form>
 	</div>
 	<?php
 }
@@ -56,7 +54,7 @@ if (isset($opinions)) {
 			<?php
 		}
 		?>
-		<div class="container-fluid">
+		<div class="container-fluid pb-3">
 			<ul class="pagination">
 				<li class="page-item <?= ($currentPage == 1) ? "disabled" : ""; ?>"><a class="page-link" href="<?= HOST; ?>/subjectAndComments/<?= $_GET['parameter']; ?>/<?= $currentPage - 1; ?>">Précédente</a></li>
 				<?php
