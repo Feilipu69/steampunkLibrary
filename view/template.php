@@ -69,11 +69,20 @@
 				?>
 				<?= $content; ?>
 			</section>
-			<div class="container rounded">
-				<footer>
-					<p>&copy; 2021 apprenti-développeur</p>
-				</footer>
-			</div>
+			<footer>
+				<div class="container rounded d-lg-flex justify-content-between">
+					<div>
+						Liens :
+						<ul>
+							<li><a href="https://www.french-steampunk.fr">french-steampunk</a></li>
+							<li><a href="https://www.steampunkstore.fr">steampunkstore</a></li>
+						</ul>
+					</div>
+					<div>
+						<p>&copy; 2021 apprenti-développeur</p>
+					</div>
+				</div>
+			</footer>
 			<script>
 				tinymce.init({
 					selector:'textarea',
