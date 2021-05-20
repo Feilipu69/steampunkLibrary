@@ -13,5 +13,5 @@
 			<li class="nav-item"><a class="nav-link" href="<?= HOST; ?>/forumThemes/bazar">Bazar</a></li>
 		</ul>
 	</nav>
-	<img src="<?= HOST; ?>/public/steampunk-border.png" alt="Bordure" class="img-fluid" />
+	<img src="<?= HOST; ?>/public/steampunk-border.png" alt="Bordure" class="border2 img-fluid" />
 </div>

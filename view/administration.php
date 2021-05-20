@@ -1,5 +1,5 @@
 <h3 class="container">Administration</h3>
-<div class="section">
+<div class="section mb-5">
 	<img src="<?= HOST; ?>/public/steampunk-border-2.png" alt="bordure" class="img-fluid" />
 	<div class="mt-3 mb-5">
 		<h3>Nouveau livre</h3>
@@ -11,7 +11,7 @@
 			</div>
 		</form>
 	</div>
-	<img src="<?= HOST; ?>/public/steampunk-border-2.png" alt="bordure" class="img-fluid" />
+	<img src="<?= HOST; ?>/public/steampunk-border-2.png" alt="bordure" class="border2 img-fluid" />
 </div>
 <h3>Gestion des membres</h3>
 <div class="container d-md-flex justify-content-between">
