@@ -1,6 +1,6 @@
 <h3 class="container">Forum</h3>
 <div class="section">
-	<img src="<?= HOST; ?>/public/steampunk-border.png" alt="Bordure" class="img-fluid" />
+	<img src="<?= HOST; ?>/public/steampunk-border.png" alt="Bordure" class=" border1 img-fluid" />
 	<nav class="mt-5 mb-5">
 		<ul class="nav justify-content-center">
 			<li class="nav-item"><a class="nav-link" href="<?= HOST; ?>/forumThemes/bibliotheque">Bibliothèque</a></li>

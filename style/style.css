@@ -83,6 +83,10 @@ em, #deleteSubject {
 	font-size: 25px;
 }
 
+.border1, .border2 {
+	width: 70%;
+}
+
 .border2 {
 	transform: rotateX(180deg) rotateY(180deg);
 }

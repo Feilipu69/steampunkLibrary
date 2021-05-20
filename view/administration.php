@@ -1,6 +1,6 @@
 <h3 class="container">Administration</h3>
 <div class="section mb-5">
-	<img src="<?= HOST; ?>/public/steampunk-border-2.png" alt="bordure" class="img-fluid" />
+	<img src="<?= HOST; ?>/public/steampunk-border-2.png" alt="bordure" class="border1 img-fluid" />
 	<div class="mt-3 mb-5">
 		<h3>Nouveau livre</h3>
 		<form method="post" action="<?= HOST; ?>/addOneBook">
