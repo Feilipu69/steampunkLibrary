@@ -12,8 +12,8 @@ if (isset($getSubject)) {
 	foreach ($getSubject as $subject) {
 		?>
 		<div class="d-flex justify-content-between">
-			<img src="<?= HOST; ?>/public/smallGear.png" alt="rouage" />
-			<img src="<?= HOST; ?>/public/smallGear.png" alt="rouage" />
+			<img src="<?= HOST; ?>/public/smallGear.png" alt="rouage" class="ml-lg-4" />
+			<img src="<?= HOST; ?>/public/smallGear.png" alt="rouage" class="mr-lg-4" />
 		</div>
 		<div class="border-top border-bottom border-warning pt-3">
 			<div class="ml-md-5">
