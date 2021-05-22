@@ -15,28 +15,47 @@ use Bihin\steampunkLibrary\utils\View;
 class FrontController
 {
 	// Livres	
-	
+
 	public function getBooks(){
 		$booksCatalogue = new BooksCatalogueManager();
-		$catalogue = $booksCatalogue->getBooks();
+		$catalogue = $booksCatalogue->catalogue();
+		$allBooks = $booksCatalogue->countAllBooks();
+
+		// Pagination
+		if (isset($_GET['page']) && !empty($_GET['page'])) {
+			$currentPage = (int) strip_tags($_GET['page']);
+		} else {
+			$currentPage = 1;
+		}
+		//$numberOfComments = $opinion->countAllOpinions($forumId);
+		$numberOfBooksByPage = 9;
+		$allPages = ceil($allBooks/$numberOfBooksByPage);
+		$firstPage = ($currentPage * $numberOfBooksByPage) - $numberOfBooksByPage;
+		// Avoir les 9 livres
+		$books = $booksCatalogue->getBooks($firstPage, $numberOfBooksByPage);
+		// Fin pagination
+
 		$displayBooks = new View('books');
 		$displayBooks->render([
-			'catalogue' => $catalogue
+			'catalogue' => $catalogue,
+			'currentPage' => $currentPage,
+			'allPages' => $allPages,
+			'books' => $books
 		]);
 	}
-	
+
 	public function getOneBook($isbn){ 
 		$displayABook = new View('book');
 		$displayABook->render([]);
 	}
-	
+
 	// Membres	
 	/**
-	 * register permet à un utilisateur de s'inscrire
-	 *
-	 * @param  mixed $post
-	 * @return void
-	 */
+	* register permet à un utilisateur de s'inscrire
+	*
+	* @param  mixed $post
+	* @return void
+	*/
 	public function register($post){
 		if (isset($_SESSION['registerError'])) {
 			unset($_SESSION['registerError']);
@@ -61,7 +80,7 @@ class FrontController
 		$displayRegisterForm = new View('register');
 		$displayRegisterForm->render([]);
 	}
-		
+
 	public function connection($post){
 		if (isset($_SESSION['error'])) {
 			unset($_SESSION['error']);
@@ -87,7 +106,7 @@ class FrontController
 		$displayConnection = new View('connection');
 		$displayConnection->render([]);
 	}
-	
+
 	public function disconnection(){
 		if (isset($_SESSION['login'])) {
 			unset($_SESSION['login']);
@@ -95,13 +114,13 @@ class FrontController
 			header('Location:' . HOST);
 		}
 	}
-	
+
 	/**
-	 * updateData. Modifie les données de l'utilisateur
-	 *
-	 * @param  mixed $post
-	 * @return void
-	 */
+	* updateData. Modifie les données de l'utilisateur
+	*
+	* @param  mixed $post
+	* @return void
+	*/
 	public function updateData($post){
 		if (isset($_SESSION['registerError'])) {
 			unset($_SESSION['registerError']);
@@ -125,7 +144,7 @@ class FrontController
 		$displayForm = new View('updateData');
 		$displayForm->render([]);
 	}
-	
+
 	public function deleteSubscriber(){
 		$subscriber = new SubscriberManager();
 		$subscriber->deleteSubscriber();
@@ -135,10 +154,10 @@ class FrontController
 	// Sujets, commentaires et votes	
 
 	/**
-	 * mySubjects. Accès aux sujets créés par l'utilisateur connecté
-	 *
-	 * @return void
-	 */
+	* mySubjects. Accès aux sujets créés par l'utilisateur connecté
+	*
+	* @return void
+	*/
 	public function mySubjects(){
 		$subjects = new ForumSubjectsManager();
 		$mySubjects = $subjects->mySubjects();
@@ -147,14 +166,14 @@ class FrontController
 			'mySubjects' => $mySubjects
 		]);
 	}
-	
+
 	/**
 	* subjectAndComments. Récupère et affiche un billet avec tous ses commentaires (par groupe de cinq). Fonctionnalité like-dislike associée à chaque commentaire, enfin pagination.
-	 *
-	 * @param  mixed $post
-	 * @param  int $forumId
-	 * @return void
-	 */
+	*
+	* @param  mixed $post
+	* @param  int $forumId
+	* @return void
+	*/
 	public function subjectAndComments($post, $forumId){
 		$subject = new ForumSubjectsManager();
 		$opinion = new OpinionManager();
@@ -198,7 +217,7 @@ class FrontController
 			'allPages' => $allPages
 		]);
 	}
-	
+
 	public function updateSubject($post, $id){
 		if (isset($post['send'])) {
 			if (!empty($post['title']) && !empty($post['content'])) {
@@ -211,15 +230,15 @@ class FrontController
 		$displayFormular = new View('updateSubjectFormular');
 		$displayFormular->render([]);
 	}
-	
+
 	public function deleteSubject($id){
 		$subject = new ForumSubjectsManager();
 		$deleteSubject = $subject->deleteSubject($id);
 		header('Location:' . HOST . '/forum');
 	}
-	
+
 	// NewsLetter	
-	
+
 	public function newsletters(){
 		$displayLetter = new View('newsletters');
 		$displayLetter->render([]);
@@ -227,21 +246,21 @@ class FrontController
 
 	// Forum	
 	/**
-	 * forum affiche le menu des thèmes du forum
-	 *
-	 * @return void
-	 */
+	* forum affiche le menu des thèmes du forum
+	*
+	* @return void
+	*/
 	public function forum(){
 		$displayForum = new View('forum');
 		$displayForum->render([]);
 	}
-	
+
 	/**
-	 * forumThemes. Accès au thème choisi par l'utilisateur
-	 *
-	 * @param  mixed $theme
-	 * @return void
-	 */
+	* forumThemes. Accès au thème choisi par l'utilisateur
+	*
+	* @param  mixed $theme
+	* @return void
+	*/
 	public function forumThemes($theme){
 		$subject = new ForumSubjectsManager();
 		$getSubject = $subject->getSubject($theme);
@@ -250,13 +269,13 @@ class FrontController
 			'getSubject' => $getSubject
 		]);
 	}
-	
+
 	/**
-	 * addForumTheme ajoute un billet au thème choisi.
-	 *
-	 * @param  mixed $post
-	 * @return void
-	 */
+	* addForumTheme ajoute un billet au thème choisi.
+	*
+	* @param  mixed $post
+	* @return void
+	*/
 	public function addForumTheme($post){
 		if (isset($post['send'])) {
 			if (!empty($post['title']) && !empty($post['content'])) {
@@ -272,12 +291,12 @@ class FrontController
 
 	// like-dislike	
 	/**
-	 * addRemoveVote. Fonctionnalité like-dislike pour chaque billet d'un sujet.
-	 *
-	 * @param  int $opinionId
-	 * @param  mixed $vote
-	 * @return void
-	 */
+	* addRemoveVote. Fonctionnalité like-dislike pour chaque billet d'un sujet.
+	*
+	* @param  int $opinionId
+	* @param  mixed $vote
+	* @return void
+	*/
 	public function addRemoveVote($opinionId, $vote){
 		$agreeDisagree = new AgreeDisagreeManager();
 		$opinions = new OpinionManager();
@@ -300,13 +319,13 @@ class FrontController
 			}
 		}
 	}
-	
+
 	/**
-	 * getAllVotes. Récupération de tous les like-dislike d'un billet.
-	 *
-	 * @param  int $opinionId
-	 * @return void
-	 */
+	* getAllVotes. Récupération de tous les like-dislike d'un billet.
+	*
+	* @param  int $opinionId
+	* @return void
+	*/
 	public function getAllVotes($opinionId){
 		$votes = new AgreeDisagreeManager();
 		$allVotes = $votes->getAllVotes($opinionId);
