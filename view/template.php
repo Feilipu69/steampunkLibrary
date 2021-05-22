@@ -24,7 +24,7 @@
 						<div id="navbarContent" class="collapse navbar-collapse justify-content-center">
 							<ul class="nav">
 								<li class="nav-item"><a class="nav-link" href="<?= HOST; ?>">Accueil</a></li>
-								<li class="nav-item"><a class="nav-link" href="<?= HOST; ?>/books">Bibliothèque</a></li>
+								<li class="nav-item"><a class="nav-link" href="<?= HOST; ?>/books?page=1">Bibliothèque</a></li>
 								<?php
 								if (isset($_SESSION['login'])) {
 									?>
