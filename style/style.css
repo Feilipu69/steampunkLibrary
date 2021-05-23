@@ -22,6 +22,10 @@ nav li, .form-control {
 	font-size: 30px;
 }
 
+.pagination li {
+	font-size: 20px;
+}
+
 h1 {
 	font-size: 70px;
 }
