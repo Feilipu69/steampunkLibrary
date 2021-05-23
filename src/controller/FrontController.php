@@ -27,7 +27,6 @@ class FrontController
 		} else {
 			$currentPage = 1;
 		}
-		//$numberOfComments = $opinion->countAllOpinions($forumId);
 		$numberOfBooksByPage = 9;
 		$allPages = ceil($allBooks/$numberOfBooksByPage);
 		$firstPage = ($currentPage * $numberOfBooksByPage) - $numberOfBooksByPage;
