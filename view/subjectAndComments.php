@@ -1,5 +1,5 @@
 <div class="container">
-	<div class="border border-warning p-3 mb-3">
+	<div class="marble border border-muted rounded shadow p-3 mb-3">
 		<h3><?= strip_tags($subjectData->getTitle()); ?></h3>
 		<em>Publié par <?= strip_tags($subjectData->getLoginSubscriber()); ?> le <?= $subjectData->getDate(); ?></em>
 		<p class="content"><?= strip_tags($subjectData->getContent()); ?></p>

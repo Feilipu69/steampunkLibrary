@@ -68,7 +68,11 @@ a:hover {
 
 .content {
 	font-family: "Edmundsbury Serif", serif;
-	font-size: 27px;
+	font-size: 23px;
+}
+
+.footer {
+	font-size: 20px;
 }
 
 #home-description li {
@@ -101,8 +105,9 @@ em, #deleteSubject {
 	border-color: #c15620;
 }
 
-.card-body, #forum {
+.marble, #forum {
 	background-image: url("../public/marbre.jpg");
+	background-size: cover;
 }
 
 footer {
