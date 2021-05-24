@@ -95,6 +95,16 @@ em, #deleteSubject {
 	transform: rotateX(180deg) rotateY(180deg);
 }
 
+#forum {
+	border-style: solid;
+	border-radius: 50px;
+	border-color: #c15620;
+}
+
+.card-body, #forum {
+	background-image: url("../public/marbre.jpg");
+}
+
 footer {
 	font-size: 20px;
 	color: #c15620;
