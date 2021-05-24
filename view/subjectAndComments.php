@@ -56,7 +56,7 @@ if (isset($opinions)) {
 		?>
 		<nav class="container-fluid pb-3">
 			<ul class="pagination justify-content-center">
-				<li class="page-item <?= ($currentPage == 1) ? "disabled" : ""; ?>"><a class="page-link" href="<?= HOST; ?>/subjectAndComments/<?= $_GET['parameter']; ?>/<?= $currentPage - 1; ?>">Précédente</a></li>
+				<li class="page-item <?= ($currentPage == 1) ? "disabled" : ""; ?>"><a class="page-link" href="<?= HOST; ?>/subjectAndComments/<?= $_GET['parameter']; ?>/<?= $currentPage - 1; ?>">&laquo;</a></li>
 				<?php
 				for ($page = 1; $page <= $allPages; $page++) {
 					?>
@@ -64,7 +64,7 @@ if (isset($opinions)) {
 					<?php
 				}
 				?>
-				<li class="page-item <?= ($currentPage == $allPages) ? "disabled" : ""; ?>"><a class="page-link" href="<?= HOST; ?>/subjectAndComments/<?= $_GET['parameter']; ?>/<?= $currentPage + 1; ?>">Suivante</a></li>
+				<li class="page-item <?= ($currentPage == $allPages) ? "disabled" : ""; ?>"><a class="page-link" href="<?= HOST; ?>/subjectAndComments/<?= $_GET['parameter']; ?>/<?= $currentPage + 1; ?>">&raquo;</a></li>
 			</ul>
 		</nav>
 	</div>
