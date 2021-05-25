@@ -55,7 +55,8 @@ a:hover {
 .card-header,
 #submit,
 #cancel,
-#welcome {
+#welcome,
+thead {
 	background-image: url("../public/fondCuivre.jpg");
 	color: white;
 }
@@ -77,10 +78,6 @@ a:hover {
 
 #home-description li {
 	list-style-image: url("../public/top-hat.png");
-}
-
-#administration li {
-	list-style-image: url("../public/goggles.png");
 }
 
 .page-item .page-link {
