@@ -14,25 +14,34 @@
 	<img src="<?= HOST; ?>/public/steampunk-border-2.png" alt="bordure" class="border2 img-fluid" />
 </div>
 <h3>Gestion des membres</h3>
-<div class="container d-md-flex justify-content-between">
+<div class="container d-md-flex justify-content-around">
 	<div>
-		<ul id="administration">
+		<table class="table table-borderless table-responsive mt-4">
+			<thead>
+				<tr>
+					<th>Login</th>
+					<th>Rôle</th>
+					<th></th>
+					<th></th>
+				</tr>
+			</thead>
+			<tbody>
 			<?php
 			foreach ($allSubscribers as $subscribers) {
-				?>
-				<?php
 				if ($subscribers->getRole() != 'admin') {
 					?>
-					<li id="member<?= $subscribers->getId(); ?>">
-						<?= $subscribers->getLogin();?> : <span id="memberRole<?= $subscribers->getId(); ?>"><?= $subscribers->getRole(); ?></span> <button id="role" onclick="role(<?= $subscribers->getId(); ?>)">Modifier le rôle</button> <button onclick="deleteMember(<?= $subscribers->getId(); ?>)">Supprimer</button> 
-					</li>
+					<tr>
+						<td id="member<?= $subscribers->getId(); ?>"><?= $subscribers->getLogin(); ?></td>
+						<td id="memberRole<?= $subscribers->getId(); ?>"><?= $subscribers->getRole(); ?></td>
+						<td><button id="role" onclick="role(<?= $subscribers->getId(); ?>)">Changer</button></td>
+						<td><button onclick="deleteMember(<?= $subscribers->getId(); ?>)">Supprimer</button></td>
+					</tr>
 					<?php
 				}
-				?>
-				<?php
 			}
 			?>
-		</ul>
+			</tbody>
+		</table>
 	</div>
 	<div class="mr-5">
 		<img src="<?= HOST; ?>/public/retro-bicycle.png" alt="vélo rétro" />
