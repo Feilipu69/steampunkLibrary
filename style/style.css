@@ -107,6 +107,11 @@ em, #deleteSubject {
 	background-size: cover;
 }
 
+.engrenages {
+	background-image: url("../public/engrenages.jpg");
+	height: 75px;
+}
+
 footer {
 	font-size: 20px;
 	color: #c15620;

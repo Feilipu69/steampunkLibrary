@@ -8,30 +8,32 @@ if (isset($_GET['parameter'])) {
 	</div>
 	<?php
 }
+?>
+<?php
 if (isset($getSubject)) {
 	foreach ($getSubject as $subject) {
 		?>
-		<div class="d-flex justify-content-between">
-			<img src="<?= HOST; ?>/public/smallGear.png" alt="rouage" class="ml-lg-4" />
-			<img src="<?= HOST; ?>/public/smallGear.png" alt="rouage" class="mr-lg-4" />
-		</div>
-		<div class="border-top border-bottom border-warning pt-3">
-			<div class="ml-md-5">
-				<div>
-					<img src="<?= HOST; ?>/public/index-finger.png" alt="index" />
-					<h3 class="d-inline"><a href="<?= HOST ; ?>/subjectAndComments/<?= $subject->getId(); ?>/1"> <?= strip_tags($subject->getTitle()); ?></a></h3>
-				</div>
-				<em>publié le : <?= $subject->getDate(); ?> par <?= strip_tags($subject->getLoginSubscriber()); ?></em>
-				<p class="content"><?= strip_tags($subject->getContent()); ?></p>
-				<?php
-				if (isset($_SESSION['role']) && ($_SESSION['role'] != 'member')) {
-					?>
-					<p><a id="deleteSubject" href="<?= HOST; ?>/deleteSubject/<?= $subject->getId(); ?>">Supprimer le sujet</a></p>
-					<?php
-				}
-				?>
+		<div class="border rounded shadow mb-5">
+			<div class="engrenages">
 			</div>
-		</div>
+			<div class="pt-3">
+				<div class="ml-4">
+					<div>
+						<img src="<?= HOST; ?>/public/index-finger.png" alt="index" />
+						<h3 class="d-inline"><a href="<?= HOST ; ?>/subjectAndComments/<?= $subject->getId(); ?>/1"> <?= strip_tags($subject->getTitle()); ?></a></h3>
+					</div>
+					<em>publié le : <?= $subject->getDate(); ?> par <?= strip_tags($subject->getLoginSubscriber()); ?></em>
+					<p class="content"><?= strip_tags($subject->getContent()); ?></p>
+					<?php
+					if (isset($_SESSION['role']) && ($_SESSION['role'] != 'member')) {
+						?>
+						<p><a id="deleteSubject" href="<?= HOST; ?>/deleteSubject/<?= $subject->getId(); ?>">Supprimer le sujet</a></p>
+						<?php
+					}
+					?>
+				</div>
+			</div>			
+			</div>
 		<?php
 	}
 }
