@@ -1,5 +1,5 @@
 function book(isbn){
-	fetch("https://www.googleapis.com/books/v1/volumes?q=" + isbn)
+	fetch("https://www.googleapis.com/books/v1/volumes?q=isbn:" + isbn)
 		.then(response => response.json())
 		.then(data => {
 			document.getElementById('title').textContent = data.items[0].volumeInfo.title;
