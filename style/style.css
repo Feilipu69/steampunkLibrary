@@ -78,6 +78,7 @@ thead {
 
 #home-description li {
 	list-style-image: url("../public/top-hat.png");
+	font-size: 25px;
 }
 
 .page-item .page-link {
