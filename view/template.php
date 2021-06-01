@@ -31,7 +31,7 @@
 									<li class="nav-item"><a class="nav-link" href="<?= HOST; ?>/newsletters">Newsletter</a></li>
 									<li class="nav-item"><a class="nav-link" href="<?= HOST; ?>/forum">Forum</a></li>
 									<?php
-									if (isset($_SESSION['role'])) {
+									if (isset($_SESSION['role']) || isset($_SESSION['login'])) {
 										?>
 										<li class="nav-item"><a class="nav-link" href="<?= HOST; ?>/updateData">Gestion de vos données</a></li>
 										<li class="nav-item"><a class="nav-link" href="<?= HOST; ?>/mySubjects">Mes sujets</a></li>
@@ -63,7 +63,7 @@
 				<?php
 				if (isset($_SESSION['login'])) {
 					?>
-					<p class="container">Bienvenue <?= $_SESSION['login']; ?></p>
+					<p class="bienvenue container">Bienvenue <?= $_SESSION['login']; ?></p>
 					<?php
 				}
 				?>
@@ -74,8 +74,8 @@
 					<div>
 						Liens :
 						<ul>
-							<li><a href="https://www.french-steampunk.fr">french-steampunk</a></li>
-							<li><a href="https://www.steampunkstore.fr">steampunkstore</a></li>
+							<li><a href="https://www.french-steampunk.fr" target="_blank">french-steampunk</a></li>
+							<li><a href="https://www.steampunkstore.fr" target="_blank">steampunkstore</a></li>
 						</ul>
 					</div>
 					<div>

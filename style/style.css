@@ -48,6 +48,10 @@ a:hover {
 	text-align: center;
 }
 
+.bienvenue {
+	font-size: 35px;
+}
+
 .card {
 	border-color: #c15620;
 }

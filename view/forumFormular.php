@@ -1,3 +1,4 @@
+<p><a href="<?= HOST; ?>/forumThemes/<?= $_GET['parameter']; ?>">Retour</a></p>
 <?php
 if (isset($_GET['parameter'])) {
 	?>

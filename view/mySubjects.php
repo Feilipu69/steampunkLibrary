@@ -9,7 +9,7 @@ if (isset($mySubjects)) {
 			<em>Publié le : <?= $subjects->getDate(); ?> </em>
 			<br>
 			<button onclick="window.location.href='<?= HOST; ?>/updateSubject/<?=$subjects->getId(); ?>';">Modifier</button> 
-			<button onclick="window.location.href='<?= HOST; ?>/deleteSubject/<?= $subjects->getId(); ?>';">Supprimer</button> 
+			<button onclick="window.location.href='<?= HOST; ?>/deleteSubject/<?= $subjects->getId(); ?>';" class="text-danger">Supprimer</button> 
 		</div>
 		<?php
 	}

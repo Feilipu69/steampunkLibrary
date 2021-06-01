@@ -1,9 +1,9 @@
 <?php
 if (isset($_GET['parameter'])) {
 	?>
-	<div class="container">
+	<div class="container mb-5">
 		<h2><?= $_GET['parameter']; ?></h2>
-		<a href="<?= HOST; ?>/forum">Retour</a>
+		<p><a href="<?= HOST; ?>/forum">Retour</a></p>
 		<h3><a href="<?= HOST; ?>/addForumTheme/<?= $_GET['parameter']; ?>">Nouveau sujet</a></h3>
 	</div>
 	<?php

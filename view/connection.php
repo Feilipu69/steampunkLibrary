@@ -13,16 +13,17 @@
 			<input type="submit" id="submit" name="connection" value="Connexion" />
 			<button id="cancel" onclick="window.location.href='<?= HOST; ?>/connection';">Annuler</button>
 		</form>
+		<?php
+		if (isset($_SESSION['error'])) {
+			?>
+			<div class="text-danger display-4"><?= $_SESSION['error']; ?></div>
+			<?php
+		}
+		?>
 	</div>
 	<div>
 		<img src="<?= HOST; ?>/public/smallBoat.png" alt="image d'un bateau steampunk" class="img-fluid" />
 	</div>
 </div>
 
-<?php
-if (isset($_SESSION['error'])) {
-	?>
-	<div><?= $_SESSION['error']; ?></div>
-	<?php
-}
-?>
+

@@ -11,7 +11,7 @@ if (isset($_GET['parameter']) && isset($_GET['page']) && isset($_SESSION['login'
 	?>
 	<div class="container">
 		<button onclick="comment()">Ajouter un commentaire</button>
-		<form method="post" action="<?= HOST; ?>/subjectAndComments/<?=$_GET['parameter']; ?>" id="comment" style="display:none">
+		<form method="post" action="<?= HOST; ?>/subjectAndComments/<?= $_GET['parameter']; ?>/<?= $_GET['page']; ?>" id="comment" style="display:none" class="mt-4">
 			<div class="form-goup">
 				<label for="login">Pseudo : </label>
 				<input type="text" name="login" id="login" value="<?= $_SESSION['login']; ?>" />
@@ -20,7 +20,7 @@ if (isset($_GET['parameter']) && isset($_GET['page']) && isset($_SESSION['login'
 				<textarea name="comment"></textarea>
 			</div>
 			<input type="submit" name="send" id="send" value="Envoyer" />
-			<button onclick="window.location.href='<?= HOST; ?>/subjectAndComments/<?= $_GET['parameter']; ?>';">Annuler</button>
+			<button onclick="window.location.href="<?= HOST; ?>/subjectAndComments/<?= $_GET['parameter']; ?>/<?= $_GET['page']; ?>";">Annuler</button>
 		</form>
 	</div>
 	<?php

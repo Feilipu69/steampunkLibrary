@@ -33,8 +33,8 @@
 					<tr id="member<?= $subscribers->getId(); ?>">
 						<td><?= $subscribers->getLogin(); ?></td>
 						<td id="memberRole<?= $subscribers->getId(); ?>"><?= $subscribers->getRole(); ?></td>
-						<td><button id="role" onclick="role(<?= $subscribers->getId(); ?>)">Changer</button></td>
-						<td><button onclick="deleteMember(<?= $subscribers->getId(); ?>)">Supprimer</button></td>
+						<td><button id="role" onclick="role(<?= $subscribers->getId(); ?>)">Modifier</button></td>
+						<td><button onclick="deleteMember(<?= $subscribers->getId(); ?>)" class="text-danger">Supprimer</button></td>
 					</tr>
 					<?php
 				}

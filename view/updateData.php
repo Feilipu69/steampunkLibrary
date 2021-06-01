@@ -1,5 +1,5 @@
-<div class="container d-flex flex-column flex-md-row justify-content-center">
-	<div class="pt-5">
+<div class="container d-flex flex-column flex-md-row justify-content-around">
+	<div class="pt-5 pb-3">
 		<h3>Modification de vos données</h3>
 		<form method="post" action="<?= HOST; ?>/updateData">
 			<div class="form-group">
@@ -16,18 +16,20 @@
 			</div>
 			<input type="submit" name="send" value="Modifier" />
 			<button onclick="window.location.href='<?= HOST; ?>/updateData';">Annuler</button>
-			<button onclick="window.location.href='<?= HOST; ?>/deleteSubscriber';">Suppression</button>
+			<br>
+			<div class="text-danger mt-3">Suppression de votre compte : <button onclick="window.location.href='<?= HOST; ?>/deleteSubscriber';">Supprimer</button></div>
 		</form>
+		<?php
+		if (isset($_SESSION['registerError'])) {
+			?>
+			<div class="text-danger display-4"><?= $_SESSION['registerError']; ?></div>
+			<?php
+		}
+		?>
 	</div>
-	<div>
+	<div class="pt-5">
 		<img src="<?= HOST; ?>/public/time.png" alt="vélo rétro" class="img-fluid" />
 	</div>
 </div>
-<?php
-if (isset($_SESSION['registerError'])) {
-	?>
-	<div><?= $_SESSION['registerError']; ?></div>
-	<?php
-}
-?>
+
 
