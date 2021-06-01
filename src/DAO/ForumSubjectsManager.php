@@ -14,7 +14,7 @@ use Bihin\steampunkLibrary\src\model\{
 class ForumSubjectsManager extends DbConnect 
 {
 	public function getSubject($theme){
-		$req = $this->db->prepare('SELECT id, loginSubscriber, subject, title, content, DATE_FORMAT(date, "%d/%m/%Y") AS date FROM forumSubjects WHERE subject = ?');
+		$req = $this->db->prepare('SELECT id, loginSubscriber, subject, title, content, DATE_FORMAT(date, "%d/%m/%Y") AS date FROM forumSubjects WHERE subject = ? ORDER BY id DESC');
 		$req->execute([
 			$theme
 		]);

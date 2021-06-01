@@ -25,7 +25,7 @@ class OpinionManager extends DbConnect
 	}
 
 	public function getOpinions($forumId, $first, $byPage){
-		$req = $this->db->prepare('SELECT * FROM opinions WHERE forumId = ? LIMIT ' . $first . ', ' . $byPage);
+		$req = $this->db->prepare('SELECT * FROM opinions WHERE forumId = ? ORDER BY id DESC LIMIT ' . $first . ', ' . $byPage);
 		$req->execute([
 			$forumId
 		]);
