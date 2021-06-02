@@ -172,7 +172,7 @@ class FrontController
 	* @param  int $forumId
 	* @return void
 	*/
-	public function subjectAndComments($post, $forumId){
+	public function subjectAndComments($post, $forumId, $page){
 		$subject = new ForumSubjectsManager();
 		$opinion = new OpinionManager();
 		$opinionsAgreeDisagree = new AgreeDisagreeManager();
@@ -273,12 +273,12 @@ class FrontController
 	* @param  mixed $post
 	* @return void
 	*/
-	public function addForumTheme($post){
+	public function addForumTheme($post, $parameter){
 		if (isset($post['send'])) {
 			if (!empty($post['title']) && !empty($post['content'])) {
 				$newTheme = new ForumSubjectsManager();
 				$forumTheme = $newTheme->addForumTheme($post);
-				header('Location:' . HOST . '/forum');
+				header('Location:' . HOST . '/forumThemes/' . $parameter);
 			}
 		}
 	}
