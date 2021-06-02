@@ -79,7 +79,7 @@ class Router
 			$this->frontController->mySubjects();
 		}
 		elseif ($_GET['route'] === 'subjectAndComments') {
-			$this->frontController->subjectAndComments($_POST, $_GET['parameter']);
+			$this->frontController->subjectAndComments($_POST, $_GET['parameter'], $_GET['page']);
 		}
 		elseif ($_GET['route'] === 'updateSubject') {
 			$this->frontController->updateSubject($_POST, $_GET['parameter']);
