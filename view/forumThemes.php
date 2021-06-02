@@ -5,6 +5,7 @@ if (isset($_GET['parameter'])) {
 		<h2><?= $_GET['parameter']; ?></h2>
 		<p><a href="<?= HOST; ?>/forum">Retour</a></p>
 		<button onclick="displayForm()" class="displayForm">Ajouter un sujet</button>
+
 		<form method="post" action="<?= HOST; ?>/addForumTheme/<?= $_GET['parameter']; ?>" id="displayForm" style="display:none" class="mt-4">
 			<div class="form-group">
 				<label for="title">Titre</label>
@@ -18,6 +19,10 @@ if (isset($_GET['parameter'])) {
 			<button onclick="window.location.href='<?= HOST; ?>/addForumTheme';">Annuler</button>
 		</form>
 	</div>
+	<script>
+		let host = "<?= HOST; ?>";
+		let theme = "<?= $_GET['parameter']; ?>";
+	</script>
 	<?php
 }
 ?>
@@ -48,12 +53,13 @@ if (isset($getSubject)) {
 		</div>
 		<?php
 	}
+	?>
+	<script>let id = <?= $subject->getId(); ?>;</script>
+	<?php
 }
 ?>
 
-<script>
-	let host = "<?= HOST; ?>";
-	let id = <?= $subject->getId(); ?>;
-</script>
+
 <script src="<?= HOST; ?>/assets/js/administration.js"></script>
 <script src="<?= HOST; ?>/assets/js/displayForm.js"></script>
+<script src="<?= HOST; ?>/assets/js/addSubjectOrComment.js"></script>
