@@ -39,11 +39,4 @@ function deleteSubject(id){
 			window.location.reload();
 		})
 }
-function deleteOpinion(parameter, page, opinionId){
-	fetch(`${host}/deleteOpinion/${parameter}/${page}/${opinionId}`, {
-		method: 'DELETE'
-	})
-		.then(() => {
-			window.location.reload();
-		})
-}
+
