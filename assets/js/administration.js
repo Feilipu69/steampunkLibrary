@@ -30,3 +30,20 @@ function deleteMember(subscriberId){
 			document.getElementById(`member${subscriberId}`).style.display = 'none';
 		})
 }
+
+function deleteSubject(id){
+	fetch(`${host}/deleteSubject/${id}`, {
+		method: 'DELETE'
+	})
+		.then(() => {
+			window.location.reload();
+		})
+}
+function deleteOpinion(parameter, page, opinionId){
+	fetch(`${host}/deleteOpinion/${parameter}/${page}/${opinionId}`, {
+		method: 'DELETE'
+	})
+		.then(() => {
+			window.location.reload();
+		})
+}

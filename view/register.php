@@ -8,7 +8,7 @@
 			<div class="form-group">
 				<label for="login">Pseudo : </label>
 				<br>
-				Tient compte des majuscules.
+				<div class="info">! Tient compte des majuscules.</div>
 				<input type="text" name="login" id="login" required class="form-control" />
 			</div>
 			<div class="form-group">

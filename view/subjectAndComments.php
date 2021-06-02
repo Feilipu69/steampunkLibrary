@@ -10,8 +10,8 @@
 if (isset($_GET['parameter']) && isset($_GET['page']) && isset($_SESSION['login'])) {
 	?>
 	<div class="container">
-		<button onclick="comment()">Ajouter un commentaire</button>
-		<form method="post" action="<?= HOST; ?>/subjectAndComments/<?= $_GET['parameter']; ?>/<?= $_GET['page']; ?>" id="comment" style="display:none" class="mt-4">
+		<button onclick="displayForm()" class="displayForm">Ajouter un commentaire</button>
+		<form method="post" action="<?= HOST; ?>/subjectAndComments/<?= $_GET['parameter']; ?>/<?= $_GET['page']; ?>" id="displayForm" style="display:none" class="mt-4">
 			<div class="form-goup">
 				<label for="login">Pseudo : </label>
 				<input type="text" name="login" id="login" value="<?= $_SESSION['login']; ?>" />
@@ -41,7 +41,7 @@ if (isset($opinions)) {
 					<?php
 					if (isset($_SESSION['role']) && $_SESSION['role'] != 'membre') {
 						?>
-						<a href="<?= HOST; ?>/deleteOpinion/<?= $_GET['parameter']; ?>/<?= $_GET['page']; ?>/<?= $opinion->getId(); ?>">Supprimer le commentaire</a>
+						<button onclick="deleteOpinion(<?= $_GET['parameter']?>, <?= $_GET['page']; ?>, <?= $opinion->getId(); ?>)">Supprimer le commentaire</button>
 						<?php
 					}
 					?>
@@ -73,8 +73,10 @@ if (isset($opinions)) {
 ?>
 <script>
 	let host = "<?= HOST; ?>";
+	let parameter = <?= $_GET['parameter']; ?>;
 	let page = <?= $_GET['page']; ?>;
 	let opinionsId = <?= $opinionsId; ?>;
 </script>
-<script src="<?= HOST; ?>/assets/js/comment.js"></script>
+<script src="<?= HOST; ?>/assets/js/administration.js"></script>
+<script src="<?= HOST; ?>/assets/js/displayForm.js"></script>
 <script src="<?= HOST; ?>/assets/js/votes.js"></script>

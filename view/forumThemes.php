@@ -4,7 +4,19 @@ if (isset($_GET['parameter'])) {
 	<div class="container mb-5">
 		<h2><?= $_GET['parameter']; ?></h2>
 		<p><a href="<?= HOST; ?>/forum">Retour</a></p>
-		<h3><a href="<?= HOST; ?>/addForumTheme/<?= $_GET['parameter']; ?>">Nouveau sujet</a></h3>
+		<button onclick="displayForm()" class="displayForm">Ajouter un sujet</button>
+		<form method="post" action="<?= HOST; ?>/addForumTheme/<?= $_GET['parameter']; ?>" id="displayForm" style="display:none" class="mt-4">
+			<div class="form-group">
+				<label for="title">Titre</label>
+				<input type="text" name="title" id="title" />
+			</div>
+			<div class="form-goup">
+				<label for="content">Contenu</label>
+				<textarea name="content"></textarea>
+			</div>
+			<input type="submit" name="send" value="Envoyer" />
+			<button onclick="window.location.href='<?= HOST; ?>/addForumTheme';">Annuler</button>
+		</form>
 	</div>
 	<?php
 }
@@ -27,14 +39,21 @@ if (isset($getSubject)) {
 					<?php
 					if (isset($_SESSION['role']) && ($_SESSION['role'] != 'member')) {
 						?>
-						<p><a id="deleteSubject" href="<?= HOST; ?>/deleteSubject/<?= $subject->getId(); ?>">Supprimer le sujet</a></p>
+						<button onclick="deleteSubject(<?= $subject->getId(); ?>)" class="mb-3">Supprimer le sujet</button>
 						<?php
 					}
 					?>
 				</div>
 			</div>			
-			</div>
+		</div>
 		<?php
 	}
 }
 ?>
+
+<script>
+	let host = "<?= HOST; ?>";
+	let id = <?= $subject->getId(); ?>;
+</script>
+<script src="<?= HOST; ?>/assets/js/administration.js"></script>
+<script src="<?= HOST; ?>/assets/js/displayForm.js"></script>

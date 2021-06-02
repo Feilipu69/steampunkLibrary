@@ -60,6 +60,7 @@ a:hover {
 #submit,
 #cancel,
 #welcome,
+.displayForm,
 thead {
 	background-image: url("../public/fondCuivre.jpg");
 	color: white;
@@ -91,6 +92,10 @@ thead {
 
 em, #deleteSubject {
 	font-size: 25px;
+}
+
+.info {
+	font-size: 20px;
 }
 
 .border1, .border2 {

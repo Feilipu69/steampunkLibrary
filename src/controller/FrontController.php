@@ -232,7 +232,6 @@ class FrontController
 	public function deleteSubject($id){
 		$subject = new ForumSubjectsManager();
 		$deleteSubject = $subject->deleteSubject($id);
-		header('Location:' . HOST . '/forum');
 	}
 
 	// NewsLetter	
@@ -282,9 +281,6 @@ class FrontController
 				header('Location:' . HOST . '/forum');
 			}
 		}
-
-		$displayFormular = new View('forumFormular');
-		$displayFormular->render([]);
 	}
 
 	// like-dislike	
