@@ -41,7 +41,7 @@ if (isset($opinions)) {
 					<?php
 					if (isset($_SESSION['role']) && $_SESSION['role'] != 'membre') {
 						?>
-						<button onclick="deleteOpinion(<?= $_GET['parameter']?>, <?= $_GET['page']; ?>, <?= $opinion->getId(); ?>)">Supprimer le commentaire</button>
+						<a href="<?= HOST; ?>/deleteOpinion/<?= $_GET['parameter']; ?>/<?= $_GET['page']; ?>/<?= $opinion->getId(); ?>">Supprimer le commentaire</a>
 						<?php
 					}
 					?>
@@ -79,4 +79,5 @@ if (isset($opinions)) {
 </script>
 <script src="<?= HOST; ?>/assets/js/administration.js"></script>
 <script src="<?= HOST; ?>/assets/js/displayForm.js"></script>
+<script src="<?= HOST; ?>/assets/js/addSubjectOrComment.js"></script>
 <script src="<?= HOST; ?>/assets/js/votes.js"></script>
