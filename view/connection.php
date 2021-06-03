@@ -16,7 +16,7 @@
 		<?php
 		if (isset($_SESSION['error'])) {
 			?>
-			<div class="text-danger display-4"><?= $_SESSION['error']; ?></div>
+			<div class="text-danger display-5"><?= $_SESSION['error']; ?></div>
 			<?php
 		}
 		?>
