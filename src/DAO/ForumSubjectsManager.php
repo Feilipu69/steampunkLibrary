@@ -47,7 +47,7 @@ class ForumSubjectsManager extends DbConnect
 	}
 
 	public function mySubjects(){
-		$req = $this->db->prepare('SELECT * FROM forumSubjects WHERE loginSubscriber = ?');
+		$req = $this->db->prepare('SELECT id, loginSubscriber, subject, title, content, DATE_FORMAT(date, "%d/%m/%Y") AS date FROM forumSubjects WHERE loginSubscriber = ?');
 		$req->execute([
 			$_SESSION['login']
 		]);
