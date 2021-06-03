@@ -8,8 +8,10 @@ if (isset($mySubjects)) {
 			<p class="content"><?= strip_tags($subjects->getcontent()); ?></p>
 			<em>Publié le : <?= $subjects->getDate(); ?> </em>
 			<br>
+			<div class="mt-3">
 			<button onclick="window.location.href='<?= HOST; ?>/updateSubject/<?=$subjects->getId(); ?>';">Modifier</button> 
 			<button onclick="window.location.href='<?= HOST; ?>/deleteSubject/<?= $subjects->getId(); ?>';" class="text-danger">Supprimer</button> 
+			</div>
 		</div>
 		<?php
 	}
