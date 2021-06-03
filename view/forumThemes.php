@@ -33,23 +33,21 @@ if (isset($getSubject)) {
 		<div class="border rounded shadow mb-5">
 			<div class="engrenages">
 			</div>
-			<div class="pt-3">
-				<div class="ml-4">
-					<div>
-						<img src="<?= HOST; ?>/public/index-finger.png" alt="index" />
-						<h3 class="d-inline"><a href="<?= HOST ; ?>/subjectAndComments/<?= $subject->getId(); ?>/1"> <?= strip_tags($subject->getTitle()); ?></a></h3>
-					</div>
-					<em>publié le : <?= $subject->getDate(); ?> par <?= strip_tags($subject->getLoginSubscriber()); ?></em>
-					<p class="content"><?= strip_tags($subject->getContent()); ?></p>
-					<?php
-					if (isset($_SESSION['role']) && ($_SESSION['role'] != 'member')) {
-						?>
-						<button onclick="deleteSubject(<?= $subject->getId(); ?>)" class="mb-3">Supprimer le sujet</button>
-						<?php
-					}
-					?>
+			<div class="mt-3 ml-4">
+				<div>
+					<img src="<?= HOST; ?>/public/index-finger.png" alt="index" />
+					<h3 class="d-inline"><a href="<?= HOST ; ?>/subjectAndComments/<?= $subject->getId(); ?>/1"> <?= strip_tags($subject->getTitle()); ?></a></h3>
 				</div>
-			</div>			
+				<em>publié le : <?= $subject->getDate(); ?> par <?= strip_tags($subject->getLoginSubscriber()); ?></em>
+				<p class="content"><?= strip_tags($subject->getContent()); ?></p>
+				<?php
+				if (isset($_SESSION['role']) && ($_SESSION['role'] != 'member')) {
+					?>
+					<button onclick="deleteSubject(<?= $subject->getId(); ?>)" class="mb-3">Supprimer le sujet</button>
+					<?php
+				}
+				?>
+			</div>
 		</div>
 		<?php
 	}
