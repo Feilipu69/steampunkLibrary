@@ -21,8 +21,8 @@
 				<tr>
 					<th>Login</th>
 					<th>Rôle</th>
-					<th></th>
-					<th></th>
+					<th>statut</th>
+					<th>Action</th>
 				</tr>
 			</thead>
 			<tbody>
