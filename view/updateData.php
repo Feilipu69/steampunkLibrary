@@ -12,7 +12,7 @@
 			</div>
 			<div class="form-group">
 				<label for="email">Courriel : </label>
-				<input type="email" name="email" di="email" required class="form-control" />
+				<input type="email" name="email" id="email" required class="form-control" />
 			</div>
 			<input type="submit" name="send" value="Modifier" />
 			<button onclick="window.location.href='<?= HOST; ?>/updateData';">Annuler</button>
