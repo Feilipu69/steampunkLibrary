@@ -17,7 +17,7 @@
 				<div class="text-center mt-5"><img src="<?= HOST; ?>/public/gear-animated.gif" alt="engrenages animés" class="d-none d-lg-inline" /><h1 class="d-inline"><a href="<?= HOST; ?>" class="text-decoration-none">La Bibliothèque à Vapeur</a></h1><img src="<?= HOST; ?>/public/gear-animated.gif" alt="engrenages animés" id="gear" class="d-none d-lg-inline" /></div>
 				<nav id="navbar" class="navbar navbar-expand-md navbar-light border-top border-bottom border-warning">
 					<button id="buttonBurger" class="navbar-toggler mx-auto" type="button" data-toggle="collapse" data-target="#navbarContent">
-						<svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" fill="currentColor" class="bi bi-list" viewBox="0 0 16 16" alt="bouton burger">
+						<svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" fill="currentColor" class="bi bi-list" viewBox="0 0 16 16">
 							<path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"/>
 						</svg>
 					</button>
