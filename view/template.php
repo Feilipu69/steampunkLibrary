@@ -64,7 +64,7 @@
 				<?php
 				if (isset($_SESSION['login'])) {
 					?>
-					<p class="bienvenue container">Bienvenue <?= $_SESSION['login']; ?></p>
+					<div class="bienvenue container mt-3 mb-3">Bienvenue <?= $_SESSION['login']; ?></div>
 					<?php
 				}
 				?>
@@ -75,12 +75,13 @@
 					<div>
 						Liens :
 						<ul>
+							<li><a href="https://fr.wikipedia.org/wiki/Steampunk" target="_blank">Steampunk Wikipedia</a></li> 
 							<li><a href="https://www.french-steampunk.fr" target="_blank">french-steampunk</a></li>
 							<li><a href="https://www.steampunkstore.fr" target="_blank">steampunkstore</a></li>
 						</ul>
 					</div>
 					<div>
-						<p>&copy; 2021 apprenti-développeur</p>
+						<div class="author">&copy; 2021 apprenti-développeur</div>
 					</div>
 				</div>
 			</footer>

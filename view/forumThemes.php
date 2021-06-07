@@ -39,7 +39,7 @@ if (isset($getSubject)) {
 					<h3 class="d-inline"><a href="<?= HOST ; ?>/subjectAndComments/<?= $subject->getId(); ?>/1"> <?= strip_tags($subject->getTitle()); ?></a></h3>
 				</div>
 				<em>publié le : <?= $subject->getDate(); ?> par <?= strip_tags($subject->getLoginSubscriber()); ?></em>
-				<p class="content"><?= strip_tags($subject->getContent()); ?></p>
+				<div class="content mb-4"><?= strip_tags($subject->getContent()); ?></div>
 				<?php
 				if (isset($_SESSION['role']) && ($_SESSION['role'] != 'member')) {
 					?>

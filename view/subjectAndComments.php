@@ -37,9 +37,9 @@ if (isset($opinions)) {
 					<p><strong><?= strip_tags($opinion->getLogin()); ?></strong> a écrit : </p>
 				</div>
 				<div class="card-body">
-					<p class="content"><?= strip_tags($opinion->getComment()); ?></p>
+					<div class="content mb-3"><?= strip_tags($opinion->getComment()); ?></div>
 					<?php
-					if (isset($_SESSION['role']) && $_SESSION['role'] != 'membre') {
+					if (isset($_SESSION['role']) && $_SESSION['role'] != 'member') {
 						?>
 						<a href="<?= HOST; ?>/deleteOpinion/<?= $_GET['parameter']; ?>/<?= $_GET['page']; ?>/<?= $opinion->getId(); ?>">Supprimer le commentaire</a>
 						<?php

@@ -126,9 +126,15 @@ em, #deleteSubject {
 	.newsletter {
 		padding-left: 150px;
 	}
+
+	footer .author{
+		margin-top: 100%;
+	}
 }
 
 footer {
 	font-size: 20px;
 	color: #c15620;
 }
+
+
