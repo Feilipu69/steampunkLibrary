@@ -5,5 +5,4 @@ function displayForm() {
   } else {
     x.style.display = "none";
   }
-} 
-
+}
