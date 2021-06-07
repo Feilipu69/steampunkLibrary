@@ -38,7 +38,7 @@
 										<li class="nav-item"><a class="nav-link" href="<?= HOST; ?>/mySubjects">Mes sujets</a></li>
 										<?php
 									}
-									if (isset($_SESSION['role']) && ($_SESSION['role'] === 'admin' || $_SESSION['role'] === 'moderator')) {
+									if (isset($_SESSION['role']) && $_SESSION['role'] === 'admin' || $_SESSION['role'] === 'moderator') {
 										?>
 										<li class="nav-item"><a class="nav-link" href="<?= HOST; ?>/administration">Administration</a></li>
 										<?php

@@ -1,59 +1,60 @@
 @font-face {
-	font-family: "steamwreck";
-	src: url("steamwreck/Steamwreck.otf");
+  font-family: "steamwreck";
+  src: url("steamwreck/Steamwreck.otf");
 }
 
 @font-face {
-	font-family: "Edmundsbury Serif";
-	src: url("edmundsbury_serif/Edmundsbury Serif.ttf");
+  font-family: "Edmundsbury Serif";
+  src: url("edmundsbury_serif/Edmundsbury Serif.ttf");
 }
 
 body {
-	font-family: "steamwreck";
-	font-size: 25px;
-	background-image: url("../public/red-velvet.jpg");
+  font-family: "steamwreck";
+  font-size: 25px;
+  background-image: url("../public/red-velvet.jpg");
 }
 
 body .container {
-	background-color: white;
+  background-color: white;
 }
 
-nav li, .form-control {
-	font-size: 30px;
+nav li,
+.form-control {
+  font-size: 30px;
 }
 
 .pagination li {
-	font-size: 20px;
+  font-size: 20px;
 }
 
 h1 {
-	font-size: 70px;
+  font-size: 70px;
 }
 
 a,
 #buttonBurger,
 h3 {
-	color: #c15620;
+  color: #c15620;
 }
 
 a:hover {
-	color: #c27f5d;
+  color: #c27f5d;
 }
 
 #gear {
-	transform: rotateY(180deg);
+  transform: rotateY(180deg);
 }
 
 .section {
-	text-align: center;
+  text-align: center;
 }
 
 .bienvenue {
-	font-size: 35px;
+  font-size: 35px;
 }
 
 .card {
-	border-color: #c15620;
+  border-color: #c15620;
 }
 
 .card-header,
@@ -62,79 +63,81 @@ a:hover {
 #welcome,
 .displayForm,
 thead {
-	background-image: url("../public/fondCuivre.jpg");
-	color: white;
+  background-image: url("../public/fondCuivre.jpg");
+  color: white;
 }
 
-#bookDescription, .jumbotron {
-	font-family: "Edmundsbury Serif", serif;
-	font-size: 22px;
-	background-image: url("../public/parchment.svg");
+#bookDescription,
+.jumbotron {
+  font-family: "Edmundsbury Serif", serif;
+  font-size: 22px;
+  background-image: url("../public/parchment.svg");
 }
 
 .content {
-	font-family: "Edmundsbury Serif", serif;
-	font-size: 23px;
+  font-family: "Edmundsbury Serif", serif;
+  font-size: 23px;
 }
 
 .footer {
-	font-size: 20px;
+  font-size: 20px;
 }
 
 #home-description li {
-	list-style-image: url("../public/top-hat.png");
-	font-size: 25px;
+  list-style-image: url("../public/top-hat.png");
+  font-size: 25px;
 }
 
 .page-item .page-link {
-	color: black;
+  color: black;
 }
 
-em, #deleteSubject {
-	font-size: 25px;
+em,
+#deleteSubject {
+  font-size: 25px;
 }
 
 .info {
-	font-size: 20px;
+  font-size: 20px;
 }
 
-.border1, .border2 {
-	width: 70%;
+.border1,
+.border2 {
+  width: 70%;
 }
 
 .border2 {
-	transform: rotateX(180deg) rotateY(180deg);
+  transform: rotateX(180deg) rotateY(180deg);
 }
 
 #forum {
-	border-style: solid;
-	border-radius: 50px;
-	border-color: #c15620;
+  border-style: solid;
+  border-radius: 50px;
+  border-color: #c15620;
 }
 
-.marble, #forum {
-	background-image: url("../public/marbre.jpg");
-	background-size: cover;
+.marble,
+#forum {
+  background-image: url("../public/marbre.jpg");
+  background-size: cover;
 }
 
 .engrenages {
-	background-image: url("../public/engrenages.jpg");
-	height: 75px;
+  background-image: url("../public/engrenages.jpg");
+  height: 75px;
 }
 
 @media screen and (min-width: 1200px) {
-	.newsletter {
-		padding-left: 150px;
-	}
+  .newsletter {
+    padding-left: 150px;
+  }
 
-	footer .author{
-		margin-top: 100%;
-	}
+  footer .author {
+    margin-top: 100%;
+  }
 }
 
 footer {
-	font-size: 20px;
-	color: #c15620;
+  font-size: 20px;
+  color: #c15620;
 }
-
-
