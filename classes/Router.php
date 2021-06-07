@@ -19,16 +19,19 @@ class Router
 
 	public function renderController(){
 		if (isset($_GET['route'])) {
-			$this->renderBooks();
-			$this->renderMember();
-			$this->renderForum();
-			$this->renderSubjectAndComments();
-			$this->renderAgreeDisagree();
-			$this->renderAdministration();
-			$this->renderNewsLetter();
+			if ($_GET['route'] === HOST) {
+				$this->frontController->home();
+			} else {
+				$this->renderBooks();
+				$this->renderMember();
+				$this->renderForum();
+				$this->renderSubjectAndComments();
+				$this->renderAgreeDisagree();
+				$this->renderAdministration();
+				$this->renderNewsLetter();
+			}
 		} else {
-			$display = new View('home');
-			$display->render([]);
+			$this->frontController->home();
 		}
 	}
 

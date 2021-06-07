@@ -14,6 +14,11 @@ use Bihin\steampunkLibrary\utils\View;
 
 class FrontController
 {
+	public function home(){
+		$display = new View('home');
+		$display->render([]);
+	}
+
 	// Livres	
 
 	public function getBooks(){
