@@ -60,4 +60,3 @@ if (isset($getPost)) {
 
 <script src="<?= HOST; ?>/assets/js/administration.js"></script>
 <script src="<?= HOST; ?>/assets/js/displayForm.js"></script>
-<script src="<?= HOST; ?>/assets/js/addSubjectOrComment.js"></script>
