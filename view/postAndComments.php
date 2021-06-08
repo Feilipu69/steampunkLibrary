@@ -1,8 +1,8 @@
 <div class="container">
 	<div class="marble border border-muted rounded shadow p-3 mb-3">
-		<h3><?= strip_tags($subjectData->getTitle()); ?></h3>
-		<em>Publié par <?= strip_tags($subjectData->getLoginSubscriber()); ?> le <?= $subjectData->getDate(); ?></em>
-		<p class="content"><?= strip_tags($subjectData->getContent()); ?></p>
+		<h3><?= strip_tags($postData->getTitle()); ?></h3>
+		<em>Publié par <?= strip_tags($postData->getLoginSubscriber()); ?> le <?= $postData->getDate(); ?></em>
+		<p class="content"><?= strip_tags($postData->getContent()); ?></p>
 	</div>
 </div>
 
@@ -11,7 +11,7 @@ if (isset($_GET['parameter']) && isset($_GET['page']) && isset($_SESSION['login'
 	?>
 	<div class="container">
 		<button onclick="displayForm()" class="displayForm">Ajouter un commentaire</button>
-		<form method="post" action="<?= HOST; ?>/subjectAndComments/<?= $_GET['parameter']; ?>/<?= $_GET['page']; ?>" id="displayForm" style="display:none" class="mt-4">
+		<form method="post" action="<?= HOST; ?>/postAndComments/<?= $_GET['parameter']; ?>/<?= $_GET['page']; ?>" id="displayForm" style="display:none" class="mt-4">
 			<div class="form-goup">
 				<label for="login">Pseudo : </label>
 				<input type="text" name="login" id="login" value="<?= $_SESSION['login']; ?>" />
@@ -20,7 +20,7 @@ if (isset($_GET['parameter']) && isset($_GET['page']) && isset($_SESSION['login'
 				<textarea name="comment"></textarea>
 			</div>
 			<input type="submit" name="send" id="send" value="Envoyer" />
-			<button onclick="window.location.href="<?= HOST; ?>/subjectAndComments/<?= $_GET['parameter']; ?>/<?= $_GET['page']; ?>";">Annuler</button>
+			<button onclick="window.location.href="<?= HOST; ?>/postAndComments/<?= $_GET['parameter']; ?>/<?= $_GET['page']; ?>";">Annuler</button>
 		</form>
 	</div>
 	<?php

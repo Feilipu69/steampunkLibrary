@@ -1,12 +1,12 @@
 <?php
 namespace Bihin\steampunkLibrary\src\model;
 
-class ForumSubjects
+class ForumPosts
 {
 	private $id;
 	private $loginSubscriber;
 	private $title;
-	private $subject;
+	private $post;
 	private $content;
 	private $date;
 
@@ -35,8 +35,8 @@ class ForumSubjects
 		return $this->title;
 	}
 
-	public function getSubject(){
-		return $this->subject;
+	public function getPost(){
+		return $this->post;
 	}
 
 	public function getContent(){
@@ -61,8 +61,8 @@ class ForumSubjects
 		$this->title = $title;
 	}
 
-	public function setSubject($subject){
-		$this->subject = $subject;
+	public function setPost($post){
+		$this->post = $post;
 	}
 
 	public function setContent($content){

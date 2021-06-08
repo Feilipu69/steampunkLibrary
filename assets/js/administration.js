@@ -37,8 +37,8 @@ function deleteMember(subscriberId) {
     .catch((error) => console.log(`Erreur : ${error}`));
 }
 
-function deleteSubject(id) {
-  fetch(`${host}/deleteSubject/${id}`, {
+function deletePost(id) {
+  fetch(`${host}/deletePost/${id}`, {
     method: "DELETE",
   })
     .then(() => {

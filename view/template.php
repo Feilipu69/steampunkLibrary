@@ -35,7 +35,7 @@
 									if (isset($_SESSION['role']) || isset($_SESSION['login'])) {
 										?>
 										<li class="nav-item"><a class="nav-link" href="<?= HOST; ?>/updateData">Gestion de vos données</a></li>
-										<li class="nav-item"><a class="nav-link" href="<?= HOST; ?>/mySubjects">Mes sujets</a></li>
+										<li class="nav-item"><a class="nav-link" href="<?= HOST; ?>/myPosts">Mes sujets</a></li>
 										<?php
 									}
 									if (isset($_SESSION['role']) && $_SESSION['role'] === 'admin' || $_SESSION['role'] === 'moderator') {

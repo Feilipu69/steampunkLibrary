@@ -5,7 +5,7 @@ use Bihin\steampunkLibrary\src\DAO\{
 	AgreeDisagreeManager,
 	BooksCatalogueManager,
 	NewsletterManager,
-	ForumSubjectsManager,
+	ForumPostsManager,
 	OpinionManager,
 	SubscriberManager
 };
@@ -54,6 +54,7 @@ class FrontController
 	}
 
 	// Membres	
+
 	/**
 	* register permet à un utilisateur de s'inscrire
 	*
@@ -154,21 +155,83 @@ class FrontController
 		$this->disconnection();
 	}
 
-	// Sujets, commentaires et votes	
+	// Forum	
 
 	/**
-	* mySubjects. Accès aux sujets créés par l'utilisateur connecté
+	* forum affiche le menu des thèmes du forum
 	*
 	* @return void
 	*/
-	public function mySubjects(){
-		$subjects = new ForumSubjectsManager();
-		$mySubjects = $subjects->mySubjects();
-		$displaySubjects = new View('mySubjects');
-		$displaySubjects->render([
-			'mySubjects' => $mySubjects
+	public function forum(){
+		$displayForum = new View('forum');
+		$displayForum->render([]);
+	}
+
+	/**
+	* forumTopic. Accès au thème choisi par l'utilisateur
+	*
+	* @param  mixed $topic
+	* @return void
+	*/
+	public function post($post){
+		$posts = new ForumPostsManager();
+		$getPost = $posts->getPost($post);
+		$displayForumPost = new View('post');
+		$displayForumPost->render([
+			'getPost' => $getPost
 		]);
 	}
+
+	/**
+	* addForumPost ajoute un billet au thème choisi.
+	*
+	* @param  mixed $post
+	* @return void
+	*/
+	public function addForumPost($post, $parameter){
+		if (isset($post['send'])) {
+			if (!empty($post['title']) && !empty($post['content'])) {
+				$newPost = new ForumPostsManager();
+				$forumPost = $newPost->addForumPost($post);
+				header('Location:' . HOST . '/post/' . $parameter);
+			}
+		}
+	}
+
+	/**
+	* myPosts. Accès aux sujets créés par l'utilisateur connecté
+	*
+	* @return void
+	*/
+	public function myPosts(){
+		$posts = new ForumPostsManager();
+		$myPosts = $posts->myPosts();
+		$displayPosts = new View('myPosts');
+		$displayPosts->render([
+			'myPosts' => $myPosts
+		]);
+	}
+
+	public function updatePost($post, $id){
+		if (isset($post['send'])) {
+			if (!empty($post['title']) && !empty($post['content'])) {
+				$posts = new ForumPostsManager();
+				$updatePost = $posts->updatePost($post, $id);
+				header('Location:' . HOST . '/myPosts');
+			}
+		}
+
+		$displayFormular = new View('updatePosttFormular');
+		$displayFormular->render([]);
+	}
+
+	public function deletePost($id){
+		$post = new ForumPostsManager();
+		$deletePost = $post->deletePost($id);
+		header('Location:' . HOST . '/myPosts');
+	}
+
+	// Sujets, commentaires et votes	
 
 	/**
 	* subjectAndComments. Récupère et affiche un billet avec tous ses commentaires (par groupe de cinq). Fonctionnalité like-dislike associée à chaque commentaire, enfin pagination.
@@ -177,8 +240,8 @@ class FrontController
 	* @param  int $forumId
 	* @return void
 	*/
-	public function subjectAndComments($post, $forumId, $page){
-		$subject = new ForumSubjectsManager();
+	public function postAndComments($post, $forumId, $page){
+		$posts = new ForumPostsManager();
 		$opinion = new OpinionManager();
 		$opinionsAgreeDisagree = new AgreeDisagreeManager();
 
@@ -210,10 +273,10 @@ class FrontController
 			}
 		}
 
-		$subjectData = $subject->getSubjectById($forumId);	
-		$displaySubjectAndComments = new View('subjectAndComments');
+		$postData = $posts->getPostById($forumId);	
+		$displaySubjectAndComments = new View('postAndComments');
 		$displaySubjectAndComments->render([
-			'subjectData' => $subjectData,
+			'postData' => $postData,
 			'opinions' => $opinions,
 			'opinionsId' => json_encode($opinionsId),
 			'currentPage' => $currentPage,
@@ -221,74 +284,22 @@ class FrontController
 		]);
 	}
 
-	public function updateSubject($post, $id){
-		if (isset($post['send'])) {
-			if (!empty($post['title']) && !empty($post['content'])) {
-				$subject = new ForumSubjectsManager();
-				$updateSubject = $subject->updateSubject($post, $id);
-				header('Location:' . HOST . '/mySubjects');
-			}
-		}
-
-		$displayFormular = new View('updateSubjectFormular');
-		$displayFormular->render([]);
-	}
-
-	public function deleteSubject($id){
-		$subject = new ForumSubjectsManager();
-		$deleteSubject = $subject->deleteSubject($id);
-	}
-
-	// NewsLetter	
-
-	public function newsletters(){
-		$displayLetter = new View('newsletters');
-		$displayLetter->render([]);
-	}
-
-	// Forum	
 	/**
-	* forum affiche le menu des thèmes du forum
+	* deleteOpinion supprime un mauvais commentaire
 	*
+	* @param  mixed $parameter
+	* @param  int $page
+	* @param  int $id
 	* @return void
 	*/
-	public function forum(){
-		$displayForum = new View('forum');
-		$displayForum->render([]);
-	}
-
-	/**
-	* forumThemes. Accès au thème choisi par l'utilisateur
-	*
-	* @param  mixed $theme
-	* @return void
-	*/
-	public function forumThemes($theme){
-		$subject = new ForumSubjectsManager();
-		$getSubject = $subject->getSubject($theme);
-		$displayForumTheme = new View('forumThemes');
-		$displayForumTheme->render([
-			'getSubject' => $getSubject
-		]);
-	}
-
-	/**
-	* addForumTheme ajoute un billet au thème choisi.
-	*
-	* @param  mixed $post
-	* @return void
-	*/
-	public function addForumTheme($post, $parameter){
-		if (isset($post['send'])) {
-			if (!empty($post['title']) && !empty($post['content'])) {
-				$newTheme = new ForumSubjectsManager();
-				$forumTheme = $newTheme->addForumTheme($post);
-				header('Location:' . HOST . '/forumThemes/' . $parameter);
-			}
-		}
+	public function deleteOpinion($parameter, $page, $id){
+		$opinion = new OpinionManager();
+		$deleteOpinion = $opinion->deleteOpinion($id);
+		header('Location:' . HOST . '/postAndComments/' . $parameter . '/' . $page);
 	}
 
 	// like-dislike	
+
 	/**
 	* addRemoveVote. Fonctionnalité like-dislike pour chaque billet d'un sujet.
 	*
@@ -329,5 +340,12 @@ class FrontController
 		$votes = new AgreeDisagreeManager();
 		$allVotes = $votes->getAllVotes($opinionId);
 		echo json_encode($allVotes);
+	}
+
+	// NewsLetter	
+
+	public function newsletters(){
+		$displayLetter = new View('newsletters');
+		$displayLetter->render([]);
 	}
 }

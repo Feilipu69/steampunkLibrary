@@ -25,7 +25,7 @@ class Router
 				$this->renderBooks();
 				$this->renderMember();
 				$this->renderForum();
-				$this->renderSubjectAndComments();
+				$this->renderPostAndComments();
 				$this->renderAgreeDisagree();
 				$this->renderAdministration();
 				$this->renderNewsLetter();
@@ -69,27 +69,32 @@ class Router
 		if ($_GET['route'] === 'forum') {
 			$this->frontController->forum();
 		}
-		elseif ($_GET['route'] === 'forumThemes') {
-			$this->frontController->forumThemes($_GET['parameter']);
+		elseif ($_GET['route'] === 'post') {
+			$this->frontController->post($_GET['parameter']);
 		}
-		elseif ($_GET['route'] === 'addForumTheme') {
-			$this->frontController->addForumTheme($_POST, $_GET['parameter']);
+		elseif ($_GET['route'] === 'addForumPost') {
+			$this->frontController->addForumPost($_POST, $_GET['parameter']);
+		}
+		elseif ($_GET['route'] === 'myPosts') {
+			$this->frontController->myPosts();
+		}
+		elseif ($_GET['route'] === 'updatePost') {
+			$this->frontController->updatePost($_POST, $_GET['parameter']);
+		}
+		elseif ($_GET['route'] === 'deletePost') {
+			$this->frontController->deletePost($_GET['parameter']);
 		}
 	}
 
-	public function renderSubjectAndComments(){
-		if ($_GET['route'] === 'mySubjects') {
-			$this->frontController->mySubjects();
+	public function renderPostAndComments(){
+		if ($_GET['route'] === 'postAndComments') {
+			$this->frontController->postAndComments($_POST, $_GET['parameter'], $_GET['page']);
 		}
-		elseif ($_GET['route'] === 'subjectAndComments') {
-			$this->frontController->subjectAndComments($_POST, $_GET['parameter'], $_GET['page']);
+		elseif ($_GET['route'] === 'deleteOpinion') {
+			$this->frontController->deleteOpinion($_GET['parameter'], $_GET['page'], $_GET['opinionId']);
 		}
-		elseif ($_GET['route'] === 'updateSubject') {
-			$this->frontController->updateSubject($_POST, $_GET['parameter']);
-		}
-		elseif ($_GET['route'] === 'deleteSubject') {
-			$this->frontController->deleteSubject($_GET['parameter']);
-		}
+
+
 	}
 
 	public function renderAgreeDisagree(){
@@ -118,9 +123,7 @@ class Router
 		elseif ($_GET['route'] === 'deleteMember') {
 			$this->adminController->deleteMember($_GET['parameter']);
 		}
-		elseif ($_GET['route'] === 'deleteOpinion') {
-			$this->adminController->deleteOpinion($_GET['parameter'], $_GET['page'], $_GET['opinionId']);
-		}
+		
 	}
 
 	public function renderNewsletter(){

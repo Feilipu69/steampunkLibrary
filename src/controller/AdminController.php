@@ -104,18 +104,4 @@ class AdminController
 		$deleteMember = $member->deleteMember($id);
 		header('Location:' . HOST . '/administration');
 	}
-
-	/**
-	* deleteOpinion supprime un mauvais commentaire
-	*
-	* @param  mixed $parameter
-	* @param  int $page
-	* @param  int $id
-	* @return void
-	*/
-	public function deleteOpinion($parameter, $page, $id){
-		$opinion = new OpinionManager();
-		$deleteOpinion = $opinion->deleteOpinion($id);
-		header('Location:' . HOST . '/subjectAndComments/' . $parameter . '/' . $page);
-	}
 }
