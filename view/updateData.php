@@ -22,7 +22,7 @@
 		<?php
 		if (isset($_SESSION['registerError'])) {
 			?>
-			<div class="text-danger display-4"><?= $_SESSION['registerError']; ?></div>
+			<div class="text-danger display-5"><?= $_SESSION['registerError']; ?></div>
 			<?php
 		}
 		?>
