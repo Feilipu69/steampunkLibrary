@@ -19,9 +19,9 @@
 					<button id="buttonBurger" class="navbar-toggler mx-auto" type="button" data-toggle="collapse" data-target="#navbarContent">
 						<svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" fill="currentColor" class="bi bi-list" viewBox="0 0 16 16">
 							<path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"/>
-						</svg>
-						Menu
-					</button>
+							</svg>
+							Menu
+						</button>
 						<div id="navbarContent" class="collapse navbar-collapse justify-content-center">
 							<ul class="nav">
 								<li class="nav-item"><a class="nav-link" href="<?= HOST; ?>">Accueil</a></li>
@@ -31,13 +31,9 @@
 									?>
 									<li class="nav-item"><a class="nav-link" href="<?= HOST; ?>/newsletters">Newsletter</a></li>
 									<li class="nav-item"><a class="nav-link" href="<?= HOST; ?>/forum">Forum</a></li>
+									<li class="nav-item"><a class="nav-link" href="<?= HOST; ?>/updateData">Gestion de vos données</a></li>
+									<li class="nav-item"><a class="nav-link" href="<?= HOST; ?>/myPosts">Mes sujets</a></li>
 									<?php
-									if (isset($_SESSION['role']) || isset($_SESSION['login'])) {
-										?>
-										<li class="nav-item"><a class="nav-link" href="<?= HOST; ?>/updateData">Gestion de vos données</a></li>
-										<li class="nav-item"><a class="nav-link" href="<?= HOST; ?>/myPosts">Mes sujets</a></li>
-										<?php
-									}
 									if (isset($_SESSION['role']) && $_SESSION['role'] === 'admin' || $_SESSION['role'] === 'moderator') {
 										?>
 										<li class="nav-item"><a class="nav-link" href="<?= HOST; ?>/administration">Administration</a></li>
@@ -47,7 +43,6 @@
 									<li class="nav-item"><a class="nav-link" href="<?= HOST; ?>/disconnection">Déconnexion</a></li> 
 									<?php
 								}
-
 								if (!isset($_SESSION['login'])) {
 									?>
 									<li class="nav-item"><a class="nav-link" href="<?= HOST; ?>/register">Inscription</a></li>
