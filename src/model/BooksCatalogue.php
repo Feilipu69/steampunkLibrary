@@ -5,6 +5,7 @@ class BooksCatalogue
 {
 	private $id;
 	private $isbn;
+	private $title;
 
 	public function __construct(array $data){
 		$this->hydrate($data);
@@ -27,6 +28,10 @@ class BooksCatalogue
 		return $this->isbn;
 	}
 
+	public function getTitle(){
+		return $this->title;
+	}
+
 	public function setId(int $id){
 		if ($id > 0) {
 			$this->id = $id;
@@ -35,5 +40,9 @@ class BooksCatalogue
 
 	public function setIsbn($isbn){
 		$this->isbn = $isbn;	
+	}
+
+	public function setTitle($title){
+		$this->title = $title;
 	}
 }

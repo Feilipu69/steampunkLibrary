@@ -7,8 +7,12 @@
 			<div class="form-group">
 				<label for="isbn">Isbn</label>
 				<input type="text" name="isbn" id="isbn" />
-				<input type="submit" name="addOneBook" value="Envoyer" />
 			</div>
+			<div class="form-group">
+				<label for="title">Titre</label>
+				<input type="text" name="title" id="title" />
+			</div>
+				<input type="submit" name="addOneBook" value="Envoyer" />
 		</form>
 	</div>
 	<img src="<?= HOST; ?>/public/steampunk-border-2.png" alt="bordure" class="border2 img-fluid" />
