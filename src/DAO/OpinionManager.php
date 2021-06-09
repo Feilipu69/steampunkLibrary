@@ -75,4 +75,11 @@ class OpinionManager extends DbConnect
 			$id
 		]);
 	}
+
+	public function deleteOpinionByPost($forumId){
+		$req = $this->db->prepare('DELETE FROM opinions WHERE forumId = ?');
+		$req->execute([
+			$forumId
+		]);
+	}
 }
