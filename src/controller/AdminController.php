@@ -21,7 +21,7 @@ class AdminController
 	}
 
 	/**
-	* administration. Affiche un formulaire d'entrée d'un nouveau livre, la gestion du role des membres et la possibilité de supprimer un membre.
+	* Display a formular for a new book, the possibility to change the status of a member and to delete the count of a member-Affiche un formulaire d'entrée d'un nouveau livre, la gestion du role des membres et la possibilité de supprimer un membre.
 	*
 	* @return void
 	*/
@@ -43,12 +43,6 @@ class AdminController
 		}
 	}
 
-	/**
-	* addABook ajoute un livre à la base de données
-	*
-	* @param  mixed $book
-	* @return void
-	*/
 	public function addOneBook($book){
 		if (isset($book['addOneBook'])) {
 			if (!empty($book['isbn'])) {
@@ -59,12 +53,6 @@ class AdminController
 		$this->administration();
 	}
 
-	/**
-	* getRole récupère les rôles des membres
-	*
-	* @param  int $id
-	* @return void
-	*/
 	public function getRole($id){
 		$subscriber = new SubscriberManager();
 		$role = $subscriber->getRole($id);
@@ -72,7 +60,7 @@ class AdminController
 	}
 
 	/**
-	* moderator permet à un membre de devenir modérateur
+	* Change the status to moderator-Moderator permet à un membre de devenir modérateur
 	*
 	* @param  int $id
 	* @return void
@@ -83,7 +71,7 @@ class AdminController
 	}
 
 	/**
-	* member retour d'un utilisateur au rôle de membre
+	* Change the status to member-Le statut du membre devient member
 	*
 	* @param  int $id
 	* @return void
@@ -93,12 +81,6 @@ class AdminController
 		$newMember = $member->member($id);
 	}
 
-	/**
-	* deleteMember supprime un membre
-	*
-	* @param  int $id
-	* @return void
-	*/
 	public function deleteMember($id){
 		$member = new SubscriberManager();
 		$deleteMember = $member->deleteMember($id);

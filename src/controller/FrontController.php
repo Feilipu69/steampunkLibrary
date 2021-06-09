@@ -19,14 +19,14 @@ class FrontController
 		$display->render([]);
 	}
 
-	// Livres	
+	// Books-Livres	
 
 	public function getBooks(){
 		$booksCatalogue = new BooksCatalogueManager();
 		$catalogue = $booksCatalogue->catalogue();
 		$allBooks = $booksCatalogue->countAllBooks();
 
-		// Pagination
+		// Page numbering-Pagination
 		if (isset($_GET['page']) && !empty($_GET['page'])) {
 			$currentPage = (int) strip_tags($_GET['page']);
 		} else {
@@ -35,9 +35,8 @@ class FrontController
 		$numberOfBooksByPage = 9;
 		$allPages = ceil($allBooks/$numberOfBooksByPage);
 		$firstPage = ($currentPage * $numberOfBooksByPage) - $numberOfBooksByPage;
-		// Avoir les 9 livres
 		$books = $booksCatalogue->getBooks($firstPage, $numberOfBooksByPage);
-		// Fin pagination
+		// End of page numbering-Fin pagination
 
 		$displayBooks = new View('books');
 		$displayBooks->render([
@@ -53,10 +52,10 @@ class FrontController
 		$displayABook->render([]);
 	}
 
-	// Membres	
+	// Members-Membres	
 
 	/**
-	* register permet à un utilisateur de s'inscrire
+	* A member can register-Register permet à un utilisateur de s'inscrire member
 	*
 	* @param  mixed $post
 	* @return void
@@ -121,7 +120,7 @@ class FrontController
 	}
 
 	/**
-	* updateData. Modifie les données de l'utilisateur
+	* To change the member's data-Modifier les données de l'utilisateur
 	*
 	* @param  mixed $post
 	* @return void
@@ -158,7 +157,7 @@ class FrontController
 	// Forum	
 
 	/**
-	* forum affiche le menu des thèmes du forum
+	* Display the topics-Affiche le menu des thèmes du forum
 	*
 	* @return void
 	*/
@@ -168,9 +167,9 @@ class FrontController
 	}
 
 	/**
-	* forumTopic. Accès au thème choisi par l'utilisateur
+	* Display the posts-Affiche les billets
 	*
-	* @param  mixed $topic
+	* @param  mixed $post
 	* @return void
 	*/
 	public function post($post){
@@ -183,9 +182,10 @@ class FrontController
 	}
 
 	/**
-	* addForumPost ajoute un billet au thème choisi.
+	* Add a post-Ajoute un billet
 	*
 	* @param  mixed $post
+	* @param  mixed $parameter
 	* @return void
 	*/
 	public function addForumPost($post, $parameter){
@@ -199,7 +199,7 @@ class FrontController
 	}
 
 	/**
-	* myPosts. Accès aux sujets créés par l'utilisateur connecté
+	* Display a member's posts-Accès aux sujets d'un utilisateur
 	*
 	* @return void
 	*/
@@ -231,13 +231,14 @@ class FrontController
 		header('Location:' . HOST . '/myPosts');
 	}
 
-	// Sujets, commentaires et votes	
+	// Posts, comments and likes dislikes-Sujets, commentaires et votes	
 
 	/**
-	* subjectAndComments. Récupère et affiche un billet avec tous ses commentaires (par groupe de cinq). Fonctionnalité like-dislike associée à chaque commentaire, enfin pagination.
+	* Display a post and its comments(5 by 5). like dislike for each comment and page numbering-Affiche un billet et ses commentaires (par groupe de cinq). Fonctionnalité like-dislike associée à chaque commentaire, enfin pagination.
 	*
 	* @param  mixed $post
 	* @param  int $forumId
+	* @param  int $page
 	* @return void
 	*/
 	public function postAndComments($post, $forumId, $page){
@@ -251,7 +252,7 @@ class FrontController
 			}
 		}
 
-		// Pagination
+		// Page numbering-Pagination
 		if (isset($_GET['page']) && !empty($_GET['page'])) {
 			$currentPage = (int) strip_tags($_GET['page']);
 		} else {
@@ -262,9 +263,8 @@ class FrontController
 		$numberOfCommentsByPage = 5;
 		$allPages = ceil($numberOfComments[0]/$numberOfCommentsByPage);
 		$firstComment = ($currentPage * $numberOfCommentsByPage) - $numberOfCommentsByPage;
-		// Avoir les données des 5 commentaires de la page souhaitée
 		$opinions = $opinion->getOpinions($forumId, $firstComment, $numberOfCommentsByPage);
-		// Fin pagination
+		// End of page numbering-Fin pagination
 
 		$opinionsId = [];
 		if (!empty($opinions)) {
@@ -285,7 +285,7 @@ class FrontController
 	}
 
 	/**
-	* deleteOpinion supprime un mauvais commentaire
+	* deleteOpinion-Supprime un commentaire
 	*
 	* @param  mixed $parameter
 	* @param  int $page
