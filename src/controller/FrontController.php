@@ -228,7 +228,9 @@ class FrontController
 
 	public function deletePost($id){
 		$post = new ForumPostsManager();
+		$comments = new OpinionManager();
 		$deletePost = $post->deletePost($id);
+		$deleteComments = $comments->deleteOpinionByPost($id);
 		header('Location:' . HOST . '/myPosts');
 	}
 
