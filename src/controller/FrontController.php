@@ -221,7 +221,7 @@ class FrontController
 			}
 		}
 
-		$displayFormular = new View('updatePosttFormular');
+		$displayFormular = new View('updatePostFormular');
 		$displayFormular->render([]);
 	}
 
