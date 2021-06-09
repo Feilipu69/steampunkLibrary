@@ -76,6 +76,7 @@ class FrontController
 					$_SESSION['login'] = $post['login'];
 					$subscriberData = $subscriber->getOneSubscriber();
 					$_SESSION['subscriberId'] = $subscriberData->getId();
+					$_SESSION['role'] = null;
 					header('Location:' . HOST);
 				}
 			}
