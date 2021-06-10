@@ -20,7 +20,7 @@ if (isset($_GET['parameter']) && isset($_GET['page']) && isset($_SESSION['login'
 				<textarea name="comment"></textarea>
 			</div>
 			<input type="submit" name="send" id="send" value="Envoyer" />
-			<button onclick="window.location.href="<?= HOST; ?>/postAndComments/<?= $_GET['parameter']; ?>/<?= $_GET['page']; ?>";">Annuler</button>
+			<button onclick="window.location.href='<?= HOST; ?>/postAndComments/<?= $_GET["parameter"]; ?>/<?= $_GET["page"]; ?>';">Annuler</button>
 		</form>
 	</div>
 	<?php
