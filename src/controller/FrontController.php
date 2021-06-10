@@ -196,6 +196,8 @@ class FrontController
 				$forumPost = $newPost->addForumPost($post);
 				header('Location:' . HOST . '/post/' . $parameter);
 			}
+		} else {
+			header('Location:' . HOST . '/post/' . $parameter);
 		}
 	}
 
