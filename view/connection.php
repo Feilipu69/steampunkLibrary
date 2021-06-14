@@ -1,6 +1,6 @@
 <div class="container d-flex flex-column flex-md-row justify-content-center">
 	<div class="pt-5">
-		<h3>Connexion</h3>
+		<h2>Connexion</h2>
 		<form method="post" action="<?= HOST; ?>/connection">
 			<div class="form-group">
 				<label for="login">Pseudo :</label>
@@ -22,7 +22,7 @@
 		?>
 	</div>
 	<div>
-		<img src="<?= HOST; ?>/public/smallBoat.png" alt="image d'un bateau steampunk" class="img-fluid" />
+		<img src="<?= HOST; ?>/public/smallBoat.png" alt="" class="img-fluid" />
 	</div>
 </div>
 

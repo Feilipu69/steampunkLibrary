@@ -1,6 +1,6 @@
 <div class="container d-flex flex-column flex-md-row justify-content-around">
 	<div class="pt-5 pb-3">
-		<h3>Modification de vos données</h3>
+		<h2>Modification de vos données</h2>
 		<form method="post" action="<?= HOST; ?>/updateData">
 			<div class="form-group">
 				<label for="login">Pseudo : </label>
@@ -28,7 +28,7 @@
 		?>
 	</div>
 	<div class="pt-5">
-		<img src="<?= HOST; ?>/public/time.png" alt="vélo rétro" class="img-fluid" />
+		<img src="<?= HOST; ?>/public/time.png" alt="" class="img-fluid" />
 	</div>
 </div>
 

@@ -2,7 +2,7 @@
 <?php
 if (isset($_GET['parameter'])) {
 	?>
-	<div id="isbn" class="container d-md-flex justify-content-around">
+	<section id="isbn" class="container d-md-flex justify-content-around">
 		<div class="mr-md-5 mt-md-3">
 			<div id="image"></div>
 			<p id="publisher"></p>
@@ -15,7 +15,7 @@ if (isset($_GET['parameter'])) {
 				<p class="mt-2 p-3 border rounded shadow" id="bookDescription"></p>
 			</div>
 		</div>
-	</div>
+	</section>
 	<script>let isbn = <?= $_GET['parameter'] ?></script>
 	<script src="../assets/js/getOneBook.js"></script>
 	<?php

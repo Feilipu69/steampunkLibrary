@@ -34,7 +34,7 @@ h1 {
 
 a,
 #buttonBurger,
-h3 {
+h2 {
   color: #c15620;
 }
 
@@ -136,6 +136,12 @@ em,
   footer .author {
     margin-top: 100%;
   }
+}
+
+@media screen and (min-width: 980px) {
+	.grandBi {
+		margin-top: 10%;
+	}
 }
 
 footer {

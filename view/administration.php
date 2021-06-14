@@ -1,6 +1,6 @@
 <h3 class="container">Administration</h3>
 <div class="section mb-5">
-	<img src="<?= HOST; ?>/public/steampunk-border-2.png" alt="bordure" class="border1 img-fluid" />
+	<img src="<?= HOST; ?>/public/steampunk-border-2.png" alt="" class="border1 img-fluid" />
 	<div class="mt-3 mb-5">
 		<h3>Nouveau livre</h3>
 		<form method="post" action="<?= HOST; ?>/addOneBook">
@@ -15,10 +15,10 @@
 				<input type="submit" name="addOneBook" value="Envoyer" />
 		</form>
 	</div>
-	<img src="<?= HOST; ?>/public/steampunk-border-2.png" alt="bordure" class="border2 img-fluid" />
+	<img src="<?= HOST; ?>/public/steampunk-border-2.png" alt="" class="border2 img-fluid" />
 </div>
 <h3>Gestion des membres</h3>
-<div class="container d-md-flex justify-content-around">
+<div class="container d-lg-flex justify-content-around">
 	<div>
 		<table class="table table-borderless table-responsive mt-4">
 			<thead>
@@ -47,8 +47,8 @@
 			</tbody>
 		</table>
 	</div>
-	<div class="mr-5">
-		<img src="<?= HOST; ?>/public/retro-bicycle.png" alt="vélo rétro" />
+	<div class="grandBi mr-5">
+		<img src="<?= HOST; ?>/public/retro-bicycle.png" alt="" class="img-fluid"/>
 	</div>
 </div>
 <script>

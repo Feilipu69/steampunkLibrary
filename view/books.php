@@ -1,5 +1,5 @@
-<h3 class="container">Bibliothèque</h3>
-<div class="container row justify-content-center mt-5">
+<h2 class="container">Bibliothèque</h2>
+<section class="container row justify-content-center mt-5">
 	<?php
 	foreach ($books as $book) {
 		?>
@@ -13,7 +13,7 @@
 		$list[] = $book->getIsbn();
 	}
 	?>
-</div>
+</section>
 <nav class="container-fluid pb-3">
 	<ul class="pagination justify-content-center">
 		<li class="page-item <?= ($currentPage == 1) ? "disabled" : ""; ?>"><a class="page-link" href="<?= HOST; ?>/books?page=<?= $currentPage - 1; ?>">&laquo;</a></li>

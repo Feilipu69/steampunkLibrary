@@ -1,10 +1,10 @@
-<div class="container">
+<article class="container">
 	<div class="marble border border-muted rounded shadow p-3 mb-3">
-		<h3><?= strip_tags($postData->getTitle()); ?></h3>
+		<h2><?= strip_tags($postData->getTitle()); ?></h2>
 		<em>Publié par <?= strip_tags($postData->getLoginSubscriber()); ?> le <?= $postData->getDate(); ?></em>
 		<p class="content"><?= strip_tags($postData->getContent()); ?></p>
 	</div>
-</div>
+</article>
 
 <?php
 if (isset($_GET['parameter']) && isset($_GET['page']) && isset($_SESSION['login'])) {
@@ -27,7 +27,7 @@ if (isset($_GET['parameter']) && isset($_GET['page']) && isset($_SESSION['login'
 }
 if (isset($opinions)) {
 	?>
-	<div class="container mt-5">
+	<section class="container mt-5">
 		<h3>Commentaires</h3>
 		<?php
 		foreach ($opinions as $opinion) {
@@ -47,8 +47,8 @@ if (isset($opinions)) {
 					?>
 				</div>
 				<div class="footer pl-3 pb-3">
-					<button onclick="addRemoveAgree(<?= $opinion->getId(); ?>, 'agree')"><img src="<?= HOST; ?>/public/thumbUp.svg" alt="pouce pointant vers le haut" /></button> : <span id="agreeOpinions<?= $opinion->getId(); ?>"></span>
-					<button onclick="addRemoveDisagree(<?= $opinion->getId(); ?>, 'disagree')"><img src="<?= HOST; ?>/public/thumbDown.svg" alt="pouce pointant vers le bas" /></button> : <span id="disagreeOpinions<?= $opinion->getId(); ?>"></span>
+					<button onclick="addRemoveAgree(<?= $opinion->getId(); ?>, 'agree')"><img src="<?= HOST; ?>/public/thumbUp.svg" alt="pouce pointant vers le haut" class="img-fluid" /></button> : <span id="agreeOpinions<?= $opinion->getId(); ?>"></span>
+					<button onclick="addRemoveDisagree(<?= $opinion->getId(); ?>, 'disagree')"><img src="<?= HOST; ?>/public/thumbDown.svg" alt="pouce pointant vers le bas" class="img-fluid" /></button> : <span id="disagreeOpinions<?= $opinion->getId(); ?>"></span>
 				</div>
 			</div>
 			<?php
@@ -67,7 +67,7 @@ if (isset($opinions)) {
 				<li class="page-item <?= ($currentPage == $allPages) ? "disabled" : ""; ?>"><a class="page-link" href="<?= HOST; ?>/subjectAndComments/<?= $_GET['parameter']; ?>/<?= $currentPage + 1; ?>">&raquo;</a></li>
 			</ul>
 		</nav>
-	</div>
+	</section>
 	<?php
 }
 ?>

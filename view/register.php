@@ -1,9 +1,9 @@
 <div class="d-flex flex-column flex-md-row">
 	<div>
-		<img src="<?= HOST; ?>/public/smallBalloon.png" alt="Image d'un dirigeable steampunk" class="img-fluid"/>
+		<img src="<?= HOST; ?>/public/smallBalloon.png" alt="" class="img-fluid"/>
 	</div>
 	<div class="pt-5">
-		<h3>Inscription</h3>
+		<h2>Inscription</h2>
 		<form method="post" action="<?= HOST; ?>/register">
 			<div class="form-group">
 				<label for="login">Pseudo : </label>
