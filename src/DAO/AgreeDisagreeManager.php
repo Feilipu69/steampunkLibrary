@@ -35,7 +35,7 @@ class AgreeDisagreeManager extends DbConnect
 		}
 	}
 
-	public function likeDislikeOpinion($opinionId, $vote){
+	public function addVote($opinionId, $vote){
 		if ($vote === 'agree') {
 			$req = $this->db->prepare('INSERT INTO likeDislike(subscriberId, opinionId, agree) VALUES(:subscriberId, :opinionId, :agree)');
 			$req->execute([

@@ -319,7 +319,7 @@ class FrontController
 		if ($vote === 'agree') {
 			$numberOpinions = $agreeDisagree->countSubscriberVotes($opinionId, $vote);
 			if ($numberOpinions[0] === '0') {
-				$addOpinion = $agreeDisagree->likeDislikeOpinion($opinionId, $vote);
+				$addOpinion = $agreeDisagree->addVote($opinionId, $vote);
 				$removeOpinion = $agreeDisagree->removeVote($opinionId, 'disagree');
 			} else {
 				$removeOpinion = $agreeDisagree->removeVote($opinionId, $vote);
@@ -327,7 +327,7 @@ class FrontController
 		} elseif ($vote === 'disagree') {
 			$numberOpinions = $agreeDisagree->countSubscriberVotes($opinionId, $vote);
 			if ($numberOpinions[0] === '0') {
-				$addOpinion = $agreeDisagree->likeDislikeOpinion($opinionId, $vote);
+				$addOpinion = $agreeDisagree->addVote($opinionId, $vote);
 				$removeOpinion = $agreeDisagree->removeVote($opinionId, 'agree');
 			} else {
 				$removeOpinion = $agreeDisagree->removeVote($opinionId, $vote);
