@@ -38,6 +38,12 @@ h2 {
   color: #c15620;
 }
 
+#submit,
+#cancel {
+	background-color: #c15620;
+	color: white;
+}
+
 a:hover {
   color: #c27f5d;
 }
@@ -59,8 +65,6 @@ a:hover {
 }
 
 .card-header,
-#submit,
-#cancel,
 #welcome,
 .displayForm,
 thead {
