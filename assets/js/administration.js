@@ -30,7 +30,9 @@ function member(subscriberId) {
 }
 
 function deleteMember(subscriberId) {
-  fetch(`${host}/deleteMember/${subscriberId}`)
+	fetch(`${host}/deleteMember/${subscriberId}`, {
+		method: "DELETE",
+	})
     .then((response) => {
       document.getElementById(`member${subscriberId}`).style.display = "none";
     })
