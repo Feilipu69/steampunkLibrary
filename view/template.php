@@ -29,7 +29,7 @@
 								<?php
 								if (isset($_SESSION['login'])) {
 									?>
-									<li class="nav-item"><a class="nav-link" href="<?= HOST; ?>/newsletters">Newsletter</a></li>
+									<li class="nav-item"><a class="nav-link" href="<?= HOST; ?>/newsletters">Bulletin</a></li>
 									<li class="nav-item"><a class="nav-link" href="<?= HOST; ?>/forum">Forum</a></li>
 									<li class="nav-item"><a class="nav-link" href="<?= HOST; ?>/updateData">Gestion de vos données</a></li>
 									<li class="nav-item"><a class="nav-link" href="<?= HOST; ?>/myPosts">Mes sujets</a></li>
