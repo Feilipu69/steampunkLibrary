@@ -6,7 +6,7 @@ function book(isbn) {
   )
     .then((response) => response.json())
     .then((data) => {
-      document.getElementById("title").textContent =
+      document.getElementById("bookTitle").textContent =
         data.items[0].volumeInfo.title;
       document.getElementById("author").textContent =
         "de " + data.items[0].volumeInfo.authors;
