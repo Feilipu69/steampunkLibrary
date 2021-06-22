@@ -1,4 +1,5 @@
 <div class="container">
+	<p></p>
 <?php
 if (isset($myPosts)) {
 	?>
