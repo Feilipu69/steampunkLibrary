@@ -8,15 +8,7 @@
 		<link href="https://fonts.googleapis.com/css2?family=Old+Standard+TT:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
 		<script src="https://cdn.tiny.cloud/1/wh9z1mfuolvg4lwiul6nr0x5ur1txczi3ksrn9vm58r2itps/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-<<<<<<< HEAD
-<<<<<<< HEAD
 		<meta name="description" content="SteampunkLibrary est un blog de littérature steampunk avec un forum pour échanger des idées de livres et pour discuter des livres présentés">
-=======
-		<meta name="description" content="Blog de litterature steampunk avec un forum pour échanger des idées de livres ou pour commenter les livres présentés">
->>>>>>> tests
-=======
-		<meta name="description" content="Blog de litterature steampunk avec un forum pour échanger des idées de livres ou pour commenter les livres présentés">
->>>>>>> tests
 		<title>La Bibliothèque à Vapeur</title>
 	</head>
 	<body>
