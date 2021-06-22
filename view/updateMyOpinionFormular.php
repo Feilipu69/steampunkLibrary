@@ -1,3 +1,4 @@
+<p class="container"><a href="<?= HOST; ?>/myPosts">Retour</a></p>
 <?php
 if (isset($_GET['parameter'])) {
 	?>
