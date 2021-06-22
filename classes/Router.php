@@ -84,6 +84,12 @@ class Router
 		elseif ($_GET['route'] === 'deletePost') {
 			$this->frontController->deletePost($_GET['parameter']);
 		}
+		elseif ($_GET['route'] === 'updateMyOpinion') {
+			$this->frontController->updateMyOpinion($_POST, $_GET['parameter']);
+		}
+		elseif ($_GET['route'] === 'deleteMyOpinion') {
+			$this->frontController->deleteMyOpinion($_GET['parameter']);
+		}
 	}
 
 	public function renderPostAndComments(){
