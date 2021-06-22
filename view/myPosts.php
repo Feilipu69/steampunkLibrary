@@ -7,9 +7,12 @@ if (isset($myPosts)) {
 	foreach ($myPosts as $posts) {
 		?>
 <<<<<<< HEAD
+<<<<<<< HEAD
 		<article class="container border shadow p-5">
 			<h2><?= strip_tags($posts->getTitle()); ?></h2>
 =======
+=======
+>>>>>>> tests
 		<div class="container border shadow p-4">
 			<h3><?= strip_tags($posts->getTitle()); ?></h3>
 >>>>>>> tests
@@ -41,5 +44,24 @@ if (isset($myOpinions)) {
 		<?php
 	}
 }
+<<<<<<< HEAD
+=======
+
+if (isset($myOpinions)) {
+	?>
+	<h2 class="mt-5">Mes commentaires</h2>
+	<?php
+	foreach ($myOpinions as $opinion) {
+		?>
+		<div class="container border shadow p-4">
+			<p>Le <?= $opinion->getDateOfComment(); ?>, vous avez écrit :</p>
+			<p class="comment"><?= strip_tags($opinion->getComment()); ?></p>
+			<button onclick="window.location.href='<?= HOST; ?>/updateMyOpinion/<?= $opinion->getId(); ?>';">Modifier</button> 
+			<button onclick="window.location.href='<?= HOST; ?>/deleteMyOpinion/<?= $opinion->getId(); ?>';" class="text-danger">Supprimer</button> 
+		</div>
+		<?php
+	}
+}
+>>>>>>> tests
 ?>
 </div>
