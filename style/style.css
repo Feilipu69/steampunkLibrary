@@ -81,7 +81,8 @@ thead {
   background-image: url("../public/parchment.svg");
 }
 
-.content {
+.content,
+.comment {
   font-family: "Edmundsbury Serif", serif;
   font-size: 23px;
 }

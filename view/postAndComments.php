@@ -25,7 +25,7 @@ if (isset($_GET['parameter']) && isset($_GET['page']) && isset($_SESSION['login'
 	</div>
 	<?php
 }
-if (isset($opinions)) {
+if (isset($_GET['parameter']) && isset($opinions)) {
 	?>
 	<section class="container mt-5">
 		<h3>Commentaires</h3>

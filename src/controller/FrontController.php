@@ -208,10 +208,13 @@ class FrontController
 	*/
 	public function myPosts(){
 		$posts = new ForumPostsManager();
+		$opinions = new OpinionManager();
 		$myPosts = $posts->myPosts();
-		$displayPosts = new View('myPosts');
+		$myOpinions = $opinions->getMyOpinions();
+		$displayPosts = new View('myPosts', 'myOpinons');
 		$displayPosts->render([
-			'myPosts' => $myPosts
+			'myPosts' => $myPosts,
+			'myOpinions' => $myOpinions
 		]);
 	}
 
@@ -233,6 +236,25 @@ class FrontController
 		$comments = new OpinionManager();
 		$deletePost = $post->deletePost($id);
 		$deleteComments = $comments->deleteOpinionByPost($id);
+		header('Location:' . HOST . '/myPosts');
+	}
+
+	public function updateMyOpinion($post, $id){
+		if (isset($post['send'])) {
+			if (!empty($post['comment'])) {
+				$myOpinion = new OpinionManager();
+				$updateMyOpinion = $myOpinion->updateMyOpinion($post, $id);
+				header('Location:' . HOST . '/myPosts');
+			}
+		}
+
+		$formular = new View('updateMyOpinionFormular');
+		$formular->render([]);
+	}
+
+	public function deleteMyOpinion($id){
+		$myOpinion = new OpinionManager();
+		$myOpinion->deleteOpinion($id);
 		header('Location:' . HOST . '/myPosts');
 	}
 
