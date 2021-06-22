@@ -47,11 +47,32 @@ class OpinionManager extends DbConnect
 		return $opinionData;
 	}
 
+	public function getMyOpinions(){
+		$req = $this->db->prepare('SELECT id, login, forumId, comment, DATE_FORMAT(dateOfComment, "%d/%m/%Y") AS dateOfComment FROM opinions WHERE login = ? ORDER BY id DESC');
+		$req->execute([
+			$_SESSION['login']
+		]);
+		while ($data = $req->fetch()){
+			$myOpinions[] = new Opinion($data); 
+		}
+		if(isset($myOpinions)){
+			return $myOpinions;
+		}
+	}
+
 	public function addLikeDislike($opinionId, $opinion){
 		$req = $this->db->prepare('UPDATE opinions SET ' . $opinion . ' = ? WHERE id = ?');
 		$req->execute([
 			$_SESSION['subscriberId'],
 			$opinionId
+		]);
+	}
+
+	public function updateMyOpinion($post, $id){
+		$req = $this->db->prepare('UPDATE opinions SET comment = :comment WHERE id = :id');
+		$req->execute([
+			'comment' => $post['comment'],
+			'id' => $id
 		]);
 	}
 
