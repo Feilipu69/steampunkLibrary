@@ -13,7 +13,7 @@ if (isset($_GET['parameter'])) {
 			</div>
 			<div class="form-goup">
 				<label for="content">Contenu</label>
-				<textarea name="content"></textarea>
+				<textarea name="content" id="content"></textarea>
 			</div>
 			<input type="submit" name="send" value="Envoyer" />
 			<button onclick="window.location.href='<?= HOST; ?>/addForumPost';">Annuler</button>

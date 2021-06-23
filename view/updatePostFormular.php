@@ -7,7 +7,7 @@ if (isset($_GET['parameter'])) {
 			<input type="text" name="title" id="title" />
 			<br>
 			<label for="content">Contenu</label>
-			<textarea name="content"></textarea>
+			<textarea name="content" id="content"></textarea>
 			<br>
 			<input type="submit" name="send" value="Modifier" />
 			<button onclick="window.location.href='<?= HOST; ?>/updatePost/<?= $_GET['parameter']; ?>';">Annuler</button>
