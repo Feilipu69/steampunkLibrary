@@ -10,7 +10,7 @@ if (isset($_GET['parameter'])) {
 		</div>
 		<div>
 			<div class="ml-md-5 mt-md-3">
-				<p id="bookTitle"></p>
+				<h2 id="bookTitle"></h2>
 				<p id="author"></p>
 				<p class="mt-2 p-3 border rounded shadow" id="bookDescription"></p>
 			</div>
