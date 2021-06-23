@@ -1,4 +1,4 @@
-<div class="container">
+<div class="mySubjects container">
 	<?php
 	if (isset($myPosts)) {
 		?>
@@ -23,18 +23,23 @@
 
 	if (isset($myOpinions)) {
 		?>
-		<h2 class="mt-5">Mes commentaires</h2>
-		<?php
-		foreach ($myOpinions as $opinion) {
-			?>
-			<div class="container border shadow p-4">
-				<p>Le <?= $opinion->getDateOfComment(); ?>, vous avez écrit :</p>
-				<p class="comment"><?= strip_tags($opinion->getComment()); ?></p>
-				<button onclick="window.location.href='<?= HOST; ?>/updateMyOpinion/<?= $opinion->getId(); ?>';">Modifier</button> 
-				<button onclick="window.location.href='<?= HOST; ?>/deleteMyOpinion/<?= $opinion->getId(); ?>';" class="text-danger">Supprimer</button> 
-			</div>
+		<div>
+			<h2 class="mt-5">Mes commentaires</h2>
 			<?php
-		}
+			foreach ($myOpinions as $opinion) {
+				?>
+				<article class="container border shadow p-4 mt-3">
+					<p>Sujet : <span class="titleOfTopic"><?= $opinion->getTitle(); ?></span></p>
+					<p>Le <?= $opinion->getDateOfComment(); ?>, vous avez écrit :</p>
+					<p class="comment"><?= strip_tags($opinion->getComment()); ?></p>
+					<button onclick="window.location.href='<?= HOST; ?>/updateMyOpinion/<?= $opinion->getId(); ?>';">Modifier</button> 
+					<button onclick="window.location.href='<?= HOST; ?>/deleteMyOpinion/<?= $opinion->getId(); ?>';" class="text-danger">Supprimer</button> 
+				</article>
+				<?php
+			}
+			?>
+		</div>
+		<?php
 	}
 	?>
 </div>
