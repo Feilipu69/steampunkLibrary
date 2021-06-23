@@ -8,6 +8,7 @@ class Opinion
 	private $forumId;
 	private $comment;
 	private $dateOfComment;
+	private $title;
 	private $agree;
 	private $disagree;
 
@@ -43,6 +44,10 @@ class Opinion
 	public function getDateOfComment(){
 		return $this->dateOfComment;
 	}
+	
+	public function getTitle(){
+		return $this->title;
+	}
 
 	public function getAgree(){
 		return $this->agree;
@@ -74,6 +79,10 @@ class Opinion
 
 	public function setDateOfComment($dateOfComment){
 		$this->dateOfComment = $dateOfComment;
+	}
+
+	public function setTitle($title){
+		$this->title = $title;
 	}
 
 	public function setAgree($agree){
