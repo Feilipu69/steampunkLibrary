@@ -66,7 +66,7 @@
 		</main>
 		<footer class="mt-3">
 			<div class="container rounded d-lg-flex justify-content-between">
-				<div>
+				<div class="mt-3">
 					Liens :
 					<ul>
 						<li><a href="https://fr.wikipedia.org/wiki/Steampunk" target="_blank">Steampunk Wikipedia</a></li> 
