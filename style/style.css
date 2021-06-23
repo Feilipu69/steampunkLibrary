@@ -35,7 +35,8 @@ h1 {
 a,
 #buttonBurger,
 h2,
-#bookTitle {
+#bookTitle,
+.titleOfTopic {
   color: #c15620;
 }
 
