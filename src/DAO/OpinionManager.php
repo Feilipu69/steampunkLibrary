@@ -48,7 +48,7 @@ class OpinionManager extends DbConnect
 	}
 
 	public function getMyOpinions(){
-		$req = $this->db->prepare('SELECT id, login, forumId, comment, DATE_FORMAT(dateOfComment, "%d/%m/%Y") AS dateOfComment FROM opinions WHERE login = ? ORDER BY id DESC');
+		$req = $this->db->prepare('SELECT o.id, o.login, o.forumId, o.comment, DATE_FORMAT(o.dateOfComment, "%d/%m/%Y") AS dateOfComment, fp.title FROM opinions o INNER JOIN forumPosts fp ON o.forumId = fp.id WHERE o.login = ? ORDER BY o.id DESC');
 		$req->execute([
 			$_SESSION['login']
 		]);
