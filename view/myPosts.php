@@ -29,7 +29,7 @@
 			foreach ($myOpinions as $opinion) {
 				?>
 				<article class="container border shadow p-4 mt-3">
-					<p>Sujet : <span class="titleOfTopic"><?= $opinion->getTitle(); ?></span></p>
+					<p class="d-inline">Sujet : </p><h3 class="d-inline titleOfTopic"><?= $opinion->getTitle(); ?></h3>
 					<p>Le <?= $opinion->getDateOfComment(); ?>, vous avez écrit :</p>
 					<p class="comment"><?= strip_tags($opinion->getComment()); ?></p>
 					<button onclick="window.location.href='<?= HOST; ?>/updateMyOpinion/<?= $opinion->getId(); ?>';">Modifier</button> 
