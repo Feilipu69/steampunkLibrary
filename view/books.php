@@ -5,7 +5,7 @@
 		?>
 		<div class="card-deck col-lg-4 text-center">
 			<div id="card<?= $book->getIsbn(); ?>" class="card mb-3">
-				<h3 id="cardHeader<?= $book->getIsbn(); ?>" class="card-header"></h3>
+				<h3 id="cardHeader<?= $book->getIsbn(); ?>" class="card-header">(titre)</h3>
 				<div id="cardBody<?= $book->getIsbn(); ?>" class="marble card-body"></div>
 			</div>
 		</div>
