@@ -4,7 +4,8 @@ namespace Bihin\steampunkLibrary\src\model;
 class ForumPosts
 {
 	private $id;
-	private $loginSubscriber;
+	private $subscriberId;
+	private $login;
 	private $title;
 	private $post;
 	private $content;
@@ -27,8 +28,12 @@ class ForumPosts
 		return $this->id;
 	}
 
-	public function getLoginSubscriber(){
-		return $this->loginSubscriber;
+	public function getSubscriberId(){
+		return $this->subscriberId;
+	}
+
+	public function getLogin(){
+		return $this->login;
 	}
 
 	public function getTitle(){
@@ -53,8 +58,14 @@ class ForumPosts
 		}
 	}
 
-	public function setLoginSubscriber($loginSubscriber){
-		$this->loginSubscriber = $loginSubscriber;
+	public function setSubscriberId($subscriberId){
+		if ($subscriberId > 0) {
+			$this->subscriberId = $subscriberId;
+		}
+	}
+
+	public function setLogin($login){
+		$this->login= $login;
 	}
 
 	public function setTitle($title){
