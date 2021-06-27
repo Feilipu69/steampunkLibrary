@@ -21,19 +21,19 @@
 		}
 	}
 
-	if (isset($myOpinions)) {
+	if (isset($myComments)) {
 		?>
 		<div>
 			<h2 class="mt-5">Mes commentaires</h2>
 			<?php
-			foreach ($myOpinions as $opinion) {
+			foreach ($myComments as $comment) {
 				?>
 				<article class="container border shadow p-4 mt-3">
-					<p class="d-inline">Sujet : </p><h3 class="d-inline titleOfTopic"><?= $opinion->getTitle(); ?></h3>
-					<p>Le <?= $opinion->getDateOfComment(); ?>, vous avez écrit :</p>
-					<p class="comment"><?= strip_tags($opinion->getComment()); ?></p>
-					<button onclick="window.location.href='<?= HOST; ?>/updateMyOpinion/<?= $opinion->getId(); ?>';">Modifier</button> 
-					<button onclick="window.location.href='<?= HOST; ?>/deleteMyOpinion/<?= $opinion->getId(); ?>';" class="text-danger">Supprimer</button> 
+					<p class="d-inline">Sujet : </p><h3 class="d-inline titleOfTopic"><?= $comment->getTitle(); ?></h3>
+					<p>Le <?= $comment->getDateOfComment(); ?>, vous avez écrit :</p>
+					<p class="comment"><?= strip_tags($comment->getComment()); ?></p>
+					<button onclick="window.location.href='<?= HOST; ?>/updateMyComment/<?= $comment->getId(); ?>';">Modifier</button> 
+					<button onclick="window.location.href='<?= HOST; ?>/deleteMyComment/<?= $comment->getId(); ?>';" class="text-danger">Supprimer</button> 
 				</article>
 				<?php
 			}

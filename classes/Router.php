@@ -84,11 +84,14 @@ class Router
 		elseif ($_GET['route'] === 'deletePost') {
 			$this->frontController->deletePost($_GET['parameter']);
 		}
-		elseif ($_GET['route'] === 'updateMyOpinion') {
-			$this->frontController->updateMyOpinion($_POST, $_GET['parameter']);
+		elseif ($_GET['route'] === 'addAComment') {
+			$this->frontController->addAComment($_POST, $_GET['parameter'], $_GET['page']);
 		}
-		elseif ($_GET['route'] === 'deleteMyOpinion') {
-			$this->frontController->deleteMyOpinion($_GET['parameter']);
+		elseif ($_GET['route'] === 'updateMyComment') {
+			$this->frontController->updateMyComment($_POST, $_GET['parameter']);
+		}
+		elseif ($_GET['route'] === 'deleteMyComment') {
+			$this->frontController->deleteMyComment($_GET['parameter']);
 		}
 	}
 
@@ -96,8 +99,8 @@ class Router
 		if ($_GET['route'] === 'postAndComments') {
 			$this->frontController->postAndComments($_POST, $_GET['parameter'], $_GET['page']);
 		}
-		elseif ($_GET['route'] === 'deleteOpinion') {
-			$this->frontController->deleteOpinion($_GET['parameter'], $_GET['page'], $_GET['opinionId']);
+		elseif ($_GET['route'] === 'deleteComment') {
+			$this->frontController->deleteComment($_GET['parameter'], $_GET['page'], $_GET['commentId']);
 		}
 
 

@@ -1,9 +1,10 @@
 <?php
 namespace Bihin\steampunkLibrary\src\model;
 
-class Opinion
+class Comments
 {
 	private $id;
+	private $subcriberId;
 	private $login;
 	private $forumId;
 	private $comment;
@@ -27,6 +28,10 @@ class Opinion
 
 	public function getId(){
 		return $this->id;
+	}
+
+	public function getSubscriberId(){
+		return $this->subscriberId;
 	}
 
 	public function getLogin(){
@@ -60,6 +65,12 @@ class Opinion
 	public function setId(int $id){
 		if ($id > 0) {
 			$this->id = $id;
+		}
+	}
+
+	public function setSubscriberId($subscriberId){
+		if ($subscriberId > 0) {
+			$this->subscriberId = $subscriberId;
 		}
 	}
 

@@ -5,7 +5,6 @@ if (isset($_GET['parameter'])) {
 		<h2><?= $_GET['parameter']; ?></h2>
 		<p><a href="<?= HOST; ?>/forum">Retour</a></p>
 		<button onclick="displayForm()" class="displayForm">Ajouter un sujet</button>
-
 		<form method="post" action="<?= HOST; ?>/addForumPost/<?= $_GET['parameter']; ?>" id="displayForm" style="display:none" class="mt-4">
 			<div class="form-group">
 				<label for="title">Titre</label>
@@ -16,7 +15,7 @@ if (isset($_GET['parameter'])) {
 				<textarea name="content" id="content"></textarea>
 			</div>
 			<input type="submit" name="send" value="Envoyer" />
-			<button onclick="window.location.href='<?= HOST; ?>/addForumPost';">Annuler</button>
+			<button onclick="window.location.href='<?= HOST; ?>/addForumPost/<?= $_GET['parameter']; ?>';">Annuler</button>
 		</form>
 	</article>
 	<script>
@@ -38,7 +37,7 @@ if (isset($getPost)) {
 					<img src="<?= HOST; ?>/public/index-finger.png" alt="" class="img-fluid" />
 					<h3 class="d-inline"><a href="<?= HOST ; ?>/postAndComments/<?= $post->getId(); ?>/1"> <?= strip_tags($post->getTitle()); ?></a></h3>
 				</div>
-				<em>publié le : <?= $post->getDate(); ?> par <?= strip_tags($post->getLoginSubscriber()); ?></em>
+				<em>publié le : <?= $post->getDate(); ?> par <?= strip_tags($post->getLogin()); ?></em>
 				<div class="content mb-4"><?= strip_tags($post->getContent()); ?></div>
 				<?php
 				if (isset($_SESSION['role']) && ($_SESSION['role'] != 'member')) {

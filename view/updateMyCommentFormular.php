@@ -3,13 +3,13 @@
 if (isset($_GET['parameter'])) {
 	?>
 	<div class="container">
-		<form method="post" action="<?= HOST; ?>/updateMyOpinion/<?= $_GET['parameter']; ?>">
+		<form method="post" action="<?= HOST; ?>/updateMyComment/<?= $_GET['parameter']; ?>">
 			<label for="comment">Nouveau commentaire</label>
 			<br>
 			<textarea name="comment" id="comment"></textarea>
 			<br>
 			<input type="submit" name="send" value="Modifier" />
-			<button onclick="window.location.href='<?= HOST; ?>/updateMyOpinion/<?= $_GET['parameter']; ?>';">Annuler</button>
+			<button onclick="window.location.href='<?= HOST; ?>/updateMyComment/<?= $_GET['parameter']; ?>';">Annuler</button>
 		</form>
 	</div>
 	<?php

@@ -4,9 +4,8 @@ namespace Bihin\steampunkLibrary\src\controller;
 use Bihin\steampunkLibrary\src\DAO\{
 	AgreeDisagreeManager,
 	BooksCatalogueManager,
-	NewsletterManager,
 	ForumPostsManager,
-	OpinionManager,
+	CommentsManager,
 	SubscriberManager
 };
 
@@ -134,12 +133,16 @@ class FrontController
 		if (isset($post['send'])) {
 			if (!empty($post['login']) && !empty($post['password']) && !empty($post['email'])) {
 				$subscriber = new SubscriberManager();
+				$posts = new ForumPostsManager();
+				$comments = new CommentsManager();
 				if ($subscriber->checkSubscriber($post)) {
 					$_SESSION['registerError'] = "Ce login existe déjà";
 				}
 				else {
 					$subscriber->updateData($post);
 					$_SESSION['login'] = $post['login'];
+					$posts->updateLoginOfPosts($post);
+					$comments->updateLoginOfComments($post);
 					header('Location:' . HOST);
 				}
 			}
@@ -183,7 +186,7 @@ class FrontController
 	}
 
 	/**
-	* Add a post-Ajoute un billet
+	* Add a post-Ajoute un sujet
 	*
 	* @param  mixed $post
 	* @param  mixed $parameter
@@ -208,13 +211,13 @@ class FrontController
 	*/
 	public function myPosts(){
 		$posts = new ForumPostsManager();
-		$opinions = new OpinionManager();
+		$comments = new CommentsManager();
 		$myPosts = $posts->myPosts();
-		$myOpinions = $opinions->getMyOpinions();
-		$displayPosts = new View('myPosts', 'myOpinons');
+		$myComments = $comments->getMyComments();
+		$displayPosts = new View('myPosts', 'myComments');
 		$displayPosts->render([
 			'myPosts' => $myPosts,
-			'myOpinions' => $myOpinions
+			'myComments' => $myComments
 		]);
 	}
 
@@ -233,28 +236,40 @@ class FrontController
 
 	public function deletePost($id){
 		$post = new ForumPostsManager();
-		$comments = new OpinionManager();
+		$comments = new CommentsManager();
 		$deletePost = $post->deletePost($id);
-		$deleteComments = $comments->deleteOpinionByPost($id);
+		$deleteComments = $comments->deleteCommentByPost($id);
 		header('Location:' . HOST . '/myPosts');
 	}
 
-	public function updateMyOpinion($post, $id){
+	function addAComment($post, $forumId, $page){
+		if (isset($post['send'])) {
+			if (!empty($post['login'] && !empty($post['comment']))) {
+				$comment = new CommentsManager();
+				$newComment = $comment->addAComment($post, $forumId, $page);
+				header('Location:' . HOST . '/postAndComments/' . $forumId . '/' . $page);
+			}
+		} else {
+			header('Location:' . HOST . '/postAndComments/' . $forumId . '/' . $page);
+		}
+	}
+
+	public function updateMyComment($post, $id){
 		if (isset($post['send'])) {
 			if (!empty($post['comment'])) {
-				$myOpinion = new OpinionManager();
-				$updateMyOpinion = $myOpinion->updateMyOpinion($post, $id);
+				$myComment = new CommentsManager();
+				$updateMyComment = $myComment->updateMyComment($post, $id);
 				header('Location:' . HOST . '/myPosts');
 			}
 		}
 
-		$formular = new View('updateMyOpinionFormular');
+		$formular = new View('updateMyCommentFormular');
 		$formular->render([]);
 	}
 
-	public function deleteMyOpinion($id){
-		$myOpinion = new OpinionManager();
-		$myOpinion->deleteOpinion($id);
+	public function deleteMyComment($id){
+		$myComment = new CommentsManager();
+		$myComment->deleteComment($id);
 		header('Location:' . HOST . '/myPosts');
 	}
 
@@ -270,14 +285,8 @@ class FrontController
 	*/
 	public function postAndComments($post, $forumId, $page){
 		$posts = new ForumPostsManager();
-		$opinion = new OpinionManager();
-		$opinionsAgreeDisagree = new AgreeDisagreeManager();
-
-		if (isset($post['send'])) {
-			if (!empty($post['login'] && !empty($post['comment']))) {
-				$newOpinion = $opinion->addOpinion($post, $forumId);
-			}
-		}
+		$comment = new CommentsManager();
+		$commentsAgreeDisagree = new AgreeDisagreeManager();
 
 		// Page numbering-Pagination
 		if (isset($_GET['page']) && !empty($_GET['page'])) {
@@ -286,17 +295,17 @@ class FrontController
 			$currentPage = 1;
 		}
 
-		$numberOfComments = $opinion->countAllOpinions($forumId);
+		$numberOfComments = $comment->countAllComments($forumId);
 		$numberOfCommentsByPage = 5;
 		$allPages = ceil($numberOfComments[0]/$numberOfCommentsByPage);
 		$firstComment = ($currentPage * $numberOfCommentsByPage) - $numberOfCommentsByPage;
-		$opinions = $opinion->getOpinions($forumId, $firstComment, $numberOfCommentsByPage);
+		$comments = $comment->getComments($forumId, $firstComment, $numberOfCommentsByPage);
 		// End of page numbering-Fin pagination
 
-		$opinionsId = [];
-		if (!empty($opinions)) {
-			foreach ($opinions as $opinion) {
-				$opinionsId[] = $opinion->getId();
+		$commentsId = [];
+		if (!empty($comments)) {
+			foreach ($comments as $comment) {
+				$commentsId[] = $comment->getId();
 			}
 		}
 
@@ -304,8 +313,8 @@ class FrontController
 		$displaySubjectAndComments = new View('postAndComments');
 		$displaySubjectAndComments->render([
 			'postData' => $postData,
-			'opinions' => $opinions,
-			'opinionsId' => json_encode($opinionsId),
+			'comments' => $comments,
+			'commentsId' => json_encode($commentsId),
 			'currentPage' => $currentPage,
 			'allPages' => $allPages
 		]);
@@ -319,9 +328,9 @@ class FrontController
 	* @param  int $id
 	* @return void
 	*/
-	public function deleteOpinion($parameter, $page, $id){
-		$opinion = new OpinionManager();
-		$deleteOpinion = $opinion->deleteOpinion($id);
+	public function deleteComment($parameter, $page, $id){
+		$comment = new CommentsManager();
+		$deleteComment = $comment->deleteComment($id);
 		header('Location:' . HOST . '/postAndComments/' . $parameter . '/' . $page);
 	}
 
@@ -330,29 +339,29 @@ class FrontController
 	/**
 	* addRemoveVote. Fonctionnalité like-dislike pour chaque billet d'un sujet.
 	*
-	* @param  int $opinionId
+	* @param  int $commentId
 	* @param  mixed $vote
 	* @return void
 	*/
-	public function addRemoveVote($opinionId, $vote){
+	public function addRemoveVote($commentId, $vote){
 		$agreeDisagree = new AgreeDisagreeManager();
-		$opinions = new OpinionManager();
+		$comments = new CommentsManager();
 
 		if ($vote === 'agree') {
-			$numberOpinions = $agreeDisagree->countSubscriberVotes($opinionId, $vote);
-			if ($numberOpinions[0] === '0') {
-				$addOpinion = $agreeDisagree->addVote($opinionId, $vote);
-				$removeOpinion = $agreeDisagree->removeVote($opinionId, 'disagree');
+			$numberComments = $agreeDisagree->countSubscriberVotes($commentId, $vote);
+			if ($numberComments[0] === '0') {
+				$addComment = $agreeDisagree->addVote($commentId, $vote);
+				$removeComment = $agreeDisagree->removeVote($commentId, 'disagree');
 			} else {
-				$removeOpinion = $agreeDisagree->removeVote($opinionId, $vote);
+				$removeComment = $agreeDisagree->removeVote($commentId, $vote);
 			}
 		} elseif ($vote === 'disagree') {
-			$numberOpinions = $agreeDisagree->countSubscriberVotes($opinionId, $vote);
-			if ($numberOpinions[0] === '0') {
-				$addOpinion = $agreeDisagree->addVote($opinionId, $vote);
-				$removeOpinion = $agreeDisagree->removeVote($opinionId, 'agree');
+			$numberComments = $agreeDisagree->countSubscriberVotes($commentId, $vote);
+			if ($numberComments[0] === '0') {
+				$addComment = $agreeDisagree->addVote($commentId, $vote);
+				$removeComment = $agreeDisagree->removeVote($commentId, 'agree');
 			} else {
-				$removeOpinion = $agreeDisagree->removeVote($opinionId, $vote);
+				$removeComment = $agreeDisagree->removeVote($commentId, $vote);
 			}
 		}
 	}
@@ -360,12 +369,12 @@ class FrontController
 	/**
 	* getAllVotes. Récupération de tous les like-dislike d'un billet.
 	*
-	* @param  int $opinionId
+	* @param  int $commentId
 	* @return void
 	*/
-	public function getAllVotes($opinionId){
+	public function getAllVotes($CommentId){
 		$votes = new AgreeDisagreeManager();
-		$allVotes = $votes->getAllVotes($opinionId);
+		$allVotes = $votes->getAllVotes($CommentId);
 		echo json_encode($allVotes);
 	}
 

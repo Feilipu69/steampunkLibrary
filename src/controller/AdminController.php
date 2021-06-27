@@ -3,8 +3,6 @@ namespace Bihin\steampunkLibrary\src\controller;
 
 use Bihin\steampunkLibrary\src\DAO\{
 	BooksCatalogueManager,
-	NewsletterManager,
-	OpinionManager,
 	SubscriberManager
 };
 

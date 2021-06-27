@@ -1,45 +1,43 @@
 // Affichage de la page
-function getAllVotes(opinionId) {
-  fetch(`${host}/getAllVotes/${opinionId}`)
-    .then((response) => response.json())
-    .then((data) => {
-      let agreeOpinions = 0;
-      let disagreeOpinions = 0;
-      for (vote of data) {
-        if (vote.agree != 0) {
-          agreeOpinions = agreeOpinions + 1;
-        }
-        if (vote.disagree != 0) {
-          disagreeOpinions = disagreeOpinions + 1;
-        }
-      }
-      document.getElementById(`agreeOpinions${opinionId}`).textContent =
-        agreeOpinions;
-      document.getElementById(`disagreeOpinions${opinionId}`).textContent =
-        disagreeOpinions;
-    })
-    .catch((error) => console.log(`Erreur : ${error}`));
+function getAllVotes(commentId) {
+	fetch(`${host}/getAllVotes/${commentId}`)
+		.then(response => response.json())
+		.then(data => {
+			let agreeComments = 0;
+			let disagreeComments = 0;
+			for (vote of data) {
+				if (vote.agree != 0) { // si il y a l'id du membre dans le champ agree
+					agreeComments = agreeComments + 1;
+				}
+				if (vote.disagree != 0) { // si il y a l'id du membre dans le champ disagree
+					disagreeComments = disagreeComments + 1;
+				}
+			}
+			document.getElementById(`agreeComments${commentId}`).textContent = agreeComments;
+			document.getElementById(`disagreeComments${commentId}`).textContent = disagreeComments;
+		})
+		.catch(error => console.log(`Erreur : ${error}`));
 }
 
-if (opinionsId != null) {
-  for (id of opinionsId) {
-    getAllVotes(id);
-  }
+if (commentsId != null) {
+	for (id of commentsId) {
+		getAllVotes(id);
+	}
 }
 
 // Modification des votes par l'utilisateur
-function addRemoveAgree(opinionId) {
-  fetch(`${host}/addRemoveAgree/${opinionId}/agree`)
-    .then((response) => {
-      getAllVotes(`${opinionId}`);
-    })
-    .catch((error) => console.log(`Erreur : ${error}`));
+function addRemoveAgree(commentId) {
+	fetch(`${host}/addRemoveAgree/${commentId}/agree`)
+		.then((response) => {
+			getAllVotes(`${commentId}`);
+		})
+		.catch(error => console.log(`Erreur : ${error}`));
 }
 
-function addRemoveDisagree(opinionId) {
-  fetch(`${host}/addRemoveDisagree/${opinionId}/disagree`)
-    .then((response) => {
-      getAllVotes(`${opinionId}`);
-    })
-    .catch((error) => console.log(`Erreur : ${error}`));
+function addRemoveDisagree(commentId) {
+	fetch(`${host}/addRemoveDisagree/${commentId}/disagree`)
+		.then(response => {
+			getAllVotes(`${commentId}`);
+		})
+		.catch(error => console.log(`Erreur : ${error}`));
 }

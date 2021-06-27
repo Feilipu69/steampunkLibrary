@@ -6,28 +6,28 @@ use Bihin\steampunkLibrary\src\model\AgreeDisagree;
 
 class AgreeDisagreeManager extends DbConnect 
 {
-	public function getAllVotes($opinionId){
-		$req = $this->db->prepare('SELECT agree, disagree FROM likeDislike WHERE opinionId = ?');
+	public function getAllVotes($commentId){
+		$req = $this->db->prepare('SELECT agree, disagree FROM likeDislike WHERE commentId = ?');
 		$req->execute([
-			$opinionId
+			$commentId
 		]);
 		$data = $req->fetchAll(); 
 		return $data;
 	}
 
-	public function countSubscriberVotes($opinionId, $vote){
+	public function countSubscriberVotes($commentId, $vote){
 		if ($vote === 'agree') {
-			$req = $this->db->prepare('SELECT COUNT(*) FROM likeDislike WHERE opinionId = ? AND agree = ?');
+			$req = $this->db->prepare('SELECT COUNT(*) FROM likeDislike WHERE commentId = ? AND agree = ?');
 			$req->execute([
-				$opinionId,
+				$commentId,
 				$_SESSION['subscriberId']
 			]);
 			$data = $req->fetch();
 			return $data;
 		} elseif ($vote === 'disagree') {
-			$req = $this->db->prepare('SELECT COUNT(*) FROM likeDislike WHERE opinionId = ? AND disagree = ?');
+			$req = $this->db->prepare('SELECT COUNT(*) FROM likeDislike WHERE commentId = ? AND disagree = ?');
 			$req->execute([
-				$opinionId,
+				$commentId,
 				$_SESSION['subscriberId']
 			]);
 			$data = $req->fetch();
@@ -35,36 +35,36 @@ class AgreeDisagreeManager extends DbConnect
 		}
 	}
 
-	public function addVote($opinionId, $vote){
+	public function addVote($commentId, $vote){
 		if ($vote === 'agree') {
-			$req = $this->db->prepare('INSERT INTO likeDislike(subscriberId, opinionId, agree) VALUES(:subscriberId, :opinionId, :agree)');
+			$req = $this->db->prepare('INSERT INTO likeDislike(subscriberId, commentId, agree) VALUES(:subscriberId, :commentId, :agree)');
 			$req->execute([
 				':subscriberId' => $_SESSION['subscriberId'],
-				':opinionId' => $opinionId,
+				':commentId' => $commentId,
 				':agree' => $_SESSION['subscriberId']
 			]);
 		} elseif ($vote === 'disagree') {
-			$req = $this->db->prepare('INSERT INTO likeDislike(subscriberId, opinionId, disagree) VALUES(:subscriberId, :opinionId, :disagree)');
+			$req = $this->db->prepare('INSERT INTO likeDislike(subscriberId, commentId, disagree) VALUES(:subscriberId, :commentId, :disagree)');
 			$req->execute([
 				':subscriberId' => $_SESSION['subscriberId'],
-				':opinionId' => $opinionId,
+				':commentId' => $commentId,
 				':disagree' => $_SESSION['subscriberId']
 			]);
 		}
 	}
 
-	public function removeVote($opinionId, $vote){
+	public function removeVote($commentId, $vote){
 		if ($vote === 'agree') {
-			$req = $this->db->prepare('DELETE FROM likeDislike WHERE agree = ? AND opinionId = ?');
+			$req = $this->db->prepare('DELETE FROM likeDislike WHERE agree = ? AND commentId = ?');
 			$req->execute([
 				$_SESSION['subscriberId'],
-				$opinionId
+				$commentId
 			]);
 		} elseif ($vote === 'disagree') {
-			$req = $this->db->prepare('DELETE FROM likeDislike WHERE disagree = ? AND opinionId = ?');
+			$req = $this->db->prepare('DELETE FROM likeDislike WHERE disagree = ? AND commentId = ?');
 			$req->execute([
 				$_SESSION['subscriberId'],
-				$opinionId
+				$commentId
 			]);
 		}
 	}
