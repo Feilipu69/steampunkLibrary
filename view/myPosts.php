@@ -6,7 +6,7 @@
 		<?php
 		foreach ($myPosts as $posts) {
 			?>
-			<article class="container border shadow p-5">
+			<article class="container border shadow mb-3 p-5">
 				<h2><?= strip_tags($posts->getTitle()); ?></h2>
 				<p>Sujet : <?= strip_tags($posts->getPost()); ?></p>
 				<p class="content"><?= strip_tags($posts->getcontent()); ?></p>
