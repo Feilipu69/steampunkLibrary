@@ -7,10 +7,9 @@ use Bihin\steampunkLibrary\src\model\Comments;
 class CommentsManager extends DbConnect
 {
 	public function addAComment($post, $forumId){
-		$req = $this->db->prepare('INSERT INTO comments (subscriberId, login, forumId, comment, dateOfComment) VALUES (:subscriberId, :login, :forumId, :comment, NOW())');
+		$req = $this->db->prepare('INSERT INTO comments (subscriberId, forumId, comment, dateOfComment) VALUES (:subscriberId, :forumId, :comment, NOW())');
 		$req->execute([
 			':subscriberId' => $_SESSION['subscriberId'],
-			':login' => $post['login'],
 			':forumId' => $forumId,
 			':comment' => $post['comment']
 		]);
@@ -26,7 +25,7 @@ class CommentsManager extends DbConnect
 	}
 
 	public function getComments($forumId, $first, $byPage){
-		$req = $this->db->prepare('SELECT * FROM comments WHERE forumId = ? ORDER BY id DESC LIMIT ' . $first . ', ' . $byPage);
+		$req = $this->db->prepare('SELECT c.id, c.subscriberId, c.forumId, c.comment, DATE_FORMAT(c.dateOfComment, "%d/%m/%Y") AS dateOfComment, s.login FROM comments c INNER JOIN subscribers s ON c.subscriberId = s.id WHERE forumId = ? ORDER BY id DESC LIMIT ' . $first . ', ' . $byPage);
 		$req->execute([
 			$forumId
 		]);
@@ -37,7 +36,9 @@ class CommentsManager extends DbConnect
 			return $comments;
 		}
 	}
-
+	
+	// Je ne le trouve nul part!
+	/*
 	public function getAComment($id){
 		$req = $this->db->prepare('SELECT * FROM comments WHERE id = ?');
 		$req->execute([
@@ -47,9 +48,10 @@ class CommentsManager extends DbConnect
 		$commentData = new Comments($data);
 		return $commentData;
 	}
+	*/
 
 	public function getMyComments(){
-		$req = $this->db->prepare('SELECT c.id, c.subscriberId, c.login, c.forumId, c.comment, DATE_FORMAT(c.dateOfComment, "%d/%m/%Y") AS dateOfComment, fp.title FROM comments c INNER JOIN forumPosts fp ON c.forumId = fp.id WHERE c.subscriberId = ? ORDER BY c.id DESC');
+		$req = $this->db->prepare('SELECT c.id, c.subscriberId, c.forumId, c.comment, DATE_FORMAT(c.dateOfComment, "%d/%m/%Y") AS dateOfComment, fp.title, s.login FROM comments c INNER JOIN forumPosts fp ON c.forumId = fp.id INNER JOIN subscribers s ON c.subscriberId = s.id WHERE c.subscriberId = ? ORDER BY c.id DESC');
 		$req->execute([
 			$_SESSION['subscriberId']
 		]);
@@ -74,14 +76,6 @@ class CommentsManager extends DbConnect
 		$req->execute([
 			'comment' => $post['comment'],
 			'id' => $id
-		]);
-	}
-
-	public function updateLoginOfComments($post){
-		$req = $this->db->prepare('UPDATE comments SET login = :login WHERE subscriberId = :subscriberId');
-		$req->execute([
-			'login' => $post['login'],
-			'subscriberId' => $_SESSION['subscriberId']
 		]);
 	}
 
