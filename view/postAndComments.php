@@ -12,10 +12,6 @@ if (isset($_GET['parameter']) && isset($_GET['page']) && isset($_SESSION['login'
 	<div class="container">
 		<button onclick="displayForm()" class="displayForm mt-3">Ajouter un commentaire</button>
 		<form method="post" action="<?= HOST; ?>/addAComment/<?= $_GET['parameter']; ?>/<?= $_GET['page']; ?>" id="displayForm" style="display:none" class="mt-4">
-			<div class="form-goup">
-				<label for="login">Pseudo : </label>
-				<input type="text" name="login" id="login" value="<?= $_SESSION['login']; ?>" />
-			</div>
 			<div class="form-group">
 				<label for="comment">Commentaire</label>
 				<textarea name="comment" id="comment"></textarea>
