@@ -133,16 +133,12 @@ class FrontController
 		if (isset($post['send'])) {
 			if (!empty($post['login']) && !empty($post['password']) && !empty($post['email'])) {
 				$subscriber = new SubscriberManager();
-				$posts = new ForumPostsManager();
-				$comments = new CommentsManager();
 				if ($subscriber->checkSubscriber($post)) {
 					$_SESSION['registerError'] = "Ce login existe déjà";
 				}
 				else {
 					$subscriber->updateData($post);
 					$_SESSION['login'] = $post['login'];
-					$posts->updateLoginOfPosts($post);
-					$comments->updateLoginOfComments($post);
 					header('Location:' . HOST);
 				}
 			}
