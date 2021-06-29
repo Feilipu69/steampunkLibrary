@@ -148,9 +148,15 @@ class FrontController
 		$displayForm->render([]);
 	}
 
-	public function deleteSubscriber(){
+	public function deleteSubscriber($subscriberId){
 		$subscriber = new SubscriberManager();
-		$subscriber->deleteSubscriber();
+		$postsOfASubscriber = new ForumPostsManager();
+		$commentsOfASubscriber = new CommentsManager();
+		$votesOfASubscriber = new AgreeDisagreeManager();
+		$subscriber->deleteSubscriber($subscriberId);
+		$postsOfASubscriber->deleteAllPostsOfASubscriber($subscriberId);
+		$commentsOfASubscriber->deleteAllCommentsOfASubscriber($subscriberId);
+		$votesOfASubscriber->deleteAllVotesOfASubscriber($subscriberId);
 		$this->disconnection();
 	}
 
@@ -240,7 +246,7 @@ class FrontController
 
 	function addAComment($post, $forumId, $page){
 		if (isset($post['send'])) {
-			if (!empty($post['login'] && !empty($post['comment']))) {
+			if (!empty($post['comment'])) {
 				$comment = new CommentsManager();
 				$newComment = $comment->addAComment($post, $forumId, $page);
 				header('Location:' . HOST . '/postAndComments/' . $forumId . '/' . $page);
