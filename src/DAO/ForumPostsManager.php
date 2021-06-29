@@ -36,7 +36,7 @@ class ForumPostsManager extends DbConnect
 	}
 
 	public function addForumPost($post){
-		$req = $this->db->prepare('INSERT INTO forumPosts (subscriberId, post, title, content, date) VALUES (:subscriberId, :loginSubscriber, :post, :title, :content, NOW())');
+		$req = $this->db->prepare('INSERT INTO forumPosts (subscriberId, post, title, content, date) VALUES (:subscriberId, :post, :title, :content, NOW())');
 		$req->execute([
 			'subscriberId' => $_SESSION['subscriberId'],
 			'post' => $_GET['parameter'],
@@ -71,6 +71,13 @@ class ForumPostsManager extends DbConnect
 		$req = $this->db->prepare('DELETE FROM forumPosts WHERE id = ?');
 		$req->execute([
 			$id
+		]);
+	}
+
+	public function deleteAllPostsOfASubscriber($subscriberId){
+		$req = $this->db->prepare('DELETE FROM forumPosts WHERE subscriberId = ?');
+		$req->execute([
+			$subscriberId
 		]);
 	}
 }
