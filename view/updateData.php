@@ -17,7 +17,7 @@
 			<input type="submit" name="send" value="Modifier" />
 			<button onclick="window.location.href='<?= HOST; ?>/updateData';">Annuler</button>
 			<br>
-			<div class="text-danger mt-3">Suppression de votre compte : <button onclick="window.location.href='<?= HOST; ?>/deleteSubscriber';">Supprimer</button></div>
+			<div class="text-danger mt-3">Suppression de votre compte : <button onclick="window.location.href='<?= HOST; ?>/deleteSubscriber/<?= $_SESSION['subscriberId']; ?>';">Supprimer</button></div>
 		</form>
 		<?php
 		if (isset($_SESSION['registerError'])) {
