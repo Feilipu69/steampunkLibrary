@@ -66,10 +66,10 @@ class SubscriberManager extends DbConnect
 		]);
 	}
 
-	public function deleteSubscriber(){
-		$req = $this->db->prepare('DELETE FROM subscribers WHERE login = ?');
+	public function deleteSubscriber($subscriberId){
+		$req = $this->db->prepare('DELETE FROM subscribers WHERE id = ?');
 		$req->execute([
-			$_SESSION['login']
+			$subscriberId
 		]);
 	}
 
