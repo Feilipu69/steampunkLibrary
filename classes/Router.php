@@ -61,7 +61,7 @@ class Router
 			$this->frontController->updateData($_POST);
 		}
 		elseif ($_GET['route'] === 'deleteSubscriber') {
-			$this->frontController->deleteSubscriber();
+			$this->frontController->deleteSubscriber($_GET['parameter']);
 		}
 	}
 
