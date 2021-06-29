@@ -36,19 +36,6 @@ class CommentsManager extends DbConnect
 			return $comments;
 		}
 	}
-	
-	// Je ne le trouve nul part!
-	/*
-	public function getAComment($id){
-		$req = $this->db->prepare('SELECT * FROM comments WHERE id = ?');
-		$req->execute([
-			$id
-		]);
-		$data = $req->fetch();
-		$commentData = new Comments($data);
-		return $commentData;
-	}
-	*/
 
 	public function getMyComments(){
 		$req = $this->db->prepare('SELECT c.id, c.subscriberId, c.forumId, c.comment, DATE_FORMAT(c.dateOfComment, "%d/%m/%Y") AS dateOfComment, fp.title, s.login FROM comments c INNER JOIN forumPosts fp ON c.forumId = fp.id INNER JOIN subscribers s ON c.subscriberId = s.id WHERE c.subscriberId = ? ORDER BY c.id DESC');
@@ -104,6 +91,13 @@ class CommentsManager extends DbConnect
 		$req = $this->db->prepare('DELETE FROM comments WHERE forumId = ?');
 		$req->execute([
 			$forumId
+		]);
+	}
+
+	public function deleteAllCommentsOfASubscriber($subscriberId){
+		$req = $this->db->prepare('DELETE FROM comments WHERE subscriberId = ?');
+		$req->execute([
+			$subscriberId
 		]);
 	}
 }
