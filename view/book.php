@@ -1,4 +1,4 @@
-<a href="<?= HOST; ?>/books">Retour</a>
+<a href="<?= HOST; ?>/books">&laquo; Retour</a>
 <?php
 if (isset($_GET['parameter'])) {
 	?>
