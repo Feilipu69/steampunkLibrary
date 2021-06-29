@@ -2,7 +2,10 @@
 namespace Bihin\steampunkLibrary\src\controller;
 
 use Bihin\steampunkLibrary\src\DAO\{
+	AgreeDisagreeManager,
 	BooksCatalogueManager,
+	ForumPostsManager,
+	CommentsManager,
 	SubscriberManager
 };
 
@@ -81,7 +84,13 @@ class AdminController
 
 	public function deleteMember($id){
 		$member = new SubscriberManager();
-		$deleteMember = $member->deleteMember($id);
+		$postsOfASubscriber = new ForumPostsManager();
+		$commentsOfASubscriber = new CommentsManager();
+		$votesOfASubscriber = new AgreeDisagreeManager();
+		$member->deleteMember($id);
+		$postsOfASubscriber->deleteAllPostsOfASubscriber($id);
+		$commentsOfASubscriber->deleteAllCommentsOfASubscriber($id);
+		$votesOfASubscriber->deleteAllVotesOfASubscriber($id);
 		header('Location:' . HOST . '/administration');
 	}
 }
