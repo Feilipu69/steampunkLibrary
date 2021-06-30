@@ -75,4 +75,11 @@ class AgreeDisagreeManager extends DbConnect
 			$subscriberId
 		]);
 	}
+
+	public function deleteVoteOfAComment($commentId){
+		$req = $this->db->prepare('DELETE FROM likeDislike WHERE commentId = ?');
+		$req->execute([
+			$commentId
+		]);
+	}
 }
