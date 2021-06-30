@@ -227,7 +227,9 @@ class FrontController
 		if (isset($post['send'])) {
 			if (!empty($post['title']) && !empty($post['content'])) {
 				$posts = new ForumPostsManager();
+				$commentsOfPost = new CommentsManager();
 				$updatePost = $posts->updatePost($post, $id);
+				$commentsOfPost->deleteCommentByPost($id);
 				header('Location:' . HOST . '/myPosts');
 			}
 		}
@@ -260,7 +262,9 @@ class FrontController
 		if (isset($post['send'])) {
 			if (!empty($post['comment'])) {
 				$myComment = new CommentsManager();
+				$deleteVoteOfOldComment = new AgreeDisagreeManager();
 				$updateMyComment = $myComment->updateMyComment($post, $id);
+				$deleteVoteOfOldComment->deleteVoteOfAComment($id);
 				header('Location:' . HOST . '/myPosts');
 			}
 		}
@@ -271,7 +275,9 @@ class FrontController
 
 	public function deleteMyComment($id){
 		$myComment = new CommentsManager();
+		$voteOfMyComment = new AgreeDisagreeManager();
 		$myComment->deleteComment($id);
+		$voteOfMyComment->deleteVoteOfAComment($id);
 		header('Location:' . HOST . '/myPosts');
 	}
 
@@ -332,7 +338,9 @@ class FrontController
 	*/
 	public function deleteComment($parameter, $page, $id){
 		$comment = new CommentsManager();
-		$deleteComment = $comment->deleteComment($id);
+		$voteOfComment = new AgreeDisagreeManager();
+		$comment->deleteComment($id);
+		$voteOfComment->deleteVoteOfAComment($id);
 		header('Location:' . HOST . '/postAndComments/' . $parameter . '/' . $page);
 	}
 
