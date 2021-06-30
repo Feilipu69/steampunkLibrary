@@ -1,3 +1,4 @@
+// Display the page
 // Affichage de la page
 function getAllVotes(commentId) {
 	fetch(`${host}/getAllVotes/${commentId}`)
@@ -25,6 +26,7 @@ if (commentsId != null) {
 	}
 }
 
+// Update votes by the member
 // Modification des votes par l'utilisateur
 function addRemoveAgree(commentId) {
 	fetch(`${host}/addRemoveAgree/${commentId}/agree`)

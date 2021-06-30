@@ -22,7 +22,8 @@ class AdminController
 	}
 
 	/**
-	* Display a formular for a new book, the possibility to change the status of a member and to delete the count of a member-Affiche un formulaire d'entrée d'un nouveau livre, la gestion du role des membres et la possibilité de supprimer un membre.
+	* Display a formular for a new book, the possibility to change the status of a member and to delete the count of a member
+	* Affiche un formulaire d'entrée d'un nouveau livre, la gestion du role des membres et la possibilité de supprimer un membre.
 	*
 	* @return void
 	*/
@@ -61,7 +62,8 @@ class AdminController
 	}
 
 	/**
-	* Change the status to moderator-Moderator permet à un membre de devenir modérateur
+	* Change the status to moderator
+	* Change le statut en moderator
 	*
 	* @param  int $id
 	* @return void
@@ -72,7 +74,8 @@ class AdminController
 	}
 
 	/**
-	* Change the status to member-Le statut du membre devient member
+	* Change the status to member
+	* Change le statut en member
 	*
 	* @param  int $id
 	* @return void

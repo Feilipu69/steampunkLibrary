@@ -18,14 +18,16 @@ class FrontController
 		$display->render([]);
 	}
 
-	// Books-Livres	
+	// Books
+	// Livres	
 
 	public function getBooks(){
 		$booksCatalogue = new BooksCatalogueManager();
 		$catalogue = $booksCatalogue->catalogue();
 		$allBooks = $booksCatalogue->countAllBooks();
 
-		// Page numbering-Pagination
+		// Page numbering
+		// Pagination
 		if (isset($_GET['page']) && !empty($_GET['page'])) {
 			$currentPage = (int) strip_tags($_GET['page']);
 		} else {
@@ -35,7 +37,8 @@ class FrontController
 		$allPages = ceil($allBooks/$numberOfBooksByPage);
 		$firstPage = ($currentPage * $numberOfBooksByPage) - $numberOfBooksByPage;
 		$books = $booksCatalogue->getBooks($firstPage, $numberOfBooksByPage);
-		// End of page numbering-Fin pagination
+		// End of page numbering
+		// Fin pagination
 
 		$displayBooks = new View('books');
 		$displayBooks->render([
@@ -51,10 +54,12 @@ class FrontController
 		$displayABook->render([]);
 	}
 
-	// Members-Membres	
+	// Members
+	// Membres	
 
 	/**
-	* A member can register-Register permet à un utilisateur de s'inscrire member
+	* A user can register
+	* Un utilisateur peut s'inscrire
 	*
 	* @param  mixed $post
 	* @return void
@@ -120,7 +125,8 @@ class FrontController
 	}
 
 	/**
-	* To change the member's data-Modifier les données de l'utilisateur
+	* To change the member's data
+	* Modifier les données de l'utilisateur
 	*
 	* @param  mixed $post
 	* @return void
@@ -163,7 +169,8 @@ class FrontController
 	// Forum	
 
 	/**
-	* Display the topics-Affiche le menu des thèmes du forum
+	* Display the topics
+	* Affiche le menu des thèmes du forum
 	*
 	* @return void
 	*/
@@ -173,7 +180,8 @@ class FrontController
 	}
 
 	/**
-	* Display the posts-Affiche les billets
+	* Display a post
+	* Affiche un sujet
 	*
 	* @param  mixed $post
 	* @return void
@@ -188,7 +196,8 @@ class FrontController
 	}
 
 	/**
-	* Add a post-Ajoute un sujet
+	* Add a post
+	* Ajoute un sujet
 	*
 	* @param  mixed $post
 	* @param  mixed $parameter
@@ -207,7 +216,8 @@ class FrontController
 	}
 
 	/**
-	* Display a member's posts-Accès aux sujets d'un utilisateur
+	* Display a member's posts
+	* Accès aux sujets d'un membre
 	*
 	* @return void
 	*/
@@ -281,10 +291,12 @@ class FrontController
 		header('Location:' . HOST . '/myPosts');
 	}
 
-	// Posts, comments and likes dislikes-Sujets, commentaires et votes	
+	// Posts, comments and likes dislikes
+	// Sujets, commentaires et votes	
 
 	/**
-	* Display a post and its comments(5 by 5). like dislike for each comment and page numbering-Affiche un billet et ses commentaires (par groupe de cinq). Fonctionnalité like-dislike associée à chaque commentaire, enfin pagination.
+	* Display a post and its comments(5 by 5). like dislike for each comment and page numbering
+	* Affiche un sujet et ses commentaires (par groupe de cinq). Fonctionnalité like-dislike associée à chaque commentaire, enfin pagination.
 	*
 	* @param  mixed $post
 	* @param  int $forumId
@@ -308,7 +320,8 @@ class FrontController
 		$allPages = ceil($numberOfComments[0]/$numberOfCommentsByPage);
 		$firstComment = ($currentPage * $numberOfCommentsByPage) - $numberOfCommentsByPage;
 		$comments = $comment->getComments($forumId, $firstComment, $numberOfCommentsByPage);
-		// End of page numbering-Fin pagination
+		// End of page numbering
+		// Fin pagination
 
 		$commentsId = [];
 		if (!empty($comments)) {
@@ -329,7 +342,8 @@ class FrontController
 	}
 
 	/**
-	* deleteOpinion-Supprime un commentaire
+	* delete a comment
+	* Supprime un commentaire
 	*
 	* @param  mixed $parameter
 	* @param  int $page
@@ -347,7 +361,8 @@ class FrontController
 	// like-dislike	
 
 	/**
-	* addRemoveVote. Fonctionnalité like-dislike pour chaque billet d'un sujet.
+	* addRemoveVote. 
+	* Fonctionnalité like-dislike pour chaque billet d'un sujet.
 	*
 	* @param  int $commentId
 	* @param  mixed $vote
@@ -377,7 +392,8 @@ class FrontController
 	}
 
 	/**
-	* getAllVotes. Récupération de tous les like-dislike d'un billet.
+	* getAllVotes. 
+	* Récupération de tous les like-dislike d'un billet.
 	*
 	* @param  int $commentId
 	* @return void
