@@ -398,9 +398,9 @@ class FrontController
 	* @param  int $commentId
 	* @return void
 	*/
-	public function getAllVotes($CommentId){
+	public function getAllVotes($commentId){
 		$votes = new AgreeDisagreeManager();
-		$allVotes = $votes->getAllVotes($CommentId);
+		$allVotes = $votes->getAllVotes($commentId);
 		echo json_encode($allVotes);
 	}
 
