@@ -7,7 +7,7 @@
 		foreach ($myPosts as $posts) {
 			?>
 			<article class="container border shadow mb-3 p-5">
-				<h2><?= strip_tags($posts->getTitle()); ?></h2>
+				<p class="d-inline">Titre : </p><h2 class="d-inline"><?= strip_tags($posts->getTitle()); ?></h2>
 				<p>Sujet : <?= strip_tags($posts->getPost()); ?></p>
 				<p class="content"><?= strip_tags($posts->getcontent()); ?></p>
 				<em>Publié le : <?= $posts->getDate(); ?> </em>
