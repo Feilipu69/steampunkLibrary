@@ -73,11 +73,4 @@ class ForumPostsManager extends DbConnect
 			$id
 		]);
 	}
-
-	public function deleteAllPostsOfASubscriber($subscriberId){
-		$req = $this->db->prepare('DELETE FROM forumPosts WHERE subscriberId = ?');
-		$req->execute([
-			$subscriberId
-		]);
-	}
 }
