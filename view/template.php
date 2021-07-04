@@ -74,7 +74,7 @@
 					</ul>
 				</div>
 				<div>
-					<div class="author">&copy; 2021 Apprenti-développeur</div>
+					<div class="author"><a href="https://www.apprenti-developpeur.fr" target="_blank">&copy; 2021 Apprenti-développeur</a></div>
 				</div>
 			</div>
 		</footer>
