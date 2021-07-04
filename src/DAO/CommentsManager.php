@@ -93,11 +93,4 @@ class CommentsManager extends DbConnect
 			$forumId
 		]);
 	}
-
-	public function deleteAllCommentsOfASubscriber($subscriberId){
-		$req = $this->db->prepare('DELETE FROM steampunkLibraryComments WHERE subscriberId = ?');
-		$req->execute([
-			$subscriberId
-		]);
-	}
 }
