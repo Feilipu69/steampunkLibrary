@@ -13,6 +13,20 @@ use Bihin\steampunkLibrary\utils\View;
 
 class FrontController
 {
+	private $agreeDisagreeManager;
+	private $booksCatalogueManager;
+	private $commentsManager;
+	private $forumPostsManager;
+	private $subscriberManager;
+
+	public function __construct(){
+		$this->agreeDisagreeManager = new AgreeDisagreeManager();
+		$this->booksCatalogueManager = new BooksCatalogueManager();
+		$this->commentsManager = new Commentsmanager();
+		$this->forumPostsManager = new ForumPostsmanager();
+		$this->subscriberManager = new SubscriberManager();
+	}
+
 	public function home(){
 		$display = new View('home');
 		$display->render([]);
@@ -22,9 +36,8 @@ class FrontController
 	// Livres	
 
 	public function getBooks(){
-		$booksCatalogue = new BooksCatalogueManager();
-		$catalogue = $booksCatalogue->catalogue();
-		$allBooks = $booksCatalogue->countAllBooks();
+		$catalogue = $this->booksCatalogueManager->catalogue();
+		$allBooks = $this->booksCatalogueManager->countAllBooks();
 
 		// Page numbering
 		// Pagination
@@ -36,7 +49,7 @@ class FrontController
 		$numberOfBooksByPage = 9;
 		$allPages = ceil($allBooks/$numberOfBooksByPage);
 		$firstPage = ($currentPage * $numberOfBooksByPage) - $numberOfBooksByPage;
-		$books = $booksCatalogue->getBooks($firstPage, $numberOfBooksByPage);
+		$books = $this->booksCatalogueManager->getBooks($firstPage, $numberOfBooksByPage);
 		// End of page numbering
 		// Fin pagination
 
@@ -71,14 +84,13 @@ class FrontController
 
 		if (isset($post['register'])) {
 			if (!empty($post['login']) && !empty($post['password']) && !empty($post['email'])) {
-				$subscriber = new SubscriberManager();
-				if ($subscriber->checkSubscriber($post)) {
+				if ($this->subscriberManager->checkSubscriber($post)) {
 					$_SESSION['registerError'] = "Ce login existe déjà";
 				}
 				else {
-					$subscriber->register($post);
+					$this->subscriberManager->register($post);
 					$_SESSION['login'] = $post['login'];
-					$subscriberData = $subscriber->getOneSubscriber();
+					$subscriberData = $this->subscriberManager->getOneSubscriber();
 					$_SESSION['subscriberId'] = $subscriberData->getId();
 					$_SESSION['role'] = null;
 					header('Location:' . HOST);
@@ -97,10 +109,9 @@ class FrontController
 
 		if (isset($post['connection'])) {
 			if (!empty($post['login']) && !empty($post['password'])) {
-				$subscriber = new SubscriberManager();
-				if ($subscriber->checkPassword($post)) {
+				if ($this->subscriberManager->checkPassword($post)) {
 					$_SESSION['login'] = $post['login'];
-					$subscriberData = $subscriber->getOneSubscriber();
+					$subscriberData = $this->subscriberManager->getOneSubscriber();
 					$role = $subscriberData->getRole();
 					$_SESSION['role'] = $role;
 					$_SESSION['subscriberId'] = $subscriberData->getId();
@@ -138,12 +149,11 @@ class FrontController
 
 		if (isset($post['send'])) {
 			if (!empty($post['login']) && !empty($post['password']) && !empty($post['email'])) {
-				$subscriber = new SubscriberManager();
-				if ($subscriber->checkSubscriber($post)) {
+				if ($this->subscriberManager->checkSubscriber($post)) {
 					$_SESSION['registerError'] = "Ce login existe déjà";
 				}
 				else {
-					$subscriber->updateData($post);
+					$this->subscriberManager->updateData($post);
 					$_SESSION['login'] = $post['login'];
 					header('Location:' . HOST);
 				}
@@ -155,14 +165,7 @@ class FrontController
 	}
 
 	public function deleteSubscriber($subscriberId){
-		$subscriber = new SubscriberManager();
-		$postsOfASubscriber = new ForumPostsManager();
-		$commentsOfASubscriber = new CommentsManager();
-		$votesOfASubscriber = new AgreeDisagreeManager();
-		$subscriber->deleteSubscriber($subscriberId);
-		$postsOfASubscriber->deleteAllPostsOfASubscriber($subscriberId);
-		$commentsOfASubscriber->deleteAllCommentsOfASubscriber($subscriberId);
-		$votesOfASubscriber->deleteAllVotesOfASubscriber($subscriberId);
+		$this->subscriberManager->deleteSubscriber($subscriberId);
 		$this->disconnection();
 	}
 
@@ -187,8 +190,7 @@ class FrontController
 	* @return void
 	*/
 	public function post($post){
-		$posts = new ForumPostsManager();
-		$getPost = $posts->getPost($post);
+		$getPost = $this->forumPostsManager->getPost($post);
 		$displayForumPost = new View('post');
 		$displayForumPost->render([
 			'getPost' => $getPost
@@ -206,8 +208,7 @@ class FrontController
 	public function addForumPost($post, $parameter){
 		if (isset($post['send'])) {
 			if (!empty($post['title']) && !empty($post['content'])) {
-				$newPost = new ForumPostsManager();
-				$forumPost = $newPost->addForumPost($post);
+				$forumPost = $this->forumPostsManager->addForumPost($post);
 				header('Location:' . HOST . '/post/' . $parameter);
 			}
 		} else {
@@ -222,10 +223,8 @@ class FrontController
 	* @return void
 	*/
 	public function myPosts(){
-		$posts = new ForumPostsManager();
-		$comments = new CommentsManager();
-		$myPosts = $posts->myPosts();
-		$myComments = $comments->getMyComments();
+		$myPosts = $this->forumPostsManager->myPosts();
+		$myComments = $this->commentsManager->getMyComments();
 		$displayPosts = new View('myPosts', 'myComments');
 		$displayPosts->render([
 			'myPosts' => $myPosts,
@@ -234,33 +233,30 @@ class FrontController
 	}
 
 	public function updatePost($post, $id){
+		$mypost = $this->forumPostsManager->getPostById($id);
 		if (isset($post['send'])) {
 			if (!empty($post['title']) && !empty($post['content'])) {
-				$posts = new ForumPostsManager();
-				$commentsOfPost = new CommentsManager();
-				$updatePost = $posts->updatePost($post, $id);
-				$commentsOfPost->deleteCommentByPost($id);
+				$updatePost = $this->forumPostsManager->updatePost($post, $id);
+				$this->commentsManager->deleteCommentByPost($id);
 				header('Location:' . HOST . '/myPosts');
 			}
 		}
 
 		$displayFormular = new View('updatePostFormular');
-		$displayFormular->render([]);
+		$displayFormular->render([
+			'mypost' => $mypost
+		]);
 	}
 
 	public function deletePost($id){
-		$post = new ForumPostsManager();
-		$comments = new CommentsManager();
-		$deletePost = $post->deletePost($id);
-		$deleteComments = $comments->deleteCommentByPost($id);
+		$deletePost = $this->forumPostsManager->deletePost($id);
 		header('Location:' . HOST . '/myPosts');
 	}
 
 	function addAComment($post, $forumId, $page){
 		if (isset($post['send'])) {
 			if (!empty($post['comment'])) {
-				$comment = new CommentsManager();
-				$newComment = $comment->addAComment($post, $forumId, $page);
+				$newComment = $this->commentsManager->addAComment($post, $forumId, $page);
 				header('Location:' . HOST . '/postAndComments/' . $forumId . '/' . $page);
 			}
 		} else {
@@ -271,10 +267,8 @@ class FrontController
 	public function updateMyComment($post, $id){
 		if (isset($post['send'])) {
 			if (!empty($post['comment'])) {
-				$myComment = new CommentsManager();
-				$deleteVoteOfOldComment = new AgreeDisagreeManager();
-				$updateMyComment = $myComment->updateMyComment($post, $id);
-				$deleteVoteOfOldComment->deleteVoteOfAComment($id);
+				$updateMyComment = $this->commentsManager->updateMyComment($post, $id);
+				$this->agreeDisagreeManager->deleteVoteOfAComment($id);
 				header('Location:' . HOST . '/myPosts');
 			}
 		}
@@ -284,10 +278,7 @@ class FrontController
 	}
 
 	public function deleteMyComment($id){
-		$myComment = new CommentsManager();
-		$voteOfMyComment = new AgreeDisagreeManager();
-		$myComment->deleteComment($id);
-		$voteOfMyComment->deleteVoteOfAComment($id);
+		$this->commentsManager->deleteComment($id);
 		header('Location:' . HOST . '/myPosts');
 	}
 
@@ -304,8 +295,6 @@ class FrontController
 	* @return void
 	*/
 	public function postAndComments($post, $forumId, $page){
-		$posts = new ForumPostsManager();
-		$comment = new CommentsManager();
 		$commentsAgreeDisagree = new AgreeDisagreeManager();
 
 		// Page numbering-Pagination
@@ -315,11 +304,11 @@ class FrontController
 			$currentPage = 1;
 		}
 
-		$numberOfComments = $comment->countAllComments($forumId);
+		$numberOfComments = $this->commentsManager->countAllComments($forumId);
 		$numberOfCommentsByPage = 5;
 		$allPages = ceil($numberOfComments[0]/$numberOfCommentsByPage);
 		$firstComment = ($currentPage * $numberOfCommentsByPage) - $numberOfCommentsByPage;
-		$comments = $comment->getComments($forumId, $firstComment, $numberOfCommentsByPage);
+		$comments = $this->commentsManager->getComments($forumId, $firstComment, $numberOfCommentsByPage);
 		// End of page numbering
 		// Fin pagination
 
@@ -330,7 +319,7 @@ class FrontController
 			}
 		}
 
-		$postData = $posts->getPostById($forumId);	
+		$postData = $this->forumPostsManager->getPostById($forumId);	
 		$displaySubjectAndComments = new View('postAndComments');
 		$displaySubjectAndComments->render([
 			'postData' => $postData,
@@ -351,10 +340,7 @@ class FrontController
 	* @return void
 	*/
 	public function deleteComment($parameter, $page, $id){
-		$comment = new CommentsManager();
-		$voteOfComment = new AgreeDisagreeManager();
-		$comment->deleteComment($id);
-		$voteOfComment->deleteVoteOfAComment($id);
+		$this->commentsManager->deleteComment($id);
 		header('Location:' . HOST . '/postAndComments/' . $parameter . '/' . $page);
 	}
 
@@ -369,24 +355,21 @@ class FrontController
 	* @return void
 	*/
 	public function addRemoveVote($commentId, $vote){
-		$agreeDisagree = new AgreeDisagreeManager();
-		$comments = new CommentsManager();
-
 		if ($vote === 'agree') {
-			$numberComments = $agreeDisagree->countSubscriberVotes($commentId, $vote);
+			$numberComments = $this->agreeDisagreeManager->countSubscriberVotes($commentId, $vote);
 			if ($numberComments[0] === '0') {
-				$addComment = $agreeDisagree->addVote($commentId, $vote);
-				$removeComment = $agreeDisagree->removeVote($commentId, 'disagree');
+				$addComment = $this->agreeDisagreeManager->addVote($commentId, $vote);
+				$removeComment = $this->agreeDisagreeManager->removeVote($commentId, 'disagree');
 			} else {
-				$removeComment = $agreeDisagree->removeVote($commentId, $vote);
+				$removeComment = $this->agreeDisagreeManager->removeVote($commentId, $vote);
 			}
 		} elseif ($vote === 'disagree') {
-			$numberComments = $agreeDisagree->countSubscriberVotes($commentId, $vote);
+			$numberComments = $this->agreeDisagreeManager->countSubscriberVotes($commentId, $vote);
 			if ($numberComments[0] === '0') {
-				$addComment = $agreeDisagree->addVote($commentId, $vote);
-				$removeComment = $agreeDisagree->removeVote($commentId, 'agree');
+				$addComment = $this->agreeDisagreeManager->addVote($commentId, $vote);
+				$removeComment = $this->agreeDisagreeManager->removeVote($commentId, 'agree');
 			} else {
-				$removeComment = $agreeDisagree->removeVote($commentId, $vote);
+				$removeComment = $this->agreeDisagreeManager->removeVote($commentId, $vote);
 			}
 		}
 	}
@@ -399,8 +382,7 @@ class FrontController
 	* @return void
 	*/
 	public function getAllVotes($commentId){
-		$votes = new AgreeDisagreeManager();
-		$allVotes = $votes->getAllVotes($commentId);
+		$allVotes = $this->agreeDisagreeManager->getAllVotes($commentId);
 		echo json_encode($allVotes);
 	}
 
