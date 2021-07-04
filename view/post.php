@@ -3,7 +3,7 @@ if (isset($_GET['parameter'])) {
 	?>
 	<article class="container mb-5">
 		<h2><?= $_GET['parameter']; ?></h2>
-		<p><a href="<?= HOST; ?>/forum">&laquo; Retour</a></p>
+		<p class="retour"><a href="<?= HOST; ?>/forum">&laquo; Retour</a></p>
 		<button onclick="displayForm()" class="displayForm">Ajouter un sujet</button>
 		<form method="post" action="<?= HOST; ?>/addForumPost/<?= $_GET['parameter']; ?>" id="displayForm" style="display:none" class="mt-4">
 			<div class="form-group">
