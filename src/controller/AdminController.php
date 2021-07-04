@@ -13,6 +13,20 @@ use Bihin\steampunkLibrary\utils\View;
 
 class AdminController
 {	
+	private $agreeDisagreeManager;
+	private $booksCatalogueManager;
+	private $forumPostsManager;
+	private $commentsManager;
+	private $subscriberManager;
+
+	public function __construct(){
+		$this->agreeDisagreeManager = new AgreeDisagreeManager();
+		$this->booksCatalogueManager = new BooksCatalogueManager();
+		$this->forumPostsManager = new ForumPostsManager();
+		$this->commentsManager = new CommentsManager();
+		$this->subscriberManager = new SubscriberManager();
+	}
+
 	public function checkRole(){
 		if ($_SESSION['role'] !== 'admin' && $_SESSION['role'] !== 'moderator') {
 			header('Location:' . HOST);
@@ -29,8 +43,7 @@ class AdminController
 	*/
 	public function administration(){
 		if ($this->checkRole()) {
-			$subscribers = new SubscriberManager();
-			$allSubscribers = $subscribers->getSubscribers();
+			$allSubscribers = $this->subscriberManager->getSubscribers();
 
 			$subscriberId = [];
 			foreach ($allSubscribers as $subscriber) {
@@ -48,16 +61,14 @@ class AdminController
 	public function addOneBook($book){
 		if (isset($book['addOneBook'])) {
 			if (!empty($book['isbn'])) {
-				$newBook = new BooksCatalogueManager();
-				$newBook->addOneBook($book);
+				$this->booksCatalogueManager->addOneBook($book);
 			}
 		}
 		$this->administration();
 	}
 
 	public function getRole($id){
-		$subscriber = new SubscriberManager();
-		$role = $subscriber->getRole($id);
+		$role = $this->subscriberManager->getRole($id);
 		echo json_encode($role);
 	}
 
@@ -69,8 +80,7 @@ class AdminController
 	* @return void
 	*/
 	public function moderator($id){
-		$moderator = new SubscriberManager();
-		$newModerator = $moderator->moderator($id);
+		$newModerator = $this->subscriberManager->moderator($id);
 	}
 
 	/**
@@ -81,19 +91,11 @@ class AdminController
 	* @return void
 	*/
 	public function member($id){
-		$member = new SubscriberManager();
-		$newMember = $member->member($id);
+		$newMember = $this->subscriberManager->member($id);
 	}
 
 	public function deleteMember($id){
-		$member = new SubscriberManager();
-		$postsOfASubscriber = new ForumPostsManager();
-		$commentsOfASubscriber = new CommentsManager();
-		$votesOfASubscriber = new AgreeDisagreeManager();
-		$member->deleteMember($id);
-		$postsOfASubscriber->deleteAllPostsOfASubscriber($id);
-		$commentsOfASubscriber->deleteAllCommentsOfASubscriber($id);
-		$votesOfASubscriber->deleteAllVotesOfASubscriber($id);
+		$this->subscriberManager->deleteMember($id);
 		header('Location:' . HOST . '/administration');
 	}
 }
