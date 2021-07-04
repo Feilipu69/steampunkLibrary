@@ -10,7 +10,7 @@
 
 body {
   font-family: "steamwreck";
-  font-size: 25px;
+  font-size: 23px;
   background-image: url("../public/red-velvet.jpg");
 }
 
@@ -19,10 +19,13 @@ body .container {
 }
 
 nav li,
+.bienvenue,
 .form-control {
   font-size: 30px;
 }
 
+.footer,
+.info, 
 #date,
 .pagination li {
   font-size: 20px;
@@ -58,7 +61,6 @@ a:hover {
   text-align: center;
 }
 
-.bienvenue,
 #bookTitle {
   font-size: 35px;
 }
@@ -88,10 +90,6 @@ thead {
   font-size: 23px;
 }
 
-.footer {
-  font-size: 20px;
-}
-
 #home-description li {
   list-style-image: url("../public/top-hat.png");
   font-size: 25px;
@@ -104,10 +102,6 @@ thead {
 em,
 #deleteSubject {
   font-size: 25px;
-}
-
-.info {
-  font-size: 20px;
 }
 
 .border1,
