@@ -13,7 +13,7 @@ use Bihin\steampunkLibrary\src\model\{
 class ForumPostsManager extends DbConnect 
 {
 	public function getPost($post){
-		$req = $this->db->prepare('SELECT fp.id, fp.post, fp.title, fp.content, DATE_FORMAT(fp.date, "%d/%m/%Y") AS date, s.login FROM forumPosts fp INNER JOIN subscribers s ON fp.subscriberId = s.id WHERE fp.post = ? ORDER BY fp.id DESC');
+		$req = $this->db->prepare('SELECT fp.id, fp.post, fp.title, fp.content, DATE_FORMAT(fp.date, "%d/%m/%Y") AS date, s.login FROM steampunkLibrary_forumPosts fp INNER JOIN steampunkLibrary_subscribers s ON fp.subscriberId = s.id WHERE fp.post = ? ORDER BY fp.id DESC');
 		$req->execute([
 			$post
 		]);
@@ -26,7 +26,7 @@ class ForumPostsManager extends DbConnect
 	}
 
 	public function getPostById($forumId){
-		$req = $this->db->prepare('SELECT fp.id, fp.post, fp.title, fp.content, DATE_FORMAT(fp.date, "%d/%m/%Y") AS date, s.login FROM forumPosts fp INNER JOIN subscribers s ON fp.subscriberId = s.id WHERE fp.id = ?');
+		$req = $this->db->prepare('SELECT fp.id, fp.post, fp.title, fp.content, DATE_FORMAT(fp.date, "%d/%m/%Y") AS date, s.login FROM steampunkLibrary_forumPosts fp INNER JOIN steampunkLibrary_subscribers s ON fp.subscriberId = s.id WHERE fp.id = ?');
 		$req->execute([
 			$forumId
 		]);
@@ -36,7 +36,7 @@ class ForumPostsManager extends DbConnect
 	}
 
 	public function addForumPost($post){
-		$req = $this->db->prepare('INSERT INTO forumPosts (subscriberId, post, title, content, date) VALUES (:subscriberId, :post, :title, :content, NOW())');
+		$req = $this->db->prepare('INSERT INTO steampunkLibrary_forumPosts (subscriberId, post, title, content, date) VALUES (:subscriberId, :post, :title, :content, NOW())');
 		$req->execute([
 			'subscriberId' => $_SESSION['subscriberId'],
 			'post' => $_GET['parameter'],
@@ -46,7 +46,7 @@ class ForumPostsManager extends DbConnect
 	}
 
 	public function myPosts(){
-		$req = $this->db->prepare('SELECT id, subscriberId, post, title, content, DATE_FORMAT(date, "%d/%m/%Y") AS date FROM forumPosts WHERE subscriberId = ?');
+		$req = $this->db->prepare('SELECT id, subscriberId, post, title, content, DATE_FORMAT(date, "%d/%m/%Y") AS date FROM steampunkLibrary_forumPosts WHERE subscriberId = ?');
 		$req->execute([
 			$_SESSION['subscriberId']
 		]);
@@ -59,7 +59,7 @@ class ForumPostsManager extends DbConnect
 	}
 
 	public function updatePost($post, $id){
-		$req = $this->db->prepare('UPDATE forumPosts SET title = :title, content = :content, date = NOW() WHERE id = :id');
+		$req = $this->db->prepare('UPDATE steampunkLibrary_forumPosts SET title = :title, content = :content, date = NOW() WHERE id = :id');
 		$req->execute([
 			'title' => $post['title'],
 			'content' => $post['content'],
@@ -68,7 +68,7 @@ class ForumPostsManager extends DbConnect
 	}
 
 	public function deletePost($id){
-		$req = $this->db->prepare('DELETE FROM forumPosts WHERE id = ?');
+		$req = $this->db->prepare('DELETE FROM steampunkLibrary_forumPosts WHERE id = ?');
 		$req->execute([
 			$id
 		]);
