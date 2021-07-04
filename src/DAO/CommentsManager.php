@@ -7,7 +7,7 @@ use Bihin\steampunkLibrary\src\model\Comments;
 class CommentsManager extends DbConnect
 {
 	public function addAComment($post, $forumId){
-		$req = $this->db->prepare('INSERT INTO steampunkLibraryComments (subscriberId, forumId, comment, dateOfComment) VALUES (:subscriberId, :forumId, :comment, NOW())');
+		$req = $this->db->prepare('INSERT INTO steampunkLibrary_comments (subscriberId, forumId, comment, dateOfComment) VALUES (:subscriberId, :forumId, :comment, NOW())');
 		$req->execute([
 			':subscriberId' => $_SESSION['subscriberId'],
 			':forumId' => $forumId,
@@ -16,7 +16,7 @@ class CommentsManager extends DbConnect
 	}
 
 	public function countAllComments($forumId){
-		$req = $this->db->prepare('SELECT COUNT(*) FROM steampunkLibraryComments WHERE forumId = ?');
+		$req = $this->db->prepare('SELECT COUNT(*) FROM steampunkLibrary_comments WHERE forumId = ?');
 		$req->execute([
 			$forumId
 		]);
@@ -25,7 +25,7 @@ class CommentsManager extends DbConnect
 	}
 
 	public function getComments($forumId, $first, $byPage){
-		$req = $this->db->prepare('SELECT slc.id, slc.subscriberId, slc.forumId, slc.comment, DATE_FORMAT(slc.dateOfComment, "%d/%m/%Y") AS dateOfComment, s.login FROM steampunkLibraryComments slc INNER JOIN steampunkLibrary_subscribers s ON slc.subscriberId = s.id WHERE forumId = ? ORDER BY id DESC LIMIT ' . $first . ', ' . $byPage);
+		$req = $this->db->prepare('SELECT slc.id, slc.subscriberId, slc.forumId, slc.comment, DATE_FORMAT(slc.dateOfComment, "%d/%m/%Y") AS dateOfComment, s.login FROM steampunkLibrary_comments slc INNER JOIN steampunkLibrary_subscribers s ON slc.subscriberId = s.id WHERE forumId = ? ORDER BY id DESC LIMIT ' . $first . ', ' . $byPage);
 		$req->execute([
 			$forumId
 		]);
@@ -38,7 +38,7 @@ class CommentsManager extends DbConnect
 	}
 
 	public function getMyComments(){
-		$req = $this->db->prepare('SELECT slc.id, slc.subscriberId, slc.forumId, slc.comment, DATE_FORMAT(slc.dateOfComment, "%d/%m/%Y") AS dateOfComment, fp.title, s.login FROM steampunkLibraryComments slc INNER JOIN steampunkLibrary_forumPosts fp ON slc.forumId = fp.id INNER JOIN steampunkLibrary_subscribers s ON slc.subscriberId = s.id WHERE slc.subscriberId = ? ORDER BY slc.id DESC');
+		$req = $this->db->prepare('SELECT slc.id, slc.subscriberId, slc.forumId, slc.comment, DATE_FORMAT(slc.dateOfComment, "%d/%m/%Y") AS dateOfComment, fp.title, s.login FROM steampunkLibrary_comments slc INNER JOIN steampunkLibrary_forumPosts fp ON slc.forumId = fp.id INNER JOIN steampunkLibrary_subscribers s ON slc.subscriberId = s.id WHERE slc.subscriberId = ? ORDER BY slc.id DESC');
 		$req->execute([
 			$_SESSION['subscriberId']
 		]);
@@ -51,7 +51,7 @@ class CommentsManager extends DbConnect
 	}
 
 	public function addLikeDislike($commentId, $comment){
-		$req = $this->db->prepare('UPDATE steampunkLibraryComments SET ' . $comment . ' = ? WHERE id = ?');
+		$req = $this->db->prepare('UPDATE steampunkLibrary_comments SET ' . $comment . ' = ? WHERE id = ?');
 		$req->execute([
 			$_SESSION['subscriberId'],
 			$commentId
@@ -59,7 +59,7 @@ class CommentsManager extends DbConnect
 	}
 
 	public function updateMyComment($post, $id){
-		$req = $this->db->prepare('UPDATE steampunkLibraryComments SET comment = :comment WHERE id = :id');
+		$req = $this->db->prepare('UPDATE steampunkLibrary_comments SET comment = :comment WHERE id = :id');
 		$req->execute([
 			'comment' => $post['comment'],
 			'id' => $id
@@ -67,28 +67,28 @@ class CommentsManager extends DbConnect
 	}
 
 	public function removeComment($commentId, $comment){
-		$req = $this->db->prepare('UPDATE steampunkLibraryComments SET ' . $comment . ' = 0 WHERE id = ?');
+		$req = $this->db->prepare('UPDATE steampunkLibrary_comments SET ' . $comment . ' = 0 WHERE id = ?');
 		$req->execute([
 			$commentId
 		]);
 	}
 
 	public function commentDeleteDisagree($parameter){
-		$req = $this->db->prepare('UPDATE steampunkLibraryComments SET disagree = 0 WHERE id = ?');
+		$req = $this->db->prepare('UPDATE steampunkLibrary_comments SET disagree = 0 WHERE id = ?');
 		$req->execute([
 			$parameter
 		]);
 	}
 	
 	public function deleteComment($id){
-		$req = $this->db->prepare('DELETE FROM steampunkLibraryComments WHERE id = ?');
+		$req = $this->db->prepare('DELETE FROM steampunkLibrary_comments WHERE id = ?');
 		$req->execute([
 			$id
 		]);
 	}
 
 	public function deleteCommentByPost($forumId){
-		$req = $this->db->prepare('DELETE FROM steampunkLibraryComments WHERE forumId = ?');
+		$req = $this->db->prepare('DELETE FROM steampunkLibrary_comments WHERE forumId = ?');
 		$req->execute([
 			$forumId
 		]);
