@@ -3,6 +3,7 @@
 if (isset($_GET['parameter'])) {
 	?>
 	<div class="container">
+		<div><em class="text-danger">Attention les modifications supprimeront tous les votes associés.</em></div>
 		<form method="post" action="<?= HOST; ?>/updateMyComment/<?= $_GET['parameter']; ?>">
 			<label for="comment">Nouveau commentaire</label>
 			<br>
