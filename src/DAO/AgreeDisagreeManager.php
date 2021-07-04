@@ -75,4 +75,11 @@ class AgreeDisagreeManager extends DbConnect
 			$subscriberId
 		]);
 	}
+
+	public function deleteVoteOfAComment($id){
+		$req = $this->db->prepare('DELETE FROM steampunkLibrary_likeDislike WHERE commentId = ?');
+		$req->execute([
+			$id
+		]);
+	}
 }
