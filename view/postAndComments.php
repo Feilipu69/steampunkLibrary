@@ -31,7 +31,7 @@ if (isset($_GET['parameter']) && isset($comments)) {
 			?>
 			<div class="card mb-3">
 				<div class="card-header">
-					<p><strong><?= strip_tags($comment->getLogin()); ?></strong> a écrit : </p>
+					<p><?= strip_tags($comment->getLogin()); ?> a écrit : </p>
 				</div>
 				<div class="card-body">
 					<div class="content mb-3"><?= strip_tags($comment->getComment()); ?></div>
