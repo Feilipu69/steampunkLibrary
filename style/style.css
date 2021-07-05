@@ -20,7 +20,8 @@ body .container {
 
 nav li,
 .bienvenue,
-.form-control {
+.form-control,
+tr th {
   font-size: 30px;
 }
 
