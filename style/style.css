@@ -21,7 +21,7 @@ body .container {
 nav li,
 .bienvenue,
 .form-control,
-tr th {
+thead td {
   font-size: 30px;
 }
 
