@@ -1,4 +1,4 @@
-<h3 class="container">Administration</h3>
+<h2 class="container">Administration</h2>
 <div class="section mb-5">
 	<img src="<?= HOST; ?>/public/steampunk-border-2.png" alt="" class="border1 img-fluid" />
 	<div class="mt-3 mb-5">
@@ -23,10 +23,10 @@
 		<table class="table table-borderless table-responsive mt-4">
 			<thead>
 				<tr>
-					<th>Login</th>
-					<th>Rôle</th>
-					<th>statut</th>
-					<th>Action</th>
+					<td>Login</td>
+					<td>Rôle</td>
+					<td>statut</td>
+					<td>Action</td>
 				</tr>
 			</thead>
 			<tbody>
