@@ -23,10 +23,10 @@
 		<table class="table table-borderless table-responsive mt-4">
 			<thead>
 				<tr>
-					<th>Login</th>
-					<th>Rôle</th>
-					<th>statut</th>
-					<th>Action</th>
+					<td>Login</td>
+					<td>Rôle</td>
+					<td>Statut</td>
+					<td>Action</td>
 				</tr>
 			</thead>
 			<tbody>
