@@ -12,6 +12,7 @@ class SubscriberManager extends DbConnect
 			$subscribers[] = new Subscriber($data);
 		}
 		return $subscribers;
+		$req->closeCursor();
 	}
 
 	public function getOneSubscriber(){
@@ -23,6 +24,7 @@ class SubscriberManager extends DbConnect
 			$subscriber = new Subscriber($data);
 		}
 		return $subscriber;
+		$req->closeCursor();
 	}
 
 	public function checkSubscriber($post){
@@ -33,6 +35,7 @@ class SubscriberManager extends DbConnect
 		]);
 		$subscriberChecked = $req->fetchColumn();
 		return $subscriberChecked;
+		$req->closeCursor();
 	}
 
 	public function checkPassword($post){
@@ -44,6 +47,7 @@ class SubscriberManager extends DbConnect
 		$subscriberData = $req->fetch();
 		$subscriberPassword = password_verify($subscriber->getPassword(), $subscriberData['password']);
 		return $subscriberPassword;
+		$req->closeCursor();
 	}
 
 	public function register($post){
@@ -80,6 +84,7 @@ class SubscriberManager extends DbConnect
 		]);
 		$data = $req->fetch();
 		return $data;
+		$req->closeCursor();
 	}
 
 	public function moderator($id){

@@ -60,7 +60,7 @@ class AdminController
 
 	public function addOneBook($book){
 		if (isset($book['addOneBook'])) {
-			if (!empty($book['isbn'])) {
+			if (!empty(htmlspecialchars($book['isbn']))) {
 				$this->booksCatalogueManager->addOneBook($book);
 			}
 		}

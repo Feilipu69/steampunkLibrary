@@ -11,6 +11,7 @@ class BooksCatalogueManager extends DbConnect
 		$data = $req->fetch();
 		$catalogue[] = new BooksCatalogue($data);
 		return $catalogue;
+		$req->closeCursor();
 	}
 
 	public function getBooks($first, $byPage){
@@ -19,12 +20,14 @@ class BooksCatalogueManager extends DbConnect
 			$books[] = new BooksCatalogue($data);
 		}
 		return $books;
+		$req->closeCursor();
 	}
 
 	public function countAllBooks(){
 		$req = $this->db->query('SELECT COUNT(*) FROM steampunkLibrary_booksCatalogue');
 		$allBooks = $req->fetch();
 		return $allBooks[0];
+		$req->closeCursor();
 	}
 
 	public function addOneBook($post){

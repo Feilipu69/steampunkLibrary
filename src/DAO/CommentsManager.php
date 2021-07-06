@@ -22,6 +22,7 @@ class CommentsManager extends DbConnect
 		]);
 		$data = $req->fetch();
 		return $data;
+		$req->closeCursor();
 	}
 
 	public function getComments($forumId, $first, $byPage){
@@ -35,6 +36,7 @@ class CommentsManager extends DbConnect
 		if (isset($comments)) {
 			return $comments;
 		}
+		$req->closeCursor();
 	}
 
 	public function getMyComments(){
@@ -48,6 +50,7 @@ class CommentsManager extends DbConnect
 		if(isset($myComments)){
 			return $myComments;
 		}
+		$req->closeCursor();
 	}
 
 	public function addLikeDislike($commentId, $comment){

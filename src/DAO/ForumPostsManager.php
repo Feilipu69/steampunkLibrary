@@ -23,6 +23,7 @@ class ForumPostsManager extends DbConnect
 		if (isset($posts)) {
 			return $posts;
 		}
+		$req->closeCursor();
 	}
 
 	public function getPostById($forumId){
@@ -33,6 +34,7 @@ class ForumPostsManager extends DbConnect
 		$data = $req->fetch();
 		$post = new ForumPosts($data);
 		return $post;
+		$req->closeCursor();
 	}
 
 	public function addForumPost($post){
@@ -56,6 +58,7 @@ class ForumPostsManager extends DbConnect
 		if (isset($myPosts)) {
 			return $myPosts;
 		}
+		$req->closeCursor();
 	}
 
 	public function updatePost($post, $id){

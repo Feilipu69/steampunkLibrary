@@ -83,7 +83,7 @@ class FrontController
 		}
 
 		if (isset($post['register'])) {
-			if (!empty($post['login']) && !empty($post['password']) && !empty($post['email'])) {
+			if (!empty(htmlspecialchars($post['login'])) && !empty(htmlspecialchars($post['password'])) && !empty(htmlspecialchars($post['email']))) {
 				if ($this->subscriberManager->checkSubscriber($post)) {
 					$_SESSION['registerError'] = "Ce login existe déjà";
 				}
@@ -108,7 +108,7 @@ class FrontController
 		}
 
 		if (isset($post['connection'])) {
-			if (!empty($post['login']) && !empty($post['password'])) {
+			if (!empty(htmlspecialchars($post['login'])) && !empty(htmlspecialchars($post['password']))) {
 				if ($this->subscriberManager->checkPassword($post)) {
 					$_SESSION['login'] = $post['login'];
 					$subscriberData = $this->subscriberManager->getOneSubscriber();
@@ -148,7 +148,7 @@ class FrontController
 		}
 
 		if (isset($post['send'])) {
-			if (!empty($post['login']) && !empty($post['password']) && !empty($post['email'])) {
+			if (!empty(htmlspecialchars($post['login'])) && !empty(htmlspecialchars($post['password'])) && !empty(htmlspecialchars($post['email']))) {
 				if ($this->subscriberManager->checkSubscriber($post)) {
 					$_SESSION['registerError'] = "Ce login existe déjà";
 				}
@@ -207,7 +207,7 @@ class FrontController
 	*/
 	public function addForumPost($post, $parameter){
 		if (isset($post['send'])) {
-			if (!empty($post['title']) && !empty($post['content'])) {
+			if (!empty(htmlspecialchars($post['title'])) && !empty(htmlspecialchars($post['content']))) {
 				$forumPost = $this->forumPostsManager->addForumPost($post);
 				header('Location:' . HOST . '/post/' . $parameter);
 			}
@@ -235,7 +235,7 @@ class FrontController
 	public function updatePost($post, $id){
 		$mypost = $this->forumPostsManager->getPostById($id);
 		if (isset($post['send'])) {
-			if (!empty($post['title']) && !empty($post['content'])) {
+			if (!empty(htmlspecialchars($post['title'])) && !empty(htmlspecialchars($post['content']))) {
 				$updatePost = $this->forumPostsManager->updatePost($post, $id);
 				$this->commentsManager->deleteCommentByPost($id);
 				header('Location:' . HOST . '/myPosts');
@@ -255,7 +255,7 @@ class FrontController
 
 	function addAComment($post, $forumId, $page){
 		if (isset($post['send'])) {
-			if (!empty($post['comment'])) {
+			if (!empty(htmlspecialchars($post['comment']))) {
 				$newComment = $this->commentsManager->addAComment($post, $forumId, $page);
 				header('Location:' . HOST . '/postAndComments/' . $forumId . '/' . $page);
 			}
@@ -266,7 +266,7 @@ class FrontController
 
 	public function updateMyComment($post, $id){
 		if (isset($post['send'])) {
-			if (!empty($post['comment'])) {
+			if (!empty(htmlspecialchars($post['comment']))) {
 				$updateMyComment = $this->commentsManager->updateMyComment($post, $id);
 				$this->agreeDisagreeManager->deleteVoteOfAComment($id);
 				header('Location:' . HOST . '/myPosts');

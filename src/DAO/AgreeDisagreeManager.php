@@ -13,6 +13,7 @@ class AgreeDisagreeManager extends DbConnect
 		]);
 		$data = $req->fetchAll(); 
 		return $data;
+		$req->closeCursor();
 	}
 
 	public function countSubscriberVotes($commentId, $vote){
@@ -24,6 +25,7 @@ class AgreeDisagreeManager extends DbConnect
 			]);
 			$data = $req->fetch();
 			return $data;
+			$req->closeCursor();
 		} elseif ($vote === 'disagree') {
 			$req = $this->db->prepare('SELECT COUNT(*) FROM steampunkLibrary_likeDislike WHERE commentId = ? AND disagree = ?');
 			$req->execute([
@@ -32,6 +34,7 @@ class AgreeDisagreeManager extends DbConnect
 			]);
 			$data = $req->fetch();
 			return $data;
+			$req->closeCursor();
 		}
 	}
 
