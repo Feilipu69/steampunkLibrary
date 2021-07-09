@@ -38,7 +38,7 @@ if (isset($_GET['parameter']) && isset($comments)) {
 					<?php
 					if (isset($_SESSION['role']) && $_SESSION['role'] != 'member') {
 						?>
-						<a href="<?= HOST; ?>/deleteComment/<?= $_GET['parameter']; ?>/<?= $_GET['page']; ?>/<?= $comment->getId(); ?>">Supprimer le commentaire</a>
+						<a href="<?= HOST; ?>/deleteComment/<?= strip_tags($_GET['parameter']); ?>/<?= strip_tags($_GET['page']); ?>/<?= strip_tags($comment->getId()); ?>">Supprimer le commentaire</a>
 						<?php
 					}
 					?>
@@ -70,9 +70,9 @@ if (isset($_GET['parameter']) && isset($comments)) {
 ?>
 <script>
 	let host = "<?= HOST; ?>";
-	let parameter = <?= $_GET['parameter']; ?>;
-	let page = <?= $_GET['page']; ?>;
-	let commentsId = <?= $commentsId; ?>;
+	let parameter = <?= strip_tags($_GET['parameter']); ?>;
+	let page = <?= strip_tags($_GET['page']); ?>;
+	let commentsId = <?= strip_tags($commentsId); ?>;
 </script>
 <script src="<?= HOST; ?>/assets/js/administration.js"></script>
 <script src="<?= HOST; ?>/assets/js/displayForm.js"></script>

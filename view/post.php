@@ -2,10 +2,10 @@
 if (isset($_GET['parameter'])) {
 	?>
 	<article class="container mb-5">
-		<h2><?= $_GET['parameter']; ?></h2>
+		<h2><?= strip_tags($_GET['parameter']); ?></h2>
 		<p class="retour"><a href="<?= HOST; ?>/forum">&laquo; Retour</a></p>
 		<button onclick="displayForm()" class="displayForm">Ajouter un sujet</button>
-		<form method="post" action="<?= HOST; ?>/addForumPost/<?= $_GET['parameter']; ?>" id="displayForm" style="display:none" class="mt-4">
+		<form method="post" action="<?= HOST; ?>/addForumPost/<?= strip_tags($_GET['parameter']); ?>" id="displayForm" style="display:none" class="mt-4">
 			<div class="form-group">
 				<label for="title">Titre</label>
 				<input type="text" name="title" id="title" />
@@ -20,7 +20,7 @@ if (isset($_GET['parameter'])) {
 	</article>
 	<script>
 		let host = "<?= HOST; ?>";
-		let theme = "<?= $_GET['parameter']; ?>";
+		let theme = "<?= strip_tags($_GET['parameter']); ?>";
 	</script>
 	<?php
 }
@@ -35,14 +35,14 @@ if (isset($getPost)) {
 			<div class="mt-3 ml-4">
 				<div>
 					<img src="<?= HOST; ?>/public/index-finger.png" alt="" class="img-fluid" />
-					<h3 class="d-inline"><a href="<?= HOST ; ?>/postAndComments/<?= $post->getId(); ?>/1"> <?= strip_tags($post->getTitle()); ?></a></h3>
+					<h3 class="d-inline"><a href="<?= HOST ; ?>/postAndComments/<?= strip_tags($post->getId()); ?>/1"> <?= strip_tags($post->getTitle()); ?></a></h3>
 				</div>
 				<em>publié le : <?= $post->getDate(); ?> par <?= strip_tags($post->getLogin()); ?></em>
 				<div class="content mb-4"><?= strip_tags($post->getContent()); ?></div>
 				<?php
 				if (isset($_SESSION['role']) && ($_SESSION['role'] != 'member')) {
 					?>
-					<button onclick="deletePost(<?= $post->getId(); ?>)" class="mb-3">Supprimer le sujet</button>
+					<button onclick="deletePost(<?= strip_tags($post->getId()); ?>)" class="mb-3">Supprimer le sujet</button>
 					<?php
 				}
 				?>

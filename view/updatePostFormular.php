@@ -3,7 +3,7 @@ if (isset($_GET['parameter'])) {
 	?>
 	<div class="container mb-3"><em class="text-danger">Attention les modifications supprimeront tous les commentaires associés.</em></div>
 	<div class="container">
-		<form method="post" action="<?= HOST; ?>/updatePost/<?= $_GET['parameter']; ?>">
+		<form method="post" action="<?= HOST; ?>/updatePost/<?= strip_tags($_GET['parameter']); ?>">
 			<label for="title">Titre</label>
 			<input type="text" name="title" id="title" placeholder="<?= $mypost->getTitle(); ?>"/>
 			<br>
@@ -11,7 +11,7 @@ if (isset($_GET['parameter'])) {
 			<textarea name="content" id="content" placeholder="<?= strip_tags($mypost->getContent()); ?>"></textarea>
 			<br>
 			<input type="submit" name="send" value="Modifier" />
-			<button onclick="window.location.href='<?= HOST; ?>/updatePost/<?= $_GET['parameter']; ?>';">Annuler</button>
+			<button onclick="window.location.href='<?= HOST; ?>/updatePost/<?= strip_tags($_GET['parameter']); ?>';">Annuler</button>
 		</form>
 	</div>
 	<?php
