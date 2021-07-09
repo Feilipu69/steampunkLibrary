@@ -30,7 +30,7 @@
 								?>
 								<li class="nav-item"><a class="nav-link" href="<?= HOST; ?>/newsletters">Bulletin</a></li>
 								<li class="nav-item"><a class="nav-link" href="<?= HOST; ?>/forum">Forum</a></li>
-								<li class="nav-item"><a class="nav-link" href="<?= HOST; ?>/updateData/<?= $_SESSION['subscriberId']; ?>">Gestion de vos données</a></li>
+								<li class="nav-item"><a class="nav-link" href="<?= HOST; ?>/updateData">Gestion de vos données</a></li>
 								<li class="nav-item"><a class="nav-link" href="<?= HOST; ?>/myPosts">Mes sujets</a></li>
 								<?php
 								if (isset($_SESSION['role']) && $_SESSION['role'] === 'admin' || $_SESSION['role'] === 'moderator') {
