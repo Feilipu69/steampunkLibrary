@@ -38,16 +38,16 @@ class FrontController
 	public function getBooks(){
 		$catalogue = $this->booksCatalogueManager->catalogue();
 		$allBooks = $this->booksCatalogueManager->countAllBooks();
+		$numberOfBooksByPage = 9;
+		$allPages = ceil($allBooks/$numberOfBooksByPage);
 
 		// Page numbering
 		// Pagination
-		if (isset($_GET['page']) && !empty($_GET['page'])) {
+		if (isset($_GET['page']) && (int)$_GET['page'] && !empty($_GET['page']) && $_GET['page'] >= 1 && $_GET['page'] <= $allPages) {
 			$currentPage = (int) strip_tags($_GET['page']);
 		} else {
 			$currentPage = 1;
 		}
-		$numberOfBooksByPage = 9;
-		$allPages = ceil($allBooks/$numberOfBooksByPage);
 		$firstPage = ($currentPage * $numberOfBooksByPage) - $numberOfBooksByPage;
 		$books = $this->booksCatalogueManager->getBooks($firstPage, $numberOfBooksByPage);
 		// End of page numbering
@@ -83,15 +83,21 @@ class FrontController
 		}
 
 		if (isset($post['register'])) {
-			if (!empty(htmlspecialchars($post['login'])) && !empty(htmlspecialchars($post['password'])) && !empty(htmlspecialchars($post['email']))) {
-				if ($this->subscriberManager->checkSubscriber($post)) {
+			if (!empty($post['login']) && !empty($post['password']) && !empty($post['email'])) {
+				$secureData = [
+					'login' => strip_tags($post['login']), 
+					'password' => strip_tags($post['password']), 
+					'email' => strip_tags($post['email'])
+				];
+
+				if ($this->subscriberManager->checkSubscriber($secureData)) {
 					$_SESSION['registerError'] = "Ce login existe déjà";
 				}
 				else {
-					$this->subscriberManager->register($post);
-					$_SESSION['login'] = $post['login'];
+					$this->subscriberManager->register($secureData);
+					$_SESSION['login'] = $secureData['login'];
 					$subscriberData = $this->subscriberManager->getOneSubscriber();
-					$_SESSION['subscriberId'] = $subscriberData->getId();
+					$_SESSION['subscriberId'] = strip_tags($subscriberData->getId());
 					$_SESSION['role'] = null;
 					header('Location:' . HOST);
 				}
@@ -108,9 +114,14 @@ class FrontController
 		}
 
 		if (isset($post['connection'])) {
-			if (!empty(htmlspecialchars($post['login'])) && !empty(htmlspecialchars($post['password']))) {
+			if (!empty($post['login']) && !empty($post['password'])) {
+				$secureData = [
+					'login' => strip_tags($post['login']),
+					'password' => strip_tags($post['password'])
+				];
+
 				if ($this->subscriberManager->checkPassword($post)) {
-					$_SESSION['login'] = $post['login'];
+					$_SESSION['login'] = $secureData['login'];
 					$subscriberData = $this->subscriberManager->getOneSubscriber();
 					$role = $subscriberData->getRole();
 					$_SESSION['role'] = $role;
@@ -148,13 +159,19 @@ class FrontController
 		}
 
 		if (isset($post['send'])) {
-			if (!empty(htmlspecialchars($post['login'])) && !empty(htmlspecialchars($post['password'])) && !empty(htmlspecialchars($post['email']))) {
+			if (!empty($post['login']) && !empty($post['password']) && !empty($post['email'])) {
+				$secureData = [
+					'login' => strip_tags($post['login']), 
+					'password' => strip_tags($post['password']), 
+					'email' => strip_tags($post['email'])
+				];
+
 				if ($this->subscriberManager->checkSubscriber($post)) {
 					$_SESSION['registerError'] = "Ce login existe déjà";
 				}
 				else {
 					$this->subscriberManager->updateData($post);
-					$_SESSION['login'] = $post['login'];
+					$_SESSION['login'] = $secureData['login'];
 					header('Location:' . HOST);
 				}
 			}
@@ -165,7 +182,8 @@ class FrontController
 	}
 
 	public function deleteSubscriber($subscriberId){
-		$this->subscriberManager->deleteSubscriber($subscriberId);
+		$secureSubscriberId = strip_tags($subscriberId);
+		$this->subscriberManager->deleteSubscriber($secureSubscriberId);
 		$this->disconnection();
 	}
 
@@ -190,7 +208,8 @@ class FrontController
 	* @return void
 	*/
 	public function post($post){
-		$getPost = $this->forumPostsManager->getPost($post);
+		$securePost = strip_tags($post);
+		$getPost = $this->forumPostsManager->getPost($securePost);
 		$displayForumPost = new View('post');
 		$displayForumPost->render([
 			'getPost' => $getPost
@@ -206,13 +225,19 @@ class FrontController
 	* @return void
 	*/
 	public function addForumPost($post, $parameter){
+		$secureParameter = strip_tags($parameter);
 		if (isset($post['send'])) {
-			if (!empty(htmlspecialchars($post['title'])) && !empty(htmlspecialchars($post['content']))) {
-				$forumPost = $this->forumPostsManager->addForumPost($post);
-				header('Location:' . HOST . '/post/' . $parameter);
+			if (!empty($post['title']) && !empty($post['content'])) {
+				$secureData = [
+					'title' => strip_tags($post['title']),
+					'content' => strip_tags($post['content'])
+				];
+
+				$forumPost = $this->forumPostsManager->addForumPost($secureData);
+				header('Location:' . HOST . '/post/' . $secureParameter);
 			}
 		} else {
-			header('Location:' . HOST . '/post/' . $parameter);
+			header('Location:' . HOST . '/post/' . $secureParameter);
 		}
 	}
 
@@ -233,11 +258,17 @@ class FrontController
 	}
 
 	public function updatePost($post, $id){
-		$mypost = $this->forumPostsManager->getPostById($id);
+		$secureId = strip_tags($id);
+		$mypost = $this->forumPostsManager->getPostById($secureId);
 		if (isset($post['send'])) {
-			if (!empty(htmlspecialchars($post['title'])) && !empty(htmlspecialchars($post['content']))) {
-				$updatePost = $this->forumPostsManager->updatePost($post, $id);
-				$this->commentsManager->deleteCommentByPost($id);
+			if (!empty($post['title']) && !empty($post['content'])) {
+				$secureData = [
+					'title' => strip_tags($post['title']),
+					'content' => strip_tags($post['content'])
+				];
+
+				$updatePost = $this->forumPostsManager->updatePost($secureData, $secureId);
+				$this->commentsManager->deleteCommentByPost($secureId);
 				header('Location:' . HOST . '/myPosts');
 			}
 		}
@@ -249,13 +280,14 @@ class FrontController
 	}
 
 	public function deletePost($id){
-		$deletePost = $this->forumPostsManager->deletePost($id);
+		$secureId = strip_tags($id);
+		$deletePost = $this->forumPostsManager->deletePost($secureId);
 		header('Location:' . HOST . '/myPosts');
 	}
 
 	function addAComment($post, $forumId, $page){
 		if (isset($post['send'])) {
-			if (!empty(htmlspecialchars($post['comment']))) {
+			if (!empty($post['comment'])) {
 				$newComment = $this->commentsManager->addAComment($post, $forumId, $page);
 				header('Location:' . HOST . '/postAndComments/' . $forumId . '/' . $page);
 			}
@@ -266,7 +298,7 @@ class FrontController
 
 	public function updateMyComment($post, $id){
 		if (isset($post['send'])) {
-			if (!empty(htmlspecialchars($post['comment']))) {
+			if (!empty($post['comment'])) {
 				$updateMyComment = $this->commentsManager->updateMyComment($post, $id);
 				$this->agreeDisagreeManager->deleteVoteOfAComment($id);
 				header('Location:' . HOST . '/myPosts');
@@ -278,7 +310,8 @@ class FrontController
 	}
 
 	public function deleteMyComment($id){
-		$this->commentsManager->deleteComment($id);
+		$secureId = strip_tags($id);
+		$this->commentsManager->deleteComment($secureId);
 		header('Location:' . HOST . '/myPosts');
 	}
 
@@ -295,18 +328,24 @@ class FrontController
 	* @return void
 	*/
 	public function postAndComments($post, $forumId, $page){
+		if (isset($_GET['parameter']) && (int)$_GET['parameter'] && !empty($_GET['parameter'])) {
+			$forumId = (int) strip_tags($_GET['parameter']);
+		} else {
+			$forumId = 1;
+		}
 		$commentsAgreeDisagree = new AgreeDisagreeManager();
+		$numberOfComments = $this->commentsManager->countAllComments($forumId);
+		$numberOfCommentsByPage = 5;
+		$allPages = ceil($numberOfComments[0]/$numberOfCommentsByPage);
 
-		// Page numbering-Pagination
-		if (isset($_GET['page']) && !empty($_GET['page'])) {
+		// Page numbering
+		//Pagination
+		if (isset($_GET['page']) && (int)$_GET['page'] && !empty($_GET['page']) && $_GET['page'] >= 1 && $_GET['page'] <= $allPages) {
 			$currentPage = (int) strip_tags($_GET['page']);
 		} else {
 			$currentPage = 1;
 		}
 
-		$numberOfComments = $this->commentsManager->countAllComments($forumId);
-		$numberOfCommentsByPage = 5;
-		$allPages = ceil($numberOfComments[0]/$numberOfCommentsByPage);
 		$firstComment = ($currentPage * $numberOfCommentsByPage) - $numberOfCommentsByPage;
 		$comments = $this->commentsManager->getComments($forumId, $firstComment, $numberOfCommentsByPage);
 		// End of page numbering
