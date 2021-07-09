@@ -1,6 +1,6 @@
 <a href="<?= HOST; ?>/books">&laquo; Retour</a>
 <?php
-if (isset($_GET['parameter'])) {
+if (isset($_GET['parameter']) && (int)$_GET['parameter'] && !empty($_GET['parameter'])) {
 	?>
 	<section id="isbn" class="container d-md-flex justify-content-around">
 		<div class="mr-md-5 mt-md-3">
@@ -16,10 +16,10 @@ if (isset($_GET['parameter'])) {
 			</div>
 		</div>
 	</section>
-	<script>let isbn = <?= $_GET['parameter'] ?></script>
+	<script>let isbn = <?= strip_tags($_GET['parameter']); ?></script>
 	<script src="../assets/js/getOneBook.js"></script>
 	<?php
-}
+} 
 ?>
 <script src="https://www.google.com/books/jsapi.js"></script>
 
