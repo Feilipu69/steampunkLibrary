@@ -63,8 +63,12 @@ class FrontController
 	}
 
 	public function getOneBook($isbn){ 
-		$displayABook = new View('book');
-		$displayABook->render([]);
+		if (isset($isbn) && preg_match("#^(?=(?:\D*\d){10}(?:(?:\D*\d){3})?$)[\d-]+$#", $isbn)) {
+			$displayABook = new View('book');
+			$displayABook->render([]);
+		} else {
+			header('Location:' . HOST . '/errorPage');
+		}
 	}
 
 	// Members
@@ -430,5 +434,10 @@ class FrontController
 	public function newsletters(){
 		$displayLetter = new View('newsletters');
 		$displayLetter->render([]);
+	}
+
+	public function errorPage(){
+		$displayErrorPage = new View('errorPage');
+		$displayErrorPage->render([]);
 	}
 }
