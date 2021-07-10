@@ -61,8 +61,10 @@ class AdminController
 	public function addOneBook($book){
 		if (isset($book['addOneBook'])) {
 			if (!empty($book['isbn'])) {
-				$this->booksCatalogueManager->addOneBook($book);
-			}
+				if (preg_match("#^(?=(?:\D*\d){10}(?:(?:\D*\d){3})?$)[\d-]+$#", $book['isbn'])) {
+					$this->booksCatalogueManager->addOneBook($book);
+				} 
+			} 
 		}
 		$this->administration();
 	}
