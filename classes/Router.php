@@ -11,6 +11,7 @@ use Bihin\steampunkLibrary\utils\View;
 class Router
 {
 	private $frontController;
+	private $adminController;
 
 	public function __construct(){
 		$this->frontController = new FrontController();
@@ -29,6 +30,7 @@ class Router
 				$this->renderAgreeDisagree();
 				$this->renderAdministration();
 				$this->renderNewsLetter();
+				$this->errorPage();
 			}
 		} else {
 			$this->frontController->home();
@@ -102,8 +104,6 @@ class Router
 		elseif ($_GET['route'] === 'deleteComment') {
 			$this->frontController->deleteComment($_GET['parameter'], $_GET['page'], $_GET['commentId']);
 		}
-
-
 	}
 
 	public function renderAgreeDisagree(){
@@ -132,12 +132,17 @@ class Router
 		elseif ($_GET['route'] === 'deleteMember') {
 			$this->adminController->deleteMember($_GET['parameter']);
 		}
-		
 	}
 
 	public function renderNewsletter(){
 		if ($_GET['route'] === 'newsletters') {
 			$this->frontController->newsletters();
+		}
+	}
+
+	public function errorPage(){
+		if ($_GET['route'] === 'errorPage') {
+			$this->frontController->errorPage();
 		}
 	}
 }
