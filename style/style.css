@@ -21,7 +21,8 @@ body .container {
 nav li,
 .bienvenue,
 .form-control,
-thead td {
+thead td,
+.errorPage {
   font-size: 30px;
 }
 
