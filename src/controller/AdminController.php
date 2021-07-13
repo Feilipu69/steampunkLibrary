@@ -60,10 +60,16 @@ class AdminController
 
 	public function addOneBook($book){
 		if (isset($book['addOneBook'])) {
-			if (!empty($book['isbn'])) {
-				if (preg_match("#^(?=(?:\D*\d){10}(?:(?:\D*\d){3})?$)[\d-]+$#", $book['isbn'])) {
-					$this->booksCatalogueManager->addOneBook($book);
-				} 
+			if (!empty($book['isbn']) && !empty($book['title'])) {
+				$newBook = [
+					'isbn' => $book['isbn'],
+					'title' => strip_tags($book['title'])
+				];
+				if (preg_match("#^(?=(?:\D*\d){10}(?:(?:\D*\d){3})?$)[\d-]+$#", $newBook['isbn'])) {
+					$this->booksCatalogueManager->addOneBook($newBook);
+				}  else {
+					$_SESSION['errorIsbn'] = "Données incorrectes";
+				}
 			} 
 		}
 		$this->administration();
