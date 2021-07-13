@@ -1,1 +1,1 @@
-<div class='container errorPage'>Désolé, la machine à vapeur à un problème.</div>
+<div class='container errorPage'>Désolé, une erreur de manipulation empêche le bon fonctionnement de la bibliothèque à vapeur.</div>
