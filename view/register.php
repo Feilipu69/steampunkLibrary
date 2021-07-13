@@ -10,6 +10,13 @@
 				<br>
 				<div class="info">! Tient compte des majuscules.</div>
 				<input type="text" name="login" id="login" required class="form-control" />
+				<?php
+				if (isset($_SESSION['registerError'])) {
+					?>
+					<div class="text-danger display-5"><?= $_SESSION['registerError']; ?></div>
+					<?php
+				}
+				?>
 			</div>
 			<div class="form-group">
 				<label for="password">Mot de passe : </label>
@@ -22,13 +29,7 @@
 			<input type="submit" id="submit" name="register" value="Inscription" />
 			<button id="cancel" onclick="window.location.href='<?= HOST; ?>/register';">Annuler</button>
 		</form>
-	<?php
-	if (isset($_SESSION['registerError'])) {
-		?>
-		<div class="text-danger display-5"><?= $_SESSION['registerError']; ?></div>
-		<?php
-	}
-	?>
+
 	</div>
 </div>
 

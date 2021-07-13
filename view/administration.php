@@ -7,13 +7,21 @@
 			<div class="form-group">
 				<label for="isbn">Isbn</label>
 				<input type="text" name="isbn" id="isbn" />
+			<?php
+			if (isset($_SESSION['errorIsbn'])) {
+				?>
+				<div class="text-danger display-5"><?= $_SESSION['errorIsbn']; ?></div>
+				<?php
+			}
+			?>
 			</div>
 			<div class="form-group">
 				<label for="title">Titre</label>
 				<input type="text" name="title" id="title" />
 			</div>
-				<input type="submit" name="addOneBook" value="Envoyer" />
+			<input type="submit" name="addOneBook" value="Envoyer" />
 		</form>
+
 	</div>
 	<img src="<?= HOST; ?>/public/steampunk-border-2.png" alt="" class="border2 img-fluid" />
 </div>
@@ -30,20 +38,20 @@
 				</tr>
 			</thead>
 			<tbody>
-			<?php
-			foreach ($allSubscribers as $subscribers) {
-				if ($subscribers->getRole() != 'admin') {
-					?>
-					<tr id="member<?= $subscribers->getId(); ?>">
-						<td><?= $subscribers->getLogin(); ?></td>
-						<td id="memberRole<?= $subscribers->getId(); ?>"><?= $subscribers->getRole(); ?></td>
-						<td><button id="role" onclick="role(<?= $subscribers->getId(); ?>)">Modifier</button></td>
-						<td><button onclick="deleteMember(<?= $subscribers->getId(); ?>)" class="text-danger">Supprimer</button></td>
-					</tr>
-					<?php
+				<?php
+				foreach ($allSubscribers as $subscribers) {
+					if ($subscribers->getRole() != 'admin') {
+						?>
+						<tr id="member<?= $subscribers->getId(); ?>">
+							<td><?= $subscribers->getLogin(); ?></td>
+							<td id="memberRole<?= $subscribers->getId(); ?>"><?= $subscribers->getRole(); ?></td>
+							<td><button id="role" onclick="role(<?= $subscribers->getId(); ?>)">Modifier</button></td>
+							<td><button onclick="deleteMember(<?= $subscribers->getId(); ?>)" class="text-danger">Supprimer</button></td>
+						</tr>
+						<?php
+					}
 				}
-			}
-			?>
+				?>
 			</tbody>
 		</table>
 	</div>
