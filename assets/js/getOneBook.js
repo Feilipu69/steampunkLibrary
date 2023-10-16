@@ -2,7 +2,7 @@ function book(isbn) {
   fetch(
     "https://www.googleapis.com/books/v1/volumes?q=isbn:" +
       isbn +
-      "&key=AIzaSyDpCGRbWjD1LsaLOBnolEV5LNSQPnhlOic"
+      "&key=AIzaSyC1hAZvGpAI8cZHMhvlLHW-Kj7mOD7wjKc"
   )
     .then((response) => response.json())
     .then((data) => {
