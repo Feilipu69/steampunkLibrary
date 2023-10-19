@@ -71,6 +71,11 @@ a:hover {
   border-color: #c15620;
 }
 
+.card-header a {
+	color: white;
+	text-decoration: none;
+}
+
 .card-header,
 #welcome,
 .displayForm,
