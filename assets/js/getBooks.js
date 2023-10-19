@@ -7,8 +7,8 @@ async function livres() {
 		)
 			.then((response) => response.json())
 			.then((data) => {
-				document.getElementById("cardHeader" + isbn).textContent =
-					data.items[0].volumeInfo.title;
+				document.getElementById("cardHeader" + isbn).innerHTML =
+					"<a href=" + `${host}/book/${isbn}` + ">" + data.items[0].volumeInfo.title + "</a>";
 				document.getElementById("cardBody" + isbn).innerHTML =
 					"<a href=" +
 					`${host}/book/${isbn}` +
